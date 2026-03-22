@@ -10,17 +10,16 @@ class AirportInterface:
         self.root = root
         self.root.title("airport management system")
         self.root.geometry("800x600")
-        # set main window background to white
         self.root.configure(bg="white")
-        # configure main window padding and background
         self.root.config(padx=20, pady=20, bg="white")
 
         # initialize airport list variable
         self.airport_list = []
 
-        # create a top frame for the logo and title, set its background to white
-        frame_header = tk.Frame(root, bg="white")
+        # create a top frame for the logo and title, set a fixed height to use absolute positioning
+        frame_header = tk.Frame(root, bg="white", height=80)
         frame_header.pack(fill="x", pady=10)
+        frame_header.pack_propagate(False)  # prevents the frame from shrinking
 
         # load and place the eetac logo
         try:
@@ -30,17 +29,18 @@ class AirportInterface:
             logo_image = logo_image.resize((120, 60), Image.Resampling.LANCZOS)
             # create a photolabel and place it on the left
             logo_photo = ImageTk.PhotoImage(logo_image)
-            # set the logo label background to white
             logo_label = tk.Label(frame_header, image=logo_photo, bg="white")
             logo_label.image = logo_photo  # keep a reference to avoid garbage collection
-            logo_label.pack(side="left", padx=10)
+            # place the logo exactly on the left side
+            logo_label.place(x=10, rely=0.5, anchor="w")
         except Exception as e:
             # silently pass if the logo is not found so the app still works
             pass
 
-        # create the title label in uppercase, with white background
-        tk.Label(frame_header, text="AIRPORT MANAGEMENT SYSTEM", font=("helvetica", 18, "bold"), bg="white",
-                 fg="black").pack(side="left", expand=True, padx=10)
+        # place the title label exactly in the center of the frame
+        title_label = tk.Label(frame_header, text="AIRPORT MANAGEMENT SYSTEM", font=("helvetica", 18, "bold"),
+                               bg="white", fg="black")
+        title_label.place(relx=0.5, rely=0.5, anchor="center")
 
         # create top frame for basic loading and display operations, with white background
         frame_top = tk.Frame(root, bg="white")
@@ -76,9 +76,10 @@ class AirportInterface:
         tk.Button(frame_bottom, text="show in google earth", command=self.show_map, width=30, bg="#90ee90",
                   fg="black").grid(row=0, column=1, padx=5)
 
-        # create text area for console output simulation, set background to white and text to black
-        tk.Label(root, text="console output:", bg="white", fg="black").pack(anchor="w")
-        self.text_box = tk.Text(root, height=18, width=90, bg="white", fg="black", font=("consolas", 10))
+        # create text area for console output simulation
+        # removed anchor="w" to automatically center the text above the box
+        tk.Label(root, text="console output:", bg="white", fg="black").pack(pady=(10, 0))
+        self.text_box = tk.Text(root, height=15, width=90, bg="white", fg="black", font=("consolas", 10))
         self.text_box.pack(pady=5)
 
     def write_console(self, message):
