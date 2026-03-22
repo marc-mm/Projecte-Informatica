@@ -11,10 +11,18 @@ airport = Airport()
 def IsSchengenAirport(code):
     Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
     if code in Schengen:
-        True
+        return True
 
 def SetSchengen(airport):
     if IsSchengenAirport(airport.code) == True:
         airport.Schengen = True
 def PrintAirport(airport):
     print(airport)
+
+def LoadAirports (filename):
+    airports = []
+    file = open(filename, 'r')
+    for line in file:
+        airports.append(Airport())
+    airports = airports[1:]
+    return airports
