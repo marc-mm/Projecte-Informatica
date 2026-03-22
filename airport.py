@@ -22,7 +22,12 @@ def PrintAirport(airport):
 def LoadAirports (filename):
     airports = []
     file = open(filename, 'r')
-    for line in file:
-        airports.append(Airport())
-    airports = airports[1:]
+    lines = file.readlines()
+    for line in lines:
+        w = line.split(" ")
+        airport = Airport()
+        airport.code = w[0]
+        airport.latitude = float(w[1])
+        airport.longitude = float(w[2])
+        airports.append(airport)
     return airports
