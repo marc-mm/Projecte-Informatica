@@ -16,3 +16,5 @@ def IsSchengenAirport(code):
 def SetSchengen(airport):
     if IsSchengenAirport(airport.code) == True:
         airport.Schengen = True
+def PrintAirport(airport):
+    print(airport)
