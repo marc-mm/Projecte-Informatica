@@ -6,7 +6,7 @@ class Airport:
         self.longitude = 0.0
         self.Schengen = False
 
-
+airport = Airport()
 
 def IsSchengenAirport(code):
     Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
