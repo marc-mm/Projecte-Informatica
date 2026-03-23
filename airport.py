@@ -10,7 +10,7 @@ airport = Airport()
 
 def IsSchengenAirport(code):
     Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
-    if code in Schengen:
+    if code[0:1] in Schengen:
         return True
 
 def SetSchengen(airport):
