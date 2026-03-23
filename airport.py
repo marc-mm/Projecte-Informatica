@@ -92,6 +92,7 @@ def MapAirports (airports, filename):
         kml.write("<name>" + item.code + "</name>\n")
         kml.write("\t\t<point>\n")
         kml.write("\t\t\t<coordinates>\n" + "\t\t\t\t" + str(item.latitude) + "," + str(item.longitude) + "\n" + "\t\t\t</coordinates>\n")
-        kml.write("\t\t</Point>\n")
+        kml.write("\t\t</point>\n")
         kml.write("\t</Placemark>\n")
-
+    kml.write("</Document>\n")
+    kml.write("</kml>\n")

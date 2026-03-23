@@ -5,40 +5,42 @@
 			<coordinates>
 				63.985,-22.605555555555558
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
 	<Placemark> <name>CYUL</name>
 		<point>
 			<coordinates>
 				45.46805555555556,-73.74138888888889
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
 	<Placemark> <name>CYYZ</name>
 		<point>
 			<coordinates>
 				43.67722222222222,-79.63055555555555
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
 	<Placemark> <name>DAAG</name>
 		<point>
 			<coordinates>
 				36.693888888888885,3.2144444444444447
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
 	<Placemark> <name>DTTA</name>
 		<point>
 			<coordinates>
 				36.85111111111111,10.226944444444445
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
 	<Placemark> <name>EBAW</name>
 		<point>
 			<coordinates>
 				51.18944444444444,4.460277777777778
 			</coordinates>
-		</Point>
+		</point>
 	</Placemark>
+</Document>
+</kml>
