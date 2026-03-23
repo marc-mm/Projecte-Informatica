@@ -33,12 +33,21 @@ def LoadAirports (filename):
     return airports
 
 def SaveSchengenAirports(filename, airports):
-    file = open(filename, 'w')
-    file.write("CODE LAT LON")
-    for item in airports:
-        if IsSchengenAirport(item.code) == True:
-            file.write(item.code + " " + item.latitude + " " + item.longitude)
+    if airports == None:
+        return "Error: No airports found"
+    else:
+        file = open(filename, 'w')
+        file.write("CODE LAT LON")
+        for item in airports:
+            if IsSchengenAirport(item.code) == True:
+                file.write(item.code + " " + item.latitude + " " + item.longitude)
 
-def AddAirport (airports, airport)
-    if airport.code not in airports:
+def AddAirport (airports, airport):
+    if airport not in airports:
         airports.append(airport)
+def RemoveAirport (airports, code):
+    i = 0
+    while i < len(airports):
+        if airports[i].code == code:
+            airports = airports[:i] + airports[i+1:]
+        i += 1
