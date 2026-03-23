@@ -39,6 +39,32 @@ def parse_coordinate(coord_str):
     return decimal_val
 
 
+def MapAirports(airports):
+    # Aquesta funció crea un arxiu KML que pot llegir Google Earth
+    filename = "airports.kml"
+
+    file = open(filename, 'w')
+
+    # Escrivim la capçalera obligatòria dels arxius KML
+    file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+    file.write('<Document>\n')
+
+    # Recorrem tots els aeroports i els afegim al mapa com a "Punts" (Placemarks)
+    for apt in airports:
+        file.write('  <Placemark>\n')
+        file.write('    <name>' + apt.code + '</name>\n')
+        file.write('    <Point>\n')
+        # Atenció: Google Earth llegeix primer la longitud i després la latitud!
+        file.write('      <coordinates>' + str(apt.longitude) + ',' + str(apt.latitude) + ',0</coordinates>\n')
+        file.write('    </Point>\n')
+        file.write('  </Placemark>\n')
+
+    # Tanquem les etiquetes i l'arxiu
+    file.write('</Document>\n')
+    file.write('</kml>\n')
+    file.close()
+
 def LoadAirports(filename):
     airports = []
     file = open(filename, 'r')
