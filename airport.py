@@ -73,9 +73,25 @@ def RemoveAirport (airports, code):
 def PlotAirports (airports):
     schengen = 0
     for item in airports:
-        if item.Schengen == True:
+        if IsSchengenAirport(item.code) == True:
             schengen += 1
-    y1 = len(airports)-schengen
-    plt.bar("Airports", y1, color="pink")
-    plt.bar("Airports", schengen, bottom=y1, color="blue")
+    print(schengen)
+    y1 = len(airports)
+    plt.bar("Airports", schengen, color="blue")
+    plt.bar("Airports", y1, bottom=schengen, color="pink")
+    plt.title("Schengen Airports")
+    plt.legend(["Schengen","No Schengen"], loc="upper right")
     plt.show()
+
+def MapAirports (airports, filename):
+    kml = open(filename, "w")
+    kml.write("<kml xmlns='http://www.opengis.net/kml/2.2'>\n")
+    kml.write("<Document>\n")
+    for item in airports:
+        kml.write("\t<Placemark> ")
+        kml.write("<name>" + item.code + "</name>\n")
+        kml.write("\t\t<point>\n")
+        kml.write("\t\t\t<coordinates>\n" + "\t\t\t\t" + str(item.latitude) + "," + str(item.longitude) + "\n" + "\t\t\t</coordinates>\n")
+        kml.write("\t\t</Point>\n")
+        kml.write("\t</Placemark>\n")
+

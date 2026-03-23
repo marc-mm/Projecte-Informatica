@@ -25,6 +25,8 @@ for i in airports:
     print(i.code)
     print(i.latitude)
     print(i.longitude)
+    print(i.Schengen)
     print()
 
 PlotAirports(airports)
+MapAirports(airports,"Geospatial_airports.kml")
