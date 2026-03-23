@@ -34,6 +34,11 @@ def LoadAirports (filename):
 
 def SaveSchengenAirports(filename, airports):
     file = open(filename, 'w')
+    file.write("CODE LAT LON")
     for item in airports:
         if IsSchengenAirport(item.code) == True:
-            file.write(item.code + " is Schengen\n")
+            file.write(item.code + " " + item.latitude + " " + item.longitude)
+
+def AddAirport (airports, airport)
+    if airport.code not in airports:
+        airports.append(airport)
