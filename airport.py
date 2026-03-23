@@ -1,4 +1,4 @@
-import os
+
 class Airport:
     def __init__(self):
         self.code = ""
@@ -15,46 +15,17 @@ def IsSchengenAirport(code):
         return True
     return False
 
-def SetSchengen(airport):
-    if IsSchengenAirport(airport.code) == True:
-        airport.Schengen = True
-def PrintAirport(airport):
-    print(airport)
-
-
-def parse_coordinate(coord_str):
-    # Aquesta funció tradueix coses com 'N635906' o 'W0223620' a decimals
-    direction = coord_str[0]
-
-
-    degrees = float(coord_str[1:-4])
-    minutes = float(coord_str[-4:-2])
-    seconds = float(coord_str[-2:])
-
-    # Passem tot a format decimal
-    decimal_val = degrees + (minutes / 60) + (seconds / 3600)
-
-    # Si és Sud o Oest, la coordenada ha de ser negativa
-    if direction == 'S' or direction == 'W':
-        decimal_val = -decimal_val
-
-    return decimal_val
-
 
 def MapAirports(airports):
     import os
-    # Aquesta funció crea un arxiu KML que pot llegir Google Earth
     filename = "airports.kml"
-
     file = open(filename, 'w')
 
-    # Escrivim la capçalera obligatòria dels arxius KML
     file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
     file.write('<Document>\n')
 
-    # DEFINIM ELS ESTILS DELS COLORS
-    # 1. Estil Verd (Schengen)
+    # 1. Estil Verd (Schengen) - ENLLAÇ CORREGIT
     file.write('  <Style id="schengen">\n')
     file.write('    <IconStyle>\n')
     file.write('      <Icon>\n')
@@ -63,7 +34,7 @@ def MapAirports(airports):
     file.write('    </IconStyle>\n')
     file.write('  </Style>\n')
 
-    # 2. Estil Vermell (No Schengen)
+    # 2. Estil Vermell (No Schengen) - ENLLAÇ CORREGIT
     file.write('  <Style id="non_schengen">\n')
     file.write('    <IconStyle>\n')
     file.write('      <Icon>\n')
@@ -72,12 +43,10 @@ def MapAirports(airports):
     file.write('    </IconStyle>\n')
     file.write('  </Style>\n')
 
-    # Recorrem tots els aeroports i els afegim al mapa
     for apt in airports:
         file.write('  <Placemark>\n')
         file.write('    <name>' + apt.code + '</name>\n')
 
-        # CONDICIÓ DELS COLORS: Mirem si és Schengen o no per assignar l'estil
         if apt.Schengen == True:
             file.write('    <styleUrl>#schengen</styleUrl>\n')
         else:
@@ -88,31 +57,47 @@ def MapAirports(airports):
         file.write('    </Point>\n')
         file.write('  </Placemark>\n')
 
-    # Tanquem les etiquetes i l'arxiu
     file.write('</Document>\n')
     file.write('</kml>\n')
     file.close()
-
-    # Obrim el fitxer automàticament al final
     os.startfile(filename)
 
-def LoadAirports(filename):
-    airports = []
-    file = open(filename, 'r')
-    lines = file.readlines()
+def SetSchengen(airport):
+    if IsSchengenAirport(airport.code) == True:
+        airport.Schengen = True
+def PrintAirport(airport):
+    print(airport)
 
-    for line in lines[1:]:  # Saltem la línia 0 (l'encapçalament)
-        w = line.split()
-        if len(w) == 3:
-            airport = Airport()
-            airport.code = w[0]
-            # Utilitzem el "traductor" per llegir les coordenades
-            airport.latitude = parse_coordinate(w[1])
-            airport.longitude = parse_coordinate(w[2])
-            airports.append(airport)
+def PlotAirports(airports):
+    import matplotlib.pyplot as plt
 
-    file.close()
-    return airports
+    # 1. Comptem quants aeroports n'hi ha de cada tipus
+    schengen_count = 0
+    non_schengen_count = 0
+
+    for apt in airports:
+        if apt.Schengen == True:
+            schengen_count += 1
+        else:
+            non_schengen_count += 1
+
+    # 2. Creem el llenç del gràfic (AQUESTA ÉS LA LÍNIA QUE FALTAVA!)
+    fig, ax = plt.subplots()
+
+    # Dibuixem la base: la barra dels Schengen (blau per defecte)
+    ax.bar(['Airports'], [schengen_count], label='Schengen')
+
+    # Dibuixem la part de dalt: la barra dels No Schengen
+    ax.bar(['Airports'], [non_schengen_count], bottom=[schengen_count], color='salmon', label='No Schengen')
+
+    # 3. Posem títols i llegenda
+    ax.set_title('Schengen airports')
+    ax.set_ylabel('Count')
+    ax.legend()
+
+    # 4. Mostrem la finestra amb el gràfic
+    plt.show()
+
 def SaveSchengenAirports(filename, airports):
     file = open(filename, 'w')
     for item in airports:
