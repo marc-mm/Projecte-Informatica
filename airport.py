@@ -1,4 +1,4 @@
-
+import os
 class Airport:
     def __init__(self):
         self.code = ""
@@ -64,6 +64,7 @@ def MapAirports(airports):
     file.write('</Document>\n')
     file.write('</kml>\n')
     file.close()
+    os.startfile(filename)
 
 def LoadAirports(filename):
     airports = []
