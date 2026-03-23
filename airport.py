@@ -40,6 +40,7 @@ def parse_coordinate(coord_str):
 
 
 def MapAirports(airports):
+    import os
     # Aquesta funció crea un arxiu KML que pot llegir Google Earth
     filename = "airports.kml"
 
@@ -50,12 +51,37 @@ def MapAirports(airports):
     file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
     file.write('<Document>\n')
 
-    # Recorrem tots els aeroports i els afegim al mapa com a "Punts" (Placemarks)
+    # DEFINIM ELS ESTILS DELS COLORS
+    # 1. Estil Verd (Schengen)
+    file.write('  <Style id="schengen">\n')
+    file.write('    <IconStyle>\n')
+    file.write('      <Icon>\n')
+    file.write('        <href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>\n')
+    file.write('      </Icon>\n')
+    file.write('    </IconStyle>\n')
+    file.write('  </Style>\n')
+
+    # 2. Estil Vermell (No Schengen)
+    file.write('  <Style id="non_schengen">\n')
+    file.write('    <IconStyle>\n')
+    file.write('      <Icon>\n')
+    file.write('        <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>\n')
+    file.write('      </Icon>\n')
+    file.write('    </IconStyle>\n')
+    file.write('  </Style>\n')
+
+    # Recorrem tots els aeroports i els afegim al mapa
     for apt in airports:
         file.write('  <Placemark>\n')
         file.write('    <name>' + apt.code + '</name>\n')
+
+        # CONDICIÓ DELS COLORS: Mirem si és Schengen o no per assignar l'estil
+        if apt.Schengen == True:
+            file.write('    <styleUrl>#schengen</styleUrl>\n')
+        else:
+            file.write('    <styleUrl>#non_schengen</styleUrl>\n')
+
         file.write('    <Point>\n')
-        # Atenció: Google Earth llegeix primer la longitud i després la latitud!
         file.write('      <coordinates>' + str(apt.longitude) + ',' + str(apt.latitude) + ',0</coordinates>\n')
         file.write('    </Point>\n')
         file.write('  </Placemark>\n')
@@ -64,6 +90,8 @@ def MapAirports(airports):
     file.write('</Document>\n')
     file.write('</kml>\n')
     file.close()
+
+    # Obrim el fitxer automàticament al final
     os.startfile(filename)
 
 def LoadAirports(filename):
