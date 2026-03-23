@@ -9,9 +9,11 @@ class Airport:
 airport = Airport()
 
 def IsSchengenAirport(code):
-    Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
-    if code in Schengen:
+    Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI', 'LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LR', 'LZ', 'LJ', 'LE', 'LS', 'ES')
+    # AFEGIM [:2] perquè agafi només les dues primeres lletres del codi
+    if code[:2] in Schengen:
         return True
+    return False
 
 def SetSchengen(airport):
     if IsSchengenAirport(airport.code) == True:
