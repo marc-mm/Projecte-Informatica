@@ -19,17 +19,24 @@ def SetSchengen(airport):
 def PrintAirport(airport):
     print(airport)
 
-def LoadAirports (filename):
+
+def LoadAirports(filename):
     airports = []
     file = open(filename, 'r')
     lines = file.readlines()
-    for line in lines:
-        w = line.split(" ")
-        airport = Airport()
-        airport.code = w[0]
-        airport.latitude = float(w[1])
-        airport.longitude = float(w[2])
-        airports.append(airport)
+
+    for line in lines[1:]:
+
+        w = line.split()
+
+        if len(w) == 3:
+            airport = Airport()
+            airport.code = w[0]
+            airport.latitude = float(w[1])
+            airport.longitude = float(w[2])
+            airports.append(airport)
+
+    file.close()
     return airports
 
 def SaveSchengenAirports(filename, airports):
