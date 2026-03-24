@@ -7,8 +7,10 @@ class Airport:
         self.longitude = longitude
         self.Schengen = False
 
+
 def IsSchengenAirport(code):
     Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
+    # AFEGIM [:2] perquè agafi només les dues primeres lletres del codi
     if code[:2] in Schengen:
         return True
     else:
@@ -26,7 +28,7 @@ def LoadAirports (filename):
     file = open(filename, 'r')
     lines = file.readlines()
     file.close()
-    i = 1
+    i = 1 # Saltem la línia 0 (l'encapçalament)
     while i < len(lines):
         w = lines[i].split(" ")
         code = w[0]
@@ -83,16 +85,48 @@ def PlotAirports (airports):
     plt.legend(["Schengen","No Schengen"], loc="upper right")
     plt.show()
 
-def MapAirports (airports, filename):
-    kml = open(filename, "w")
-    kml.write("<kml xmlns='http://www.opengis.net/kml/2.2'>\n")
-    kml.write("<Document>\n")
-    for item in airports:
-        kml.write("\t<Placemark> ")
-        kml.write("<name>" + item.code + "</name>\n")
-        kml.write("\t\t<point>\n")
-        kml.write("\t\t\t<coordinates>\n" + "\t\t\t\t" + str(item.latitude) + "," + str(item.longitude) + "\n" + "\t\t\t</coordinates>\n")
-        kml.write("\t\t</point>\n")
-        kml.write("\t</Placemark>\n")
-    kml.write("</Document>\n")
-    kml.write("</kml>\n")
+def MapAirports(airports):
+    import os
+    filename = "airports.kml"
+    file = open(filename, 'w')
+
+    file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+    file.write('<Document>\n')
+
+    # 1. Estil Verd (Schengen) - ENLLAÇ CORREGIT
+    file.write('  <Style id="schengen">\n')
+    file.write('    <IconStyle>\n')
+    file.write('      <Icon>\n')
+    file.write('        <href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>\n')
+    file.write('      </Icon>\n')
+    file.write('    </IconStyle>\n')
+    file.write('  </Style>\n')
+
+    # 2. Estil Vermell (No Schengen) - ENLLAÇ CORREGIT
+    file.write('  <Style id="non_schengen">\n')
+    file.write('    <IconStyle>\n')
+    file.write('      <Icon>\n')
+    file.write('        <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>\n')
+    file.write('      </Icon>\n')
+    file.write('    </IconStyle>\n')
+    file.write('  </Style>\n')
+
+    for apt in airports:
+        file.write('  <Placemark>\n')
+        file.write('    <name>' + apt.code + '</name>\n')
+
+        if apt.Schengen == True:
+            file.write('    <styleUrl>#schengen</styleUrl>\n')
+        else:
+            file.write('    <styleUrl>#non_schengen</styleUrl>\n')
+
+        file.write('    <Point>\n')
+        file.write('      <coordinates>' + str(apt.longitude) + ',' + str(apt.latitude) + ',0</coordinates>\n')
+        file.write('    </Point>\n')
+        file.write('  </Placemark>\n')
+
+    file.write('</Document>\n')
+    file.write('</kml>\n')
+    file.close()
+    os.startfile(filename)
