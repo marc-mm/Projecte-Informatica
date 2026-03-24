@@ -6,17 +6,16 @@ import airport
 
 class AirportInterface:
     def __init__(self, root):
-        # initialize main window properties
+        # inici de marges i interface
         self.root = root
         self.root.title("airport management system")
         self.root.geometry("800x600")
         self.root.configure(bg="white")
         self.root.config(padx=20, pady=20, bg="white")
 
-        # initialize airport list variable
         self.airport_list = []
 
-        # create a top frame for the logo and title, set a fixed height to use absolute positioning
+        # quadrat titol
         frame_header = tk.Frame(root, bg="white", height=80)
         frame_header.pack(fill="x", pady=10)
         frame_header.pack_propagate(False)  # prevents the frame from shrinking
@@ -59,19 +58,19 @@ class AirportInterface:
         frame_middle = tk.Frame(root, bg="white")
         frame_middle.pack(pady=5)
         # modification buttons
-        tk.Button(frame_middle, text="Add Airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
+        tk.Button(frame_middle, text="Add airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
             row=0, column=0, padx=5)
-        tk.Button(frame_middle, text="Delete Airport", command=self.delete_airport, width=20, bg="#f0e68c",
+        tk.Button(frame_middle, text="Delete airport", command=self.delete_airport, width=20, bg="#f0e68c",
                   fg="black").grid(row=0, column=1, padx=5)
         # save schengen button
-        tk.Button(frame_middle, text="Save Schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
+        tk.Button(frame_middle, text="Save schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
                   fg="black").grid(row=0, column=2, padx=5)
 
         # create bottom frame for graphical representations, with white background
         frame_bottom = tk.Frame(root, bg="white")
         frame_bottom.pack(pady=15)
         # graphical representation buttons
-        tk.Button(frame_bottom, text="Plot Schengen vs Non-Schengen", command=self.plot_airports, width=30,
+        tk.Button(frame_bottom, text="Plot schengen vs non-schengen", command=self.plot_airports, width=30,
                   bg="#90ee90", fg="black").grid(row=0, column=0, padx=5)
         tk.Button(frame_bottom, text="Show in google earth", command=self.show_map, width=30, bg="#90ee90",
                   fg="black").grid(row=0, column=1, padx=5)
@@ -106,7 +105,7 @@ class AirportInterface:
 
         display_text = ""
         for aero in self.airport_list:
-            display_text += f"code: {aero.code} | lat: {aero.latitude} | lon: {aero.longitude} | schengen: {aero.Schengen}\n"
+            display_text += f"code: {aero.code:<4} \t| lat: {aero.latitude:<10.6f} | lon: {aero.longitude:<11.6f} \t | schengen: {aero.Schengen}\n"
         self.write_console(display_text)
 
     def set_schengen(self):
