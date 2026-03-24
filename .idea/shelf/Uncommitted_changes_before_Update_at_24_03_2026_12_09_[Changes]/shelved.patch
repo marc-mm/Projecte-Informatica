@@ -1,0 +1,65 @@
+Index: Interface.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import tkinter as tk\r\nfrom tkinter import messagebox, filedialog, simpledialog\r\nfrom PIL import Image, ImageTk\r\nimport airport\r\n\r\n\r\nclass AirportInterface:\r\n    def __init__(self, root):\r\n        # initialize main window properties\r\n        self.root = root\r\n        self.root.title(\"airport management system\")\r\n        self.root.geometry(\"800x600\")\r\n        self.root.configure(bg=\"white\")\r\n        self.root.config(padx=20, pady=20, bg=\"white\")\r\n\r\n        # initialize airport list variable\r\n        self.airport_list = []\r\n\r\n        # create a top frame for the logo and title, set a fixed height to use absolute positioning\r\n        frame_header = tk.Frame(root, bg=\"white\", height=80)\r\n        frame_header.pack(fill=\"x\", pady=10)\r\n        frame_header.pack_propagate(False)  # prevents the frame from shrinking\r\n\r\n        # load and place the eetac logo\r\n        try:\r\n            # load the logo image using the exact filename\r\n            logo_image = Image.open('eetac.png')\r\n            # resize the image to fit the header\r\n            logo_image = logo_image.resize((120, 60), Image.Resampling.LANCZOS)\r\n            # create a photolabel and place it on the left\r\n            logo_photo = ImageTk.PhotoImage(logo_image)\r\n            logo_label = tk.Label(frame_header, image=logo_photo, bg=\"white\")\r\n            logo_label.image = logo_photo  # keep a reference to avoid garbage collection\r\n            # place the logo exactly on the left side\r\n            logo_label.place(x=10, rely=0.5, anchor=\"w\")\r\n        except Exception as e:\r\n            # silently pass if the logo is not found so the app still works\r\n            pass\r\n\r\n        # place the title label exactly in the center of the frame\r\n        title_label = tk.Label(frame_header, text=\"AIRPORT MANAGEMENT SYSTEM\", font=(\"helvetica\", 18, \"bold\"),\r\n                               bg=\"white\", fg=\"black\")\r\n        title_label.place(relx=0.5, rely=0.5, anchor=\"center\")\r\n\r\n        # create top frame for basic loading and display operations, with white background\r\n        frame_top = tk.Frame(root, bg=\"white\")\r\n        frame_top.pack(pady=5)\r\n        # load and show buttons\r\n        tk.Button(frame_top, text=\"Load airports\", command=self.load_airports, width=20, bg=\"#add8e6\", fg=\"black\").grid(\r\n            row=0, column=0, padx=5)\r\n        tk.Button(frame_top, text=\"Show data\", command=self.show_data, width=20, bg=\"#add8e6\", fg=\"black\").grid(row=0,\r\n                                                                                                                column=1,\r\n                                                                                                                padx=5)\r\n        # set schengen button\r\n        tk.Button(frame_top, text=\"Set schengen\", command=self.set_schengen, width=20, bg=\"#d3d3d3\", fg=\"black\").grid(\r\n            row=0, column=2, padx=5)\r\n\r\n        # create middle frame for list modification operations, with white background\r\n        frame_middle = tk.Frame(root, bg=\"white\")\r\n        frame_middle.pack(pady=5)\r\n        # modification buttons\r\n        tk.Button(frame_middle, text=\"Add Airport\", command=self.add_airport, width=20, bg=\"#f0e68c\", fg=\"black\").grid(\r\n            row=0, column=0, padx=5)\r\n        tk.Button(frame_middle, text=\"Delete Airport\", command=self.delete_airport, width=20, bg=\"#f0e68c\",\r\n                  fg=\"black\").grid(row=0, column=1, padx=5)\r\n        # save schengen button\r\n        tk.Button(frame_middle, text=\"Save Schengen\", command=self.save_schengen, width=20, bg=\"#d3d3d3\",\r\n                  fg=\"black\").grid(row=0, column=2, padx=5)\r\n\r\n        # create bottom frame for graphical representations, with white background\r\n        frame_bottom = tk.Frame(root, bg=\"white\")\r\n        frame_bottom.pack(pady=15)\r\n        # graphical representation buttons\r\n        tk.Button(frame_bottom, text=\"Plot Schengen vs Non-Schengen\", command=self.plot_airports, width=30,\r\n                  bg=\"#90ee90\", fg=\"black\").grid(row=0, column=0, padx=5)\r\n        tk.Button(frame_bottom, text=\"Show in google earth\", command=self.show_map, width=30, bg=\"#90ee90\",\r\n                  fg=\"black\").grid(row=0, column=1, padx=5)\r\n\r\n        # create text area for console output simulation\r\n        # removed anchor=\"w\" to automatically center the text above the box\r\n        tk.Label(root, text=\"Console output:\", bg=\"white\", fg=\"black\").pack(pady=(10, 0))\r\n        self.text_box = tk.Text(root, height=15, width=90, bg=\"white\", fg=\"black\", font=(\"consolas\", 10))\r\n        self.text_box.pack(pady=5)\r\n\r\n    def write_console(self, message):\r\n        # clear previous text and insert new message into the text box\r\n        self.text_box.delete(1.0, tk.END)\r\n        self.text_box.insert(tk.END, message)\r\n\r\n    def load_airports(self):\r\n        # open file dialog to select airports text file\r\n        try:\r\n            filepath = filedialog.askopenfilename(title=\"select airports file\", filetypes=[(\"text files\", \"*.txt\")])\r\n            if filepath:\r\n                self.airport_list = airport.LoadAirports(filepath)\r\n                self.write_console(f\"successfully loaded {len(self.airport_list)} airports.\")\r\n                messagebox.showinfo(\"success\", \"airports loaded successfully.\")\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"could not load the file.\\ndetails: {e}\")\r\n\r\n    def show_data(self):\r\n        # display the loaded airports in the text box\r\n        if not self.airport_list:\r\n            messagebox.showwarning(\"warning\", \"please load airports first.\")\r\n            return\r\n\r\n        display_text = \"\"\r\n        for aero in self.airport_list:\r\n            display_text += f\"code: {aero.code} | lat: {aero.latitude} | lon: {aero.longitude} | schengen: {aero.Schengen}\\n\"\r\n        self.write_console(display_text)\r\n\r\n    def set_schengen(self):\r\n        # update schengen attribute for all airports in the list\r\n        if not self.airport_list:\r\n            messagebox.showwarning(\"warning\", \"no airports to update. please load them first.\")\r\n            return\r\n        try:\r\n            for aero in self.airport_list:\r\n                airport.SetSchengen(aero)\r\n            self.write_console(\"schengen attributes updated for all loaded airports.\")\r\n            messagebox.showinfo(\"success\", \"schengen attributes updated.\")\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"error updating schengen attributes: {e}\")\r\n\r\n    def add_airport(self):\r\n        # prompt user for a new airport code and add it to the list\r\n        code = simpledialog.askstring(\"new airport\", \"enter icao code (e.g., LEBL):\")\r\n        if not code: return\r\n\r\n        try:\r\n            new_aero = airport.Airport(code, [0.0, 0.0])\r\n            airport.AddAirport(self.airport_list, new_aero)\r\n            self.write_console(f\"airport {code} successfully added.\")\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"error adding airport: {e}\")\r\n\r\n    def delete_airport(self):\r\n        # prompt user for an airport code and remove it from the list\r\n        code = simpledialog.askstring(\"delete airport\", \"enter icao code to delete:\")\r\n        if not code: return\r\n\r\n        try:\r\n            error = airport.RemoveAirport(self.airport_list, code)\r\n            if error:\r\n                messagebox.showerror(\"error\", \"airport not found in the list.\")\r\n            else:\r\n                self.write_console(f\"airport {code} removed from the list.\")\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"error deleting airport: {e}\")\r\n\r\n    def save_schengen(self):\r\n        # save schengen airports to a new text file\r\n        if not self.airport_list:\r\n            messagebox.showwarning(\"warning\", \"no data to save.\")\r\n            return\r\n        try:\r\n            filepath = filedialog.asksaveasfilename(title=\"save as...\", defaultextension=\".txt\")\r\n            if filepath:\r\n                airport.SaveSchengenAirports(self.airport_list, filepath)\r\n                messagebox.showinfo(\"success\", \"file saved successfully.\")\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"error saving file: {e}\")\r\n\r\n    def plot_airports(self):\r\n        # generate bar chart for schengen and non-schengen airports\r\n        try:\r\n            airport.PlotAirports(self.airport_list)\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"could not generate plot.\\nerror: {e}\")\r\n\r\n    def show_map(self):\r\n        # generate google earth map for the loaded airports\r\n        try:\r\n            airport.MapAirports(self.airport_list)\r\n        except Exception as e:\r\n            messagebox.showerror(\"error\", f\"could not generate map.\\nerror: {e}\")\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    # start the application loop\r\n    root = tk.Tk()\r\n    app = AirportInterface(root)\r\n    root.mainloop()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Interface.py b/Interface.py
+--- a/Interface.py	(revision cfc3e972915fd411f650a8cb9188a2f18578b351)
++++ b/Interface.py	(date 1774350324185)
+@@ -10,21 +10,21 @@
+         self.root = root
+         self.root.title("airport management system")
+         self.root.geometry("800x600")
+-        self.root.configure(bg="white")
+-        self.root.config(padx=20, pady=20, bg="white")
++        self.root.configure(bg="#887bd5")
++        self.root.config(padx=20, pady=20, bg="#887bd5")
+ 
+         # initialize airport list variable
+         self.airport_list = []
+ 
+         # create a top frame for the logo and title, set a fixed height to use absolute positioning
+-        frame_header = tk.Frame(root, bg="white", height=80)
++        frame_header = tk.Frame(root, bg="#887bd5", height=80)
+         frame_header.pack(fill="x", pady=10)
+         frame_header.pack_propagate(False)  # prevents the frame from shrinking
+ 
+         # load and place the eetac logo
+         try:
+             # load the logo image using the exact filename
+-            logo_image = Image.open('eetac.png')
++            logo_image = Image.open('eetac_logo_bgless.png')
+             # resize the image to fit the header
+             logo_image = logo_image.resize((120, 60), Image.Resampling.LANCZOS)
+             # create a photolabel and place it on the left
+@@ -46,13 +46,13 @@
+         frame_top = tk.Frame(root, bg="white")
+         frame_top.pack(pady=5)
+         # load and show buttons
+-        tk.Button(frame_top, text="Load airports", command=self.load_airports, width=20, bg="#add8e6", fg="black").grid(
++        tk.Button(frame_top, text="Load Airports", command=self.load_airports, width=20, bg="#add8e6", fg="black").grid(
+             row=0, column=0, padx=5)
+-        tk.Button(frame_top, text="Show data", command=self.show_data, width=20, bg="#add8e6", fg="black").grid(row=0,
++        tk.Button(frame_top, text="Show Data", command=self.show_data, width=20, bg="#add8e6", fg="black").grid(row=0,
+                                                                                                                 column=1,
+                                                                                                                 padx=5)
+         # set schengen button
+-        tk.Button(frame_top, text="Set schengen", command=self.set_schengen, width=20, bg="#d3d3d3", fg="black").grid(
++        tk.Button(frame_top, text="Set Schengen", command=self.set_schengen, width=20, bg="#d3d3d3", fg="black").grid(
+             row=0, column=2, padx=5)
+ 
+         # create middle frame for list modification operations, with white background
+@@ -78,9 +78,9 @@
+ 
+         # create text area for console output simulation
+         # removed anchor="w" to automatically center the text above the box
+-        tk.Label(root, text="Console output:", bg="white", fg="black").pack(pady=(10, 0))
++        tk.Label(root, text="Console Output:", bg="white", fg="black").pack(pady=(10, 0))
+         self.text_box = tk.Text(root, height=15, width=90, bg="white", fg="black", font=("consolas", 10))
+-        self.text_box.pack(pady=5)
++        self.text_box.pack(pady=10)
+ 
+     def write_console(self, message):
+         # clear previous text and insert new message into the text box
