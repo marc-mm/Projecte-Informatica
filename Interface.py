@@ -45,39 +45,39 @@ class AirportInterface:
         frame_top = tk.Frame(root, bg="white")
         frame_top.pack(pady=5)
         # load and show buttons
-        tk.Button(frame_top, text="load airports", command=self.load_airports, width=20, bg="#add8e6", fg="black").grid(
+        tk.Button(frame_top, text="Load airports", command=self.load_airports, width=20, bg="#add8e6", fg="black").grid(
             row=0, column=0, padx=5)
-        tk.Button(frame_top, text="show data", command=self.show_data, width=20, bg="#add8e6", fg="black").grid(row=0,
+        tk.Button(frame_top, text="Show data", command=self.show_data, width=20, bg="#add8e6", fg="black").grid(row=0,
                                                                                                                 column=1,
                                                                                                                 padx=5)
         # set schengen button
-        tk.Button(frame_top, text="set schengen", command=self.set_schengen, width=20, bg="#d3d3d3", fg="black").grid(
+        tk.Button(frame_top, text="Set schengen", command=self.set_schengen, width=20, bg="#d3d3d3", fg="black").grid(
             row=0, column=2, padx=5)
 
         # create middle frame for list modification operations, with white background
         frame_middle = tk.Frame(root, bg="white")
         frame_middle.pack(pady=5)
         # modification buttons
-        tk.Button(frame_middle, text="add airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
+        tk.Button(frame_middle, text="Add airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
             row=0, column=0, padx=5)
-        tk.Button(frame_middle, text="delete airport", command=self.delete_airport, width=20, bg="#f0e68c",
+        tk.Button(frame_middle, text="Delete airport", command=self.delete_airport, width=20, bg="#f0e68c",
                   fg="black").grid(row=0, column=1, padx=5)
         # save schengen button
-        tk.Button(frame_middle, text="save schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
+        tk.Button(frame_middle, text="Save schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
                   fg="black").grid(row=0, column=2, padx=5)
 
         # create bottom frame for graphical representations, with white background
         frame_bottom = tk.Frame(root, bg="white")
         frame_bottom.pack(pady=15)
         # graphical representation buttons
-        tk.Button(frame_bottom, text="plot schengen vs non-schengen", command=self.plot_airports, width=30,
+        tk.Button(frame_bottom, text="Plot schengen vs non-schengen", command=self.plot_airports, width=30,
                   bg="#90ee90", fg="black").grid(row=0, column=0, padx=5)
-        tk.Button(frame_bottom, text="show in google earth", command=self.show_map, width=30, bg="#90ee90",
+        tk.Button(frame_bottom, text="Show in google earth", command=self.show_map, width=30, bg="#90ee90",
                   fg="black").grid(row=0, column=1, padx=5)
 
         # create text area for console output simulation
         # removed anchor="w" to automatically center the text above the box
-        tk.Label(root, text="console output:", bg="white", fg="black").pack(pady=(10, 0))
+        tk.Label(root, text="Console output:", bg="white", fg="black").pack(pady=(10, 0))
         self.text_box = tk.Text(root, height=15, width=90, bg="white", fg="black", font=("consolas", 10))
         self.text_box.pack(pady=5)
 
