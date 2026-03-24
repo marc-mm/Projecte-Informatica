@@ -1,58 +1,89 @@
+import matplotlib.pyplot as plt
 
 class Airport:
-    def __init__(self):
-        self.code = ""
-        self.latitude = 0.0
-        self.longitude = 0.0
+    def __init__(self, code, latitude, longitude):
+        self.code = code
+        self.latitude = latitude
+        self.longitude = longitude
         self.Schengen = False
 
-airport = Airport()
-
-
-def parse_coordinate(coord_str):
-    # Aquesta funció tradueix coses com 'N635906' o 'W0223620' a decimals
-    direction = coord_str[0]  # Agafa la primera lletra (N, S, E, W)
-
-    # Separem els graus, minuts i segons tallant el text
-    degrees = float(coord_str[1:-4])
-    minutes = float(coord_str[-4:-2])
-    seconds = float(coord_str[-2:])
-
-    # Passem tot a format decimal
-    decimal_val = degrees + (minutes / 60) + (seconds / 3600)
-
-    # Si és Sud o Oest, la coordenada ha de ser negativa
-    if direction == 'S' or direction == 'W':
-        decimal_val = -decimal_val
-
-    return decimal_val
-
-
-def LoadAirports(filename):
-    airports = []
-    file = open(filename, 'r')
-    lines = file.readlines()
-
-    for line in lines[1:]:  # Saltem la línia 0 (l'encapçalament)
-        w = line.split()
-        if len(w) == 3:
-            airport = Airport()
-            airport.code = w[0]
-            # Utilitzem el "traductor" per llegir les coordenades
-            airport.latitude = parse_coordinate(w[1])
-            airport.longitude = parse_coordinate(w[2])
-            airports.append(airport)
-
-    file.close()
-    return airports
 
 def IsSchengenAirport(code):
-    Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI', 'LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LR', 'LZ', 'LJ', 'LE', 'LS', 'ES')
+    Schengen = ('LO', 'EB', 'LK', 'LC', 'EK', 'EE', 'EF', 'LF', 'ED', 'LG', 'EH', 'LH', 'BI','LI', 'EV', 'EY', 'EL', 'LM', 'EN', 'EP', 'LP', 'LZ', 'LJ', 'LE', 'ES', 'LS')
     # AFEGIM [:2] perquè agafi només les dues primeres lletres del codi
     if code[:2] in Schengen:
         return True
-    return False
+    else:
+        return False
 
+
+def SetSchengen(airport):
+    airport.Schengen = IsSchengenAirport(airport.code)
+
+def PrintAirport(airport):
+    print(str(airport.code) + " " + str(airport.latitude) + " " + str(airport.longitude) + " " + str(airport.Schengen))
+
+def LoadAirports (filename):
+    airports = []
+    file = open(filename, 'r')
+    lines = file.readlines()
+    file.close()
+    i = 1 # Saltem la línia 0 (l'encapçalament)
+    while i < len(lines):
+        w = lines[i].split(" ")
+        code = w[0]
+        latitude = 0
+        latitude = float(w[1][1:3])
+        latitude += float(w[1][3:5])/60
+        latitude += float(w[1][5:7])/3600
+        if w[1][0] == "S":
+            latitude = -latitude
+        longitude = 0
+        longitude = float(w[2][1:4])
+        longitude += float(w[2][4:6])/60
+        longitude += float(w[2][6:8])/3600
+        if w[2][0] == "W":
+            longitude = -longitude
+        airport = Airport(code, latitude, longitude)
+        airports.append(airport)
+        i = i + 1
+    return airports
+
+def SaveSchengenAirports(filename, airports):
+    if airports == None:
+        print("Error: No airports found")
+    else:
+        file = open(filename, 'w')
+        file.write("CODE LAT LON\n")
+        for item in airports:
+            if IsSchengenAirport(item.code) == True:
+                file.write(item.code + " " + str(item.latitude) + " " + str(item.longitude) + "\n")
+
+def AddAirport (airports, airport):
+    if airport not in airports:
+        airports.append(airport)
+
+def RemoveAirport (airports, code):
+    i = 0
+    while i < len(airports):
+        if airports[i].code == code:
+            airports = airports[:i] + airports[i+1:]
+            return airports
+        i += 1
+    print("Error: No airport found")
+
+def PlotAirports (airports):
+    schengen = 0
+    for item in airports:
+        if IsSchengenAirport(item.code) == True:
+            schengen += 1
+    print(schengen)
+    y1 = len(airports)
+    plt.bar("Airports", schengen, color="blue")
+    plt.bar("Airports", y1, bottom=schengen, color="pink")
+    plt.title("Schengen Airports")
+    plt.legend(["Schengen","No Schengen"], loc="upper right")
+    plt.show()
 
 def MapAirports(airports):
     import os
@@ -99,45 +130,3 @@ def MapAirports(airports):
     file.write('</kml>\n')
     file.close()
     os.startfile(filename)
-
-def SetSchengen(airport):
-    if IsSchengenAirport(airport.code) == True:
-        airport.Schengen = True
-def PrintAirport(airport):
-    print(airport)
-
-def PlotAirports(airports):
-    import matplotlib.pyplot as plt
-
-    # 1. Comptem quants aeroports n'hi ha de cada tipus
-    schengen_count = 0
-    non_schengen_count = 0
-
-    for apt in airports:
-        if apt.Schengen == True:
-            schengen_count += 1
-        else:
-            non_schengen_count += 1
-
-    # 2. Creem el llenç del gràfic (AQUESTA ÉS LA LÍNIA QUE FALTAVA!)
-    fig, ax = plt.subplots()
-
-    # Dibuixem la base: la barra dels Schengen (blau per defecte)
-    ax.bar(['Airports'], [schengen_count], label='Schengen')
-
-    # Dibuixem la part de dalt: la barra dels No Schengen
-    ax.bar(['Airports'], [non_schengen_count], bottom=[schengen_count], color='salmon', label='No Schengen')
-
-    # 3. Posem títols i llegenda
-    ax.set_title('Schengen airports')
-    ax.set_ylabel('Count')
-    ax.legend()
-
-    # 4. Mostrem la finestra amb el gràfic
-    plt.show()
-
-def SaveSchengenAirports(filename, airports):
-    file = open(filename, 'w')
-    for item in airports:
-        if IsSchengenAirport(item.code) == True:
-            file.write(item.code + " is Schengen\n")
