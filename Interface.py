@@ -105,7 +105,7 @@ class AirportInterface:
 
         display_text = ""
         for aero in self.airport_list:
-            display_text += f"code: {aero.code} | lat: {aero.latitude} | lon: {aero.longitude} | schengen: {aero.Schengen}\n"
+            display_text += f"code: {aero.code} \t| lat: {aero.latitude:.6f} | lon: {aero.longitude:.6f} \t | schengen: {aero.Schengen}\n"
         self.write_console(display_text)
 
     def set_schengen(self):
