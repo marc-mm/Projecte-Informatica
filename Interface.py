@@ -6,17 +6,16 @@ import airport
 
 class AirportInterface:
     def __init__(self, root):
-        # initialize main window properties
+        # inici de marges i interface
         self.root = root
         self.root.title("airport management system")
         self.root.geometry("800x600")
         self.root.configure(bg="white")
         self.root.config(padx=20, pady=20, bg="white")
 
-        # initialize airport list variable
         self.airport_list = []
 
-        # create a top frame for the logo and title, set a fixed height to use absolute positioning
+        # quadrat titol
         frame_header = tk.Frame(root, bg="white", height=80)
         frame_header.pack(fill="x", pady=10)
         frame_header.pack_propagate(False)  # prevents the frame from shrinking
@@ -24,7 +23,7 @@ class AirportInterface:
         # load and place the eetac logo
         try:
             # load the logo image using the exact filename
-            logo_image = Image.open('eetac_upc_logo.jpg')
+            logo_image = Image.open('eetac.png')
             # resize the image to fit the header
             logo_image = logo_image.resize((120, 60), Image.Resampling.LANCZOS)
             # create a photolabel and place it on the left
@@ -106,7 +105,7 @@ class AirportInterface:
 
         display_text = ""
         for aero in self.airport_list:
-            display_text += f"code: {aero.code} | lat: {aero.lat} | lon: {aero.lon} | schengen: {aero.Schengen}\n"
+            display_text += f"code: {aero.code} | lat: {aero.latitude} | lon: {aero.longitude} | schengen: {aero.Schengen}\n"
         self.write_console(display_text)
 
     def set_schengen(self):
