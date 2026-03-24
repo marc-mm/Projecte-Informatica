@@ -59,19 +59,19 @@ class AirportInterface:
         frame_middle = tk.Frame(root, bg="white")
         frame_middle.pack(pady=5)
         # modification buttons
-        tk.Button(frame_middle, text="Add airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
+        tk.Button(frame_middle, text="Add Airport", command=self.add_airport, width=20, bg="#f0e68c", fg="black").grid(
             row=0, column=0, padx=5)
-        tk.Button(frame_middle, text="Delete airport", command=self.delete_airport, width=20, bg="#f0e68c",
+        tk.Button(frame_middle, text="Delete Airport", command=self.delete_airport, width=20, bg="#f0e68c",
                   fg="black").grid(row=0, column=1, padx=5)
         # save schengen button
-        tk.Button(frame_middle, text="Save schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
+        tk.Button(frame_middle, text="Save Schengen", command=self.save_schengen, width=20, bg="#d3d3d3",
                   fg="black").grid(row=0, column=2, padx=5)
 
         # create bottom frame for graphical representations, with white background
         frame_bottom = tk.Frame(root, bg="white")
         frame_bottom.pack(pady=15)
         # graphical representation buttons
-        tk.Button(frame_bottom, text="Plot schengen vs non-schengen", command=self.plot_airports, width=30,
+        tk.Button(frame_bottom, text="Plot Schengen vs Non-Schengen", command=self.plot_airports, width=30,
                   bg="#90ee90", fg="black").grid(row=0, column=0, padx=5)
         tk.Button(frame_bottom, text="Show in google earth", command=self.show_map, width=30, bg="#90ee90",
                   fg="black").grid(row=0, column=1, padx=5)
@@ -106,7 +106,7 @@ class AirportInterface:
 
         display_text = ""
         for aero in self.airport_list:
-            display_text += f"code: {aero.code} | lat: {aero.lat} | lon: {aero.lon} | schengen: {aero.Schengen}\n"
+            display_text += f"code: {aero.code} | lat: {aero.latitude} | lon: {aero.longitude} | schengen: {aero.Schengen}\n"
         self.write_console(display_text)
 
     def set_schengen(self):
