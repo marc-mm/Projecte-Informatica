@@ -1,2 +1,5 @@
 # Projecte-Informatica
-es un projecte
+Integrants del grup:
+- Marc Monlleó Moncayo
+- Max Arauzo Peidró
+- Félix Nicolás Díaz
