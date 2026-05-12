@@ -27,10 +27,12 @@ def SetGates(area, init_gate, end_gate, prefix):
     if len(area.Gates) > 0:
         pass
     else:
-        if (end_gate-init_gate) < 0:
+        if (int(end_gate)-int(init_gate)) < 0:
             print("error code -1")
-        while i < (end_gate-init_gate):
-            return area.Gates.append(prefix+str(init_gate+i))
+        while i < (int(end_gate)-int(init_gate)):
+            area.Gates.append(prefix+str(int(init_gate)+i))
+            i += 1
+
 
 
 def LoadAirlines(terminal, t_name):
@@ -50,13 +52,14 @@ def LoadAirportStructure (filename):
     i = 1
     while i < len(lines):
         linia = lines[i].split(" ")
+        linia = [x for x in linia if x]
         if linia[0] == "Terminal":
             terminals.append(Terminal())
             terminals[-1].t_name = linia[1]
         if linia[0] == "Area":
             terminals[-1].BA.append(Boarding_Area())
             terminals[-1].BA[-1].area = linia[1]
-            SetGates(terminals[-1].BA[-1].area, linia[4], linia[6], linia[1])
+            SetGates(terminals[-1].BA[-1], linia[4], linia[6], linia[1])
         i += 1
     AirportStructure = BarcelonaAP()
     linia_0 = lines[0].split(" ")
