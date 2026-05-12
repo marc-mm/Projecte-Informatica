@@ -1,0 +1,69 @@
+
+
+class BarcelonaAP:
+    def __init__(self):
+        self.name = ""
+        self.terminals = []
+class Terminal:
+    def __init__(self):
+        self.t_name = ""
+        self.BA = []
+        self.air_code = []
+class Boarding_Area:
+    def __init__(self):
+        self.area = ""
+        self.Gates = []
+        self.Schengen = False
+class Gate:
+    def __init__(self):
+        self.name = ""
+        self.occupied = False
+        self.craftID = ""
+
+
+
+def SetGates(area, init_gate, end_gate, prefix):
+    i = 0
+    if len(area.Gates) > 0:
+        pass
+    else:
+        if (end_gate-init_gate) < 0:
+            print("error code -1")
+        while i < (end_gate-init_gate):
+            return area.Gates.append(prefix+str(init_gate+i))
+
+
+def LoadAirlines(terminal, t_name):
+    file = open(f"{t_name}_Airlines.txt","r")
+    readline = file.readline()
+    while readline != "":
+        terminal.air_code.append(readline)
+        readline = file.readline()
+    file.close()
+
+
+def LoadAirportStructure (filename):
+    file = open(filename,"r")
+    lines = file.readlines()
+    file.close()
+    terminals = []
+    i = 1
+    while i < len(lines):
+        linia = lines[i].split(" ")
+        if linia[0] == "Terminal":
+            terminals.append(Terminal())
+            terminals[-1].t_name = linia[1]
+        if linia[0] == "Area":
+            terminals[-1].BA.append(Boarding_Area())
+            terminals[-1].BA[-1].area = linia[1]
+            SetGates(terminals[-1].BA[-1].area, linia[4], linia[6], linia[1])
+        i += 1
+    AirportStructure = BarcelonaAP()
+    linia_0 = lines[0].split(" ")
+    AirportStructure.name = linia_0[0]
+    AirportStructure.terminals = terminals
+    return AirportStructure
+
+print(LoadAirportStructure("Terminals.txt").__dict__)
+
+
