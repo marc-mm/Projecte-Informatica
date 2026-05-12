@@ -40,7 +40,7 @@ def LoadAirlines(terminal, t_name):
     readline = file.readline()
     while readline != "":
         terminal.air_code.append(readline)
-        readline = file.readline()
+        readline = file.readline().strip("\n")
     file.close()
 
 
@@ -60,13 +60,16 @@ def LoadAirportStructure (filename):
             terminals[-1].BA.append(Boarding_Area())
             terminals[-1].BA[-1].area = linia[1]
             SetGates(terminals[-1].BA[-1], linia[4], linia[6], linia[1])
+            if linia[2] == "Schengen":
+                terminals[-1].BA[-1].Schengen = True
         i += 1
     AirportStructure = BarcelonaAP()
     linia_0 = lines[0].split(" ")
-    AirportStructure.name = linia_0[0]
+    for i in terminals:
+        LoadAirlines(i,i.t_name)
+    AirportStructure.name = filename
     AirportStructure.terminals = terminals
     return AirportStructure
 
-print(LoadAirportStructure("Terminals.txt").__dict__)
 
-
+print(LoadAirportStructure("Terminals.txt").terminals[0].BA[4].__dict__)
