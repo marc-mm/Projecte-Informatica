@@ -313,6 +313,85 @@ class AirportInterface:
         )
         self._create_tile(
             arrival_tiles,
+            3,
+            0,
+            "Set Gate",
+            "Gate area .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+        self._create_tile(
+            arrival_tiles,
+            3,
+            1,
+            "Load Airlines",
+            "LoadAirlines .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+
+        self._create_tile(
+            arrival_tiles,
+            4,
+            0,
+            "Load Airport Structure",
+            "Load Airport Structure .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+        self._create_tile(
+            arrival_tiles,
+            4,
+            1,
+            "Gate Occupancy",
+            "Gate Occupancy .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+        self._create_tile(
+            arrival_tiles,
+            5,
+            0,
+            "Is Airline In Terminal",
+            "Is Airline In Terminal .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+
+        self._create_tile(
+            arrival_tiles,
+            5,
+            1,
+            "Search Terminal",
+            "Search Terminal .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+        self._create_tile(
+            arrival_tiles,
+            6,
+            0,
+            "Assign Gate ",
+            "Assign Gate .",
+            self.plot_arrivals_by_hour,
+            self.colors["gold_fill"],
+            self.colors["gold_outline"],
+            self.colors["gold_hover"],
+        )
+        self._create_tile(
+            arrival_tiles,
             2,
             1,
             "Load bundled files",

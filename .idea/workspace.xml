@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3b158f20-0d53-4cce-9272-d7d97d35bf4b" name="Changes" comment="LEBL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LEBL.py" beforeDir="false" afterPath="$PROJECT_DIR$/LEBL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,10 @@
     &quot;accountId&quot;: &quot;1ce3ff36-9f4b-4ec2-82af-dc8e6d59596e&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -56,6 +60,7 @@
     "Python.LEBL.executor": "Run",
     "Python.airport.executor": "Run",
     "Python.test_airports.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
