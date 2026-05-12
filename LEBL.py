@@ -30,7 +30,9 @@ def SetGates(area, init_gate, end_gate, prefix):
         if (int(end_gate)-int(init_gate)) < 0:
             print("error code -1")
         while i < (int(end_gate)-int(init_gate)):
-            area.Gates.append(prefix+str(int(init_gate)+i))
+            gate = Gate()
+            gate.name = prefix+str(int(init_gate)+i)
+            area.Gates.append(gate)
             i += 1
 
 
@@ -72,4 +74,4 @@ def LoadAirportStructure (filename):
     return AirportStructure
 
 
-print(LoadAirportStructure("Terminals.txt").terminals[0].BA[4].__dict__)
+print(LoadAirportStructure("Terminals.txt").terminals[0].BA[4].Gates[0].__dict__)
