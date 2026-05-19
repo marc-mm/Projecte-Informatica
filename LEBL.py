@@ -73,5 +73,13 @@ def LoadAirportStructure (filename):
     AirportStructure.terminals = terminals
     return AirportStructure
 
+def GateOccupancy (bcn):
+    Gates = []
+    for i in bcn:
+        for j in i.BA:
+            for k in j.Gates:
+                Gates.append(k.__dict__)
+    return Gates
 
-print(LoadAirportStructure("Terminals.txt").terminals[0].BA[4].Gates[0].__dict__)
+
+print(GateOccupancy(LoadAirportStructure("Terminals.txt").terminals))

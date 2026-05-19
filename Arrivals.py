@@ -91,16 +91,16 @@ def MapFlights(aircrafts, airport_list):
             # Busquem les coordenades de l'aeroport d'origen a la llista de la Versió 1
             origin_coords = None
             for apt in airport_list:
-                if apt.code == a.origin:
+                if apt.code == a.origin_airport:
                     origin_coords = (apt.latitude, apt.longitude)
                     break
 
             if origin_coords:
                 f.write('<Placemark>\n')
-                f.write(f'  <name>{a.id} ({a.origin} -> LEBL)</name>\n')
+                f.write(f'  <name>{a.flight_id} ({a.origin_airport} -> LEBL)</name>\n')
                 f.write('  <LineString>\n')
-                f.write(
-                    f'    <coordinates>{origin_coords[1]},{origin_coords[0]},0 {lebl_lon},{lebl_lat},0</coordinates>\n')
+                f.write('      <tessellate>1</tessellate>\n')
+                f.write(f'    <coordinates>{origin_coords[1]},{origin_coords[0]},0 {lebl_lon},{lebl_lat},0</coordinates>\n')
                 f.write('  </LineString>\n')
                 f.write('</Placemark>\n')
 
