@@ -1328,7 +1328,6 @@ class AirportInterface:
         plt.show()
         self.console_status.set("Hourly arrival flow chart opened.")
 
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = AirportInterface(root)
