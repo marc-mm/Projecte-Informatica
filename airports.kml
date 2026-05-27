@@ -1046,14 +1046,14 @@
   </Placemark>
   <Placemark>
     <name>LRCL</name>
-    <styleUrl>#schengen</styleUrl>
+    <styleUrl>#non_schengen</styleUrl>
     <Point>
       <coordinates>23.692222222222224,46.78916666666667,0</coordinates>
     </Point>
   </Placemark>
   <Placemark>
     <name>LROP</name>
-    <styleUrl>#schengen</styleUrl>
+    <styleUrl>#non_schengen</styleUrl>
     <Point>
       <coordinates>26.084999999999997,44.571111111111115,0</coordinates>
     </Point>

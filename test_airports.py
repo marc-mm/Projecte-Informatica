@@ -1,7 +1,7 @@
 from airport import *
 import matplotlib.pyplot as plt
 
-airport = Airport("LEBL", 41.297445, 2.0832941)
+airport = Airport("L EBL", 41.297445, 2.0832941)
 SetSchengen(airport)
 PrintAirport(airport)
 

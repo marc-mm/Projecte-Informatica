@@ -12,3 +12,4 @@ Area S Schengen     Gates 20 - 30
 Area U Schengen     Gates 30 - 39
 Area W non-Schengen Gates 40 - 49
 Area Y non-Schengen Gates 50 - 59
+
