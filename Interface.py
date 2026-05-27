@@ -1,29 +1,15 @@
 import tkinter as tk
 from collections import Counter
-from dataclasses import dataclass
-import os
 from pathlib import Path
 from tkinter import filedialog, messagebox, simpledialog
 
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from PIL import Image, ImageTk
 
+import Arrivals
 import airport
-
-
-@dataclass
-class ArrivalFlight:
-    flight_id: str
-    company: str
-    origin_airport: str
-    expected_time: str
-
-    @property
-    def hour(self):
-        try:
-            return int(self.expected_time.split(":")[0])
-        except (IndexError, ValueError):
-            return None
+import LEBL
 
 
 class AirportInterface:
@@ -32,6 +18,7 @@ class AirportInterface:
         self.base_dir = Path(__file__).resolve().parent
         self.airport_list = []
         self.arrival_list = []
+        self.airport_structure = None
         self.logo_photo = None
         self.header_canvas = None
         self.scroll_canvas = None
@@ -316,8 +303,8 @@ class AirportInterface:
             3,
             0,
             "Set Gate",
-            "Gate area .",
-            self.plot_arrivals_by_hour,
+            "Create gates in a boarding area.",
+            self.set_gates,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -327,8 +314,8 @@ class AirportInterface:
             3,
             1,
             "Load Airlines",
-            "LoadAirlines .",
-            self.plot_arrivals_by_hour,
+            "Load terminal airline list.",
+            self.load_airlines,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -339,8 +326,8 @@ class AirportInterface:
             4,
             0,
             "Load Airport Structure",
-            "Load Airport Structure .",
-            self.plot_arrivals_by_hour,
+            "Load terminals and gate areas.",
+            self.load_airport_structure,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -350,8 +337,8 @@ class AirportInterface:
             4,
             1,
             "Gate Occupancy",
-            "Gate Occupancy .",
-            self.plot_arrivals_by_hour,
+            "Show gate usage.",
+            self.show_gate_occupancy,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -361,8 +348,8 @@ class AirportInterface:
             5,
             0,
             "Is Airline In Terminal",
-            "Is Airline In Terminal .",
-            self.plot_arrivals_by_hour,
+            "Check one terminal.",
+            self.is_airline_in_terminal,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -373,8 +360,8 @@ class AirportInterface:
             5,
             1,
             "Search Terminal",
-            "Search Terminal .",
-            self.plot_arrivals_by_hour,
+            "Find terminal by airline.",
+            self.search_terminal,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -383,9 +370,9 @@ class AirportInterface:
             arrival_tiles,
             6,
             0,
-            "Assign Gate ",
-            "Assign Gate .",
-            self.plot_arrivals_by_hour,
+            "Assign Gate",
+            "Assign first free gate.",
+            self.assign_gate,
             self.colors["gold_fill"],
             self.colors["gold_outline"],
             self.colors["gold_hover"],
@@ -846,6 +833,73 @@ class AirportInterface:
         text_widget.insert("1.0", content)
         text_widget.configure(state="disabled")
 
+    def _open_plot_window(self, fig, title, subtitle):
+        window = tk.Toplevel(self.root)
+        window.title(title)
+        window.geometry("960x680")
+        window.minsize(720, 500)
+        window.configure(bg=self.colors["background"])
+        window.transient(self.root)
+
+        container = tk.Frame(window, bg=self.colors["background"])
+        container.pack(fill="both", expand=True, padx=20, pady=20)
+        container.columnconfigure(0, weight=1)
+        container.rowconfigure(1, weight=1)
+
+        header = tk.Frame(
+            container,
+            bg=self.colors["surface"],
+            highlightbackground=self.colors["border"],
+            highlightthickness=1,
+            bd=0,
+            padx=18,
+            pady=14,
+        )
+        header.grid(row=0, column=0, sticky="ew", pady=(0, 12))
+        tk.Label(
+            header,
+            text=title,
+            font=("Trebuchet MS", 16, "bold"),
+            bg=self.colors["surface"],
+            fg=self.colors["text"],
+        ).pack(anchor="w")
+        tk.Label(
+            header,
+            text=subtitle,
+            font=("Trebuchet MS", 10),
+            bg=self.colors["surface"],
+            fg=self.colors["muted"],
+        ).pack(anchor="w", pady=(4, 0))
+
+        body = tk.Frame(
+            container,
+            bg=self.colors["surface"],
+            highlightbackground=self.colors["border"],
+            highlightthickness=1,
+            bd=0,
+        )
+        body.grid(row=1, column=0, sticky="nsew")
+        body.columnconfigure(0, weight=1)
+        body.rowconfigure(0, weight=1)
+
+        canvas = FigureCanvasTkAgg(fig, master=body)
+        canvas.draw()
+        canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
+
+        toolbar_frame = tk.Frame(body, bg=self.colors["surface"])
+        toolbar_frame.grid(row=1, column=0, sticky="ew")
+        toolbar = NavigationToolbar2Tk(canvas, toolbar_frame)
+        toolbar.update()
+
+        def _on_close():
+            try:
+                plt.close(fig)
+            except Exception:
+                pass
+            window.destroy()
+
+        window.protocol("WM_DELETE_WINDOW", _on_close)
+
     def _update_status_labels(self):
         self.airports_status.set(f"Airports loaded: {len(self.airport_list)}")
         self.arrivals_status.set(f"Arrivals loaded: {len(self.arrival_list)}")
@@ -897,45 +951,163 @@ class AirportInterface:
             )
         return "\n".join(lines)
 
-    def _load_arrivals_from_file(self, filepath):
-        arrivals = []
-        with open(filepath, "r", encoding="utf-8") as file:
-            for index, line in enumerate(file):
-                if index == 0 or not line.strip():
-                    continue
-                parts = line.split()
-                if len(parts) < 4:
-                    raise ValueError(f"Invalid arrival row: {line.strip()}")
-                flight_id = parts[0]
-                origin_airport = parts[1]
-                expected_time = parts[2]
-                company = " ".join(parts[3:])
-                arrivals.append(
-                    ArrivalFlight(
-                        flight_id=flight_id,
-                        company=company,
-                        origin_airport=origin_airport,
-                        expected_time=expected_time,
-                    )
-                )
-        return arrivals
+    def _load_structure_from(self, path):
+        self.airport_structure = LEBL.LoadAirportStructure(str(path))
+        return self.airport_structure
+
+    def _need_structure(self):
+        if self.airport_structure is not None:
+            return True
+        path = self.base_dir / "Terminals.txt"
+        if not path.exists():
+            messagebox.showwarning("No structure", "Load Terminals.txt first.")
+            return False
+        try:
+            self._load_structure_from(path)
+            return True
+        except Exception as exc:
+            messagebox.showerror("Structure error", f"Could not load Terminals.txt.\nDetails: {exc}")
+            return False
+
+    def _structure_text(self):
+        lines = []
+        for terminal in self.airport_structure.terminals:
+            lines.append(f"{terminal.t_name}: {len(terminal.BA)} areas, {len(terminal.air_code)} airlines")
+            for area in terminal.BA:
+                kind = "Schengen" if area.Schengen else "non-Schengen"
+                lines.append(f"  Area {area.area}: {kind}, {len(area.Gates)} gates")
+        return "\n".join(lines)
+
+    def load_airport_structure(self):
+        try:
+            path = filedialog.askopenfilename(
+                title="Select terminal structure file",
+                initialdir=self.base_dir,
+                filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+            )
+            if not path:
+                return
+            self._load_structure_from(path)
+            text = self._structure_text()
+            self.console_status.set("Airport structure loaded.")
+            self._set_console_text(text)
+            self._open_text_window("Airport structure", "Loaded terminals and gates.", text)
+        except Exception as exc:
+            messagebox.showerror("Structure error", f"Could not load the structure.\nDetails: {exc}")
+
+    def set_gates(self):
+        if not self._need_structure():
+            return
+        terminal_name = simpledialog.askstring("Set gates", "Terminal:")
+        area_name = simpledialog.askstring("Set gates", "Area:")
+        if not terminal_name or not area_name:
+            return
+        terminal = LEBL.FindTerminal(self.airport_structure, terminal_name)
+        if terminal is None:
+            messagebox.showerror("Not found", "Terminal not found.")
+            return
+        area = LEBL.FindArea(terminal, area_name)
+        if area is None:
+            area = LEBL.Boarding_Area()
+            area.area = area_name.strip().upper()
+            area.Schengen = messagebox.askyesno("Area type", "Is this area Schengen?")
+            terminal.BA.append(area)
+        elif area.Gates and not messagebox.askyesno("Replace gates", "Area already has gates. Replace them?"):
+            return
+        else:
+            area.Gates.clear()
+
+        first_gate = simpledialog.askinteger("Set gates", "First gate:")
+        last_gate = simpledialog.askinteger("Set gates", "Last gate:")
+        if first_gate is None or last_gate is None:
+            return
+        LEBL.SetGates(area, str(first_gate), str(last_gate), area.area)
+        self._set_console_text(f"Area {area.area} now has {len(area.Gates)} gates.")
+
+    def load_airlines(self):
+        if not self._need_structure():
+            return
+        terminal_name = simpledialog.askstring("Load airlines", "Terminal:")
+        if not terminal_name:
+            return
+        terminal = LEBL.FindTerminal(self.airport_structure, terminal_name)
+        if terminal is None:
+            messagebox.showerror("Not found", "Terminal not found.")
+            return
+        LEBL.LoadAirlines(terminal, terminal.t_name, self.base_dir)
+        text = "\n".join(terminal.air_code)
+        self._set_console_text(f"{terminal.t_name} airlines loaded: {len(terminal.air_code)}")
+        self._open_text_window(f"{terminal.t_name} airlines", "Loaded airline list.", text)
+
+    def show_gate_occupancy(self):
+        if not self._need_structure():
+            return
+        gates = LEBL.GateOccupancy(self.airport_structure.terminals)
+        lines = [f"{'GATE':<8}{'OCCUPIED':<12}{'AIRCRAFT'}"]
+        for gate in gates:
+            lines.append(f"{gate['name']:<8}{str(gate['occupied']):<12}{gate['craftID'] or '-'}")
+        text = "\n".join(lines)
+        self._set_console_text(f"Gate occupancy loaded: {len(gates)} gates")
+        self._open_text_window("Gate occupancy", "Current gate status.", text)
+
+    def is_airline_in_terminal(self):
+        if not self._need_structure():
+            return
+        terminal_name = simpledialog.askstring("Check airline", "Terminal:")
+        airline = simpledialog.askstring("Check airline", "Airline code or name:")
+        if not terminal_name or not airline:
+            return
+        terminal = LEBL.FindTerminal(self.airport_structure, terminal_name)
+        found = terminal is not None and LEBL.IsAirlineInTerminal(terminal, airline)
+        self._set_console_text(f"{airline.strip().upper()} in {terminal_name.strip().upper()}: {found}")
+        messagebox.showinfo("Result", "Airline found." if found else "Airline not found.")
+
+    def search_terminal(self):
+        if not self._need_structure():
+            return
+        airline = simpledialog.askstring("Search terminal", "Airline code or name:")
+        if not airline:
+            return
+        terminals = LEBL.SearchTerminal(self.airport_structure, airline)
+        names = ", ".join(terminal.t_name for terminal in terminals) or "No terminal found"
+        self._set_console_text(f"{airline.strip().upper()}: {names}")
+        messagebox.showinfo("Search terminal", names)
+
+    def assign_gate(self):
+        if not self._need_structure():
+            return
+        flight = simpledialog.askstring("Assign gate", "Aircraft ID:")
+        airline = simpledialog.askstring("Assign gate", "Airline code:")
+        origin = simpledialog.askstring("Assign gate", "Origin airport:")
+        if not flight or not airline or not origin:
+            return
+        result = LEBL.AssignGate(self.airport_structure, flight, airline, origin)
+        if result is None:
+            messagebox.showerror("No gate", "No terminal or free gate found.")
+            return
+        terminal, _area, gate = result
+        self._set_console_text(f"{gate.craftID} assigned to {gate.name} in {terminal.t_name}.")
 
     def load_project_files(self):
         try:
             airports_path = self.base_dir / "Airports.txt"
             arrivals_path = self.base_dir / "Arrivals.txt"
+            terminals_path = self.base_dir / "Terminals.txt"
 
             if airports_path.exists():
                 self.airport_list = airport.LoadAirports(str(airports_path))
             if arrivals_path.exists():
-                self.arrival_list = self._load_arrivals_from_file(arrivals_path)
+                self.arrival_list = Arrivals.LoadArrivals(str(arrivals_path))
+            if terminals_path.exists():
+                self._load_structure_from(terminals_path)
 
             self._update_status_labels()
             self.console_status.set("Bundled project files loaded.")
             self._set_console_text(
                 "Bundled files loaded from the project folder.\n"
                 f"Airports: {len(self.airport_list)}\n"
-                f"Arrivals: {len(self.arrival_list)}"
+                f"Arrivals: {len(self.arrival_list)}\n"
+                f"Terminals: {len(self.airport_structure.terminals) if self.airport_structure else 0}"
             )
         except Exception as exc:
             messagebox.showerror("Load error", f"Could not load bundled files.\nDetails: {exc}")
@@ -1058,15 +1230,7 @@ class AirportInterface:
             if not filepath:
                 return
 
-            with open(filepath, "w", encoding="utf-8") as file:
-                file.write("CODE LAT LON\n")
-                for current_airport in self.airport_list:
-                    if airport.IsSchengenAirport(current_airport.code):
-                        file.write(
-                            f"{current_airport.code} "
-                            f"{current_airport.latitude} "
-                            f"{current_airport.longitude}\n"
-                        )
+            airport.SaveSchengenAirports(filepath, self.airport_list)
             self.console_status.set("Schengen export saved.")
             self._set_console_text(f"Schengen airports saved to:\n{filepath}")
             messagebox.showinfo("Success", "Schengen airport file saved successfully.")
@@ -1077,10 +1241,22 @@ class AirportInterface:
         if not self._require_airports():
             return
 
+        original_show = plt.show
+        plt.show = lambda *args, **kwargs: None
         try:
-            airport.PlotAirports(self.airport_list)
+            try:
+                airport.PlotAirports(self.airport_list)
+                fig = plt.gcf()
+            finally:
+                plt.show = original_show
+            self._open_plot_window(
+                fig,
+                "Schengen split",
+                "Schengen vs non-Schengen airport counts from the loaded dataset.",
+            )
             self.console_status.set("Airport chart opened.")
         except Exception as exc:
+            plt.show = original_show
             messagebox.showerror("Plot error", f"Could not generate the airport chart.\nDetails: {exc}")
 
     def show_map(self):
@@ -1088,149 +1264,25 @@ class AirportInterface:
             return
 
         try:
-            lookup = self._airport_lookup(include_project_airports=True)
-            selected_arrival = None
-            route_note = "No arrival route highlighted."
+            filename = self.base_dir / "airports.kml"
+            route_note = "Airport map opened."
+            if self.arrival_list and messagebox.askyesno("Arrival route", "Draw one loaded arrival route?"):
+                flight_id = simpledialog.askstring("Arrival route", "Arrival flight ID:")
+                selected = next(
+                    (item for item in self.arrival_list if item.flight_id.upper() == flight_id.strip().upper()),
+                    None,
+                ) if flight_id else None
+                if selected is None:
+                    messagebox.showwarning("Arrival not found", "The map will open without a route.")
+                    airport.MapAirports(self.airport_list, str(filename))
+                else:
+                    filename = self.base_dir / "flights_map.kml"
+                    airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
+                    Arrivals.MapFlights([selected], airports_for_map, str(filename))
+                    route_note = f"Route highlighted: {selected.flight_id}"
+            else:
+                airport.MapAirports(self.airport_list, str(filename))
 
-            if self.arrival_list:
-                wants_route = messagebox.askyesno(
-                    "Arrival route",
-                    "Do you want to draw the route of one loaded arrival on the map?",
-                )
-                if wants_route:
-                    flight_id = simpledialog.askstring(
-                        "Arrival route",
-                        "Enter the arrival flight ID to highlight (for example, ECMKV):",
-                    )
-                    if flight_id:
-                        normalized_id = flight_id.strip().upper()
-                        selected_arrival = next(
-                            (
-                                item
-                                for item in self.arrival_list
-                                if item.flight_id.upper() == normalized_id
-                            ),
-                            None,
-                        )
-                        if selected_arrival is None:
-                            messagebox.showwarning(
-                                "Arrival not found",
-                                "That arrival ID is not loaded. The map will open without a route.",
-                            )
-
-            filename = self.base_dir / "interface_show_map.kml"
-            with open(filename, "w", encoding="utf-8") as file:
-                file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-                file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
-                file.write("<Document>\n")
-                file.write("  <name>Airport Interface Map</name>\n")
-                file.write("  <Style id=\"schengen\">\n")
-                file.write("    <IconStyle><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon></IconStyle>\n")
-                file.write("  </Style>\n")
-                file.write("  <Style id=\"non_schengen\">\n")
-                file.write("    <IconStyle><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle>\n")
-                file.write("  </Style>\n")
-                file.write("  <Style id=\"route_origin\">\n")
-                file.write("    <IconStyle><scale>1.2</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/blu-circle.png</href></Icon></IconStyle>\n")
-                file.write("  </Style>\n")
-                file.write("  <Style id=\"route_destination\">\n")
-                file.write("    <IconStyle><scale>1.2</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href></Icon></IconStyle>\n")
-                file.write("  </Style>\n")
-                file.write("  <Style id=\"route_line\">\n")
-                file.write("    <LineStyle><color>ffffa500</color><width>4</width></LineStyle>\n")
-                file.write("  </Style>\n")
-
-                for current_airport in self.airport_list:
-                    airport_code = current_airport.code.upper()
-                    is_schengen = airport.IsSchengenAirport(airport_code)
-                    description = (
-                        f"Schengen: {is_schengen}\n"
-                        f"Latitude: {current_airport.latitude:.6f}\n"
-                        f"Longitude: {current_airport.longitude:.6f}"
-                    )
-                    file.write("  <Placemark>\n")
-                    file.write(f"    <name>{airport_code}</name>\n")
-                    file.write(f"    <description>{description}</description>\n")
-                    file.write(
-                        f"    <styleUrl>#{'schengen' if is_schengen else 'non_schengen'}</styleUrl>\n"
-                    )
-                    file.write("    <Point>\n")
-                    file.write(
-                        f"      <coordinates>{current_airport.longitude},{current_airport.latitude},0</coordinates>\n"
-                    )
-                    file.write("    </Point>\n")
-                    file.write("  </Placemark>\n")
-
-                if selected_arrival is not None:
-                    origin_airport = lookup.get(selected_arrival.origin_airport.upper())
-                    destination_airport = lookup.get(self.home_airport_code)
-                    if origin_airport and destination_airport:
-                        route_note = (
-                            f"Highlighted arrival {selected_arrival.flight_id}: "
-                            f"{selected_arrival.origin_airport} -> {self.home_airport_code}"
-                        )
-                        file.write("  <Placemark>\n")
-                        file.write(
-                            f"    <name>{selected_arrival.flight_id} route</name>\n"
-                        )
-                        file.write(
-                            f"    <description>{selected_arrival.company} arriving at {selected_arrival.expected_time}</description>\n"
-                        )
-                        file.write("    <styleUrl>#route_line</styleUrl>\n")
-                        file.write("    <LineString>\n")
-                        file.write("      <tessellate>1</tessellate>\n")
-                        file.write(
-                            "      <coordinates>"
-                            f"{origin_airport.longitude},{origin_airport.latitude},0 "
-                            f"{destination_airport.longitude},{destination_airport.latitude},0"
-                            "</coordinates>\n"
-                        )
-                        file.write("    </LineString>\n")
-                        file.write("  </Placemark>\n")
-
-                        file.write("  <Placemark>\n")
-                        file.write(
-                            f"    <name>{selected_arrival.origin_airport} origin</name>\n"
-                        )
-                        file.write(
-                            f"    <description>Origin of flight {selected_arrival.flight_id}</description>\n"
-                        )
-                        file.write("    <styleUrl>#route_origin</styleUrl>\n")
-                        file.write("    <Point>\n")
-                        file.write(
-                            f"      <coordinates>{origin_airport.longitude},{origin_airport.latitude},0</coordinates>\n"
-                        )
-                        file.write("    </Point>\n")
-                        file.write("  </Placemark>\n")
-
-                        file.write("  <Placemark>\n")
-                        file.write(
-                            f"    <name>{self.home_airport_code} destination</name>\n"
-                        )
-                        file.write(
-                            f"    <description>Destination airport for highlighted arrival {selected_arrival.flight_id}</description>\n"
-                        )
-                        file.write("    <styleUrl>#route_destination</styleUrl>\n")
-                        file.write("    <Point>\n")
-                        file.write(
-                            f"      <coordinates>{destination_airport.longitude},{destination_airport.latitude},0</coordinates>\n"
-                        )
-                        file.write("    </Point>\n")
-                        file.write("  </Placemark>\n")
-                    elif selected_arrival is not None:
-                        route_note = (
-                            f"Route for {selected_arrival.flight_id} could not be drawn "
-                            "because some airport coordinates were not available."
-                        )
-                        messagebox.showwarning(
-                            "Missing route coordinates",
-                            "The selected arrival was found, but its origin or destination coordinates are missing.",
-                        )
-
-                file.write("</Document>\n")
-                file.write("</kml>\n")
-
-            os.startfile(filename)
             self.console_status.set("Google Earth map opened.")
             self._set_console_text(
                 "Map exported to Google Earth.\n"
@@ -1251,7 +1303,7 @@ class AirportInterface:
             if not filepath:
                 return
 
-            self.arrival_list = self._load_arrivals_from_file(filepath)
+            self.arrival_list = Arrivals.LoadArrivals(filepath)
             self._update_status_labels()
             self.console_status.set("Arrival dataset loaded successfully.")
             self._set_console_text(f"Successfully loaded {len(self.arrival_list)} arrivals from:\n{filepath}")
@@ -1278,55 +1330,73 @@ class AirportInterface:
         if not self._require_arrivals():
             return
 
-        company_counter = Counter(arrival.company for arrival in self.arrival_list)
-        labels, values = zip(*company_counter.most_common(10))
-
-        plt.figure("Arrivals by company", figsize=(10, 6))
-        plt.bar(labels, values, color="#6cc8f2", edgecolor="#2d7ea2")
-        plt.title("Arrivals per airline company")
-        plt.xlabel("Company")
-        plt.ylabel("Flights")
-        plt.grid(axis="y", alpha=0.25)
-        plt.tight_layout()
-        plt.show()
-        self.console_status.set("Company arrivals chart opened.")
+        original_show = plt.show
+        plt.show = lambda *args, **kwargs: None
+        try:
+            try:
+                Arrivals.PlotAirlines(self.arrival_list)
+                fig = plt.gcf()
+            finally:
+                plt.show = original_show
+            self._open_plot_window(
+                fig,
+                "Arrivals by company",
+                "Flight count grouped by airline company.",
+            )
+            self.console_status.set("Company arrivals chart opened.")
+        except Exception as exc:
+            plt.show = original_show
+            messagebox.showerror("Plot error", f"Could not generate the company chart.\nDetails: {exc}")
 
     def plot_arrivals_by_origin(self):
         if not self._require_arrivals():
             return
 
-        origin_counter = Counter(arrival.origin_airport for arrival in self.arrival_list)
-        labels, values = zip(*origin_counter.most_common(10))
+        try:
+            from matplotlib.figure import Figure
 
-        plt.figure("Arrivals by origin", figsize=(10, 6))
-        plt.barh(labels[::-1], values[::-1], color="#7fd9ab", edgecolor="#3c936c")
-        plt.title("Top origin airports for arrivals")
-        plt.xlabel("Flights")
-        plt.ylabel("Origin airport")
-        plt.grid(axis="x", alpha=0.25)
-        plt.tight_layout()
-        plt.show()
-        self.console_status.set("Origin arrivals chart opened.")
+            origin_counter = Counter(arrival.origin_airport for arrival in self.arrival_list)
+            labels, values = zip(*origin_counter.most_common(10))
+
+            fig = Figure(figsize=(10, 6))
+            ax = fig.add_subplot(111)
+            ax.barh(labels[::-1], values[::-1], color="#7fd9ab", edgecolor="#3c936c")
+            ax.set_title("Top origin airports for arrivals")
+            ax.set_xlabel("Flights")
+            ax.set_ylabel("Origin airport")
+            ax.grid(axis="x", alpha=0.25)
+            fig.tight_layout()
+
+            self._open_plot_window(
+                fig,
+                "Arrivals by origin",
+                "Top 10 busiest origin airports for the loaded arrival flights.",
+            )
+            self.console_status.set("Origin arrivals chart opened.")
+        except Exception as exc:
+            messagebox.showerror("Plot error", f"Could not generate the origin chart.\nDetails: {exc}")
 
     def plot_arrivals_by_hour(self):
         if not self._require_arrivals():
             return
 
-        hour_counter = Counter(arrival.hour for arrival in self.arrival_list if arrival.hour is not None)
-        hours = list(range(24))
-        values = [hour_counter.get(hour, 0) for hour in hours]
-
-        plt.figure("Arrival flow by hour", figsize=(11, 6))
-        plt.plot(hours, values, color="#3d8dd8", marker="o", linewidth=2.5)
-        plt.fill_between(hours, values, color="#bfe9ff", alpha=0.6)
-        plt.title("Expected arrivals by landing hour")
-        plt.xlabel("Hour of day")
-        plt.ylabel("Flights")
-        plt.xticks(hours, [f"{hour:02d}:00" for hour in hours], rotation=45)
-        plt.grid(alpha=0.25)
-        plt.tight_layout()
-        plt.show()
-        self.console_status.set("Hourly arrival flow chart opened.")
+        original_show = plt.show
+        plt.show = lambda *args, **kwargs: None
+        try:
+            try:
+                Arrivals.PlotArrivals(self.arrival_list)
+                fig = plt.gcf()
+            finally:
+                plt.show = original_show
+            self._open_plot_window(
+                fig,
+                "Hourly arrival flow",
+                "Expected arrivals grouped by landing hour.",
+            )
+            self.console_status.set("Hourly arrival flow chart opened.")
+        except Exception as exc:
+            plt.show = original_show
+            messagebox.showerror("Plot error", f"Could not generate the hourly chart.\nDetails: {exc}")
 
 if __name__ == "__main__":
     root = tk.Tk()
