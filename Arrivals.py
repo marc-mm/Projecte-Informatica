@@ -1,4 +1,5 @@
 import math
+import os
 import matplotlib.pyplot as plt
 import airport  # Importem el fitxer de la Versió 1 per usar IsSchengenAirport i les coordenades
 
@@ -13,20 +14,43 @@ class Aircraft:
         self.lon = 0.0
         self.schengen = False
 
+    @property
+    def flight_id(self):
+        return self.id
+
+    @property
+    def company(self):
+        return self.airline
+
+    @property
+    def origin_airport(self):
+        return self.origin
+
+    @property
+    def expected_time(self):
+        return self.arrival_time
+
+    @property
+    def hour(self):
+        try:
+            return int(self.arrival_time.split(":")[0])
+        except (IndexError, ValueError):
+            return None
+
 
 def LoadArrivals(filename):
     """Llegeix el fitxer arrivals.txt i retorna una llista d'objectes Aircraft."""
     arrivals = []
     try:
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding="utf-8") as file:
             lines = file.readlines()
             for line in lines[1:]:  # Saltem l'encapçalament
                 parts = line.split()
                 if len(parts) >= 4:
                     # Validació bàsica de l'hora (format HH:MM)
-                    hora = parts[3]
+                    hora = parts[2]
                     if ":" in hora and len(hora) == 5:
-                        a = Aircraft(parts[0], parts[1], parts[2], hora)
+                        a = Aircraft(parts[0], parts[3], parts[1], hora)
                         # Assignem si és Schengen usant la funció de airport.py
                         a.schengen = airport.IsSchengenAirport(a.origin)
                         arrivals.append(a)
@@ -76,13 +100,13 @@ def PlotAirlines(aircrafts):
     plt.show()
 
 
-def MapFlights(aircrafts, airport_list):
+def MapFlights(aircrafts, airport_list, filename="flights_map.kml"):
     """Genera un KML amb les trajectòries des de l'origen fins a Barcelona (LEBL)."""
-    # Coordenades de Barcelona (LEBL) aproximades o buscades
-    lebl_lat, lebl_lon = 41.297, 2.083
+    destination = next((apt for apt in airport_list if apt.code == "LEBL"), None)
+    lebl_lat = destination.latitude if destination else 41.297
+    lebl_lon = destination.longitude if destination else 2.083
 
-    filename = "flights_map.kml"
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
         f.write('<Document>\n')
@@ -91,13 +115,13 @@ def MapFlights(aircrafts, airport_list):
             # Busquem les coordenades de l'aeroport d'origen a la llista de la Versió 1
             origin_coords = None
             for apt in airport_list:
-                if apt.code == a.origin_airport:
+                if apt.code == a.origin:
                     origin_coords = (apt.latitude, apt.longitude)
                     break
 
             if origin_coords:
                 f.write('<Placemark>\n')
-                f.write(f'  <name>{a.flight_id} ({a.origin_airport} -> LEBL)</name>\n')
+                f.write(f'  <name>{a.id} ({a.origin} -> LEBL)</name>\n')
                 f.write('  <LineString>\n')
                 f.write('      <tessellate>1</tessellate>\n')
                 f.write(f'    <coordinates>{origin_coords[1]},{origin_coords[0]},0 {lebl_lon},{lebl_lat},0</coordinates>\n')
@@ -106,5 +130,7 @@ def MapFlights(aircrafts, airport_list):
 
         f.write('</Document>\n')
         f.write('</kml>\n')
-    print("Mapa KML generat: flights_map.kml")
+    print("Mapa KML generat: " + str(filename))
+    os.startfile(filename)
+    return filename
 

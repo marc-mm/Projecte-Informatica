@@ -53,11 +53,11 @@ def SaveSchengenAirports(filename, airports):
     if airports == None:
         print("Error: No airports found")
     else:
-        file = open(filename, 'w')
-        file.write("CODE LAT LON\n")
-        for item in airports:
-            if IsSchengenAirport(item.code) == True:
-                file.write(item.code + " " + str(item.latitude) + " " + str(item.longitude) + "\n")
+        with open(filename, 'w', encoding="utf-8") as file:
+            file.write("CODE LAT LON\n")
+            for item in airports:
+                if IsSchengenAirport(item.code) == True:
+                    file.write(item.code + " " + str(item.latitude) + " " + str(item.longitude) + "\n")
 
 def AddAirport (airports, airport):
     if airport not in airports:
@@ -85,10 +85,9 @@ def PlotAirports (airports):
     plt.legend(["Schengen","No Schengen"], loc="upper right")
     plt.show()
 
-def MapAirports(airports):
+def MapAirports(airports, filename="airports.kml"):
     import os
-    filename = "airports.kml"
-    file = open(filename, 'w')
+    file = open(filename, 'w', encoding="utf-8")
 
     file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     file.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
@@ -116,7 +115,7 @@ def MapAirports(airports):
         file.write('  <Placemark>\n')
         file.write('    <name>' + apt.code + '</name>\n')
 
-        if apt.Schengen == True:
+        if IsSchengenAirport(apt.code) == True:
             file.write('    <styleUrl>#schengen</styleUrl>\n')
         else:
             file.write('    <styleUrl>#non_schengen</styleUrl>\n')
@@ -130,3 +129,4 @@ def MapAirports(airports):
     file.write('</kml>\n')
     file.close()
     os.startfile(filename)
+    return filename
