@@ -441,21 +441,13 @@ class AirportInterface:
         self._create_tile(arrival_tiles, 2, 0, "Load Airport Structure", "Load terminals and gate areas.",
                           self.load_airport_structure, self.colors["gold_fill"], self.colors["gold_outline"],
                           self.colors["gold_hover"])
-        self._create_tile(arrival_tiles, 2, 1, "Set Gate", "Create gates in a boarding area.", self.set_gates,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+
         self._create_tile(arrival_tiles, 2, 2, "Load Airlines", "Load terminal airline list.", self.load_airlines,
                           self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
 
-        self._create_tile(arrival_tiles, 3, 0, "Gate Occupancy", "Show gate usage.", self.show_gate_occupancy,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
-        self._create_tile(arrival_tiles, 3, 1, "Is Airline In Terminal", "Check one terminal.",
-                          self.is_airline_in_terminal, self.colors["gold_fill"], self.colors["gold_outline"],
-                          self.colors["gold_hover"])
-        self._create_tile(arrival_tiles, 3, 2, "Search Terminal", "Find terminal by airline.", self.search_terminal,
+        self._create_tile(arrival_tiles, 2, 1, "Gate Occupancy", "Show gate usage.", self.show_gate_occupancy,
                           self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
 
-        self._create_tile(arrival_tiles, 4, 0, "Assign Gate", "Assign first free gate.", self.assign_gate,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
 
         self.switch_view(self.view_home)
         # ---- FIN DEL ÁREA DINÁMICA ----
@@ -1068,34 +1060,6 @@ class AirportInterface:
         except Exception as exc:
             messagebox.showerror("Structure error", f"Could not load the structure.\nDetails: {exc}")
 
-    def set_gates(self):
-        if not self._need_structure():
-            return
-        terminal_name = simpledialog.askstring("Set gates", "Terminal:")
-        area_name = simpledialog.askstring("Set gates", "Area:")
-        if not terminal_name or not area_name:
-            return
-        terminal = LEBL.FindTerminal(self.airport_structure, terminal_name)
-        if terminal is None:
-            messagebox.showerror("Not found", "Terminal not found.")
-            return
-        area = LEBL.FindArea(terminal, area_name)
-        if area is None:
-            area = LEBL.Boarding_Area()
-            area.area = area_name.strip().upper()
-            area.Schengen = messagebox.askyesno("Area type", "Is this area Schengen?")
-            terminal.BA.append(area)
-        elif area.Gates and not messagebox.askyesno("Replace gates", "Area already has gates. Replace them?"):
-            return
-        else:
-            area.Gates.clear()
-
-        first_gate = simpledialog.askinteger("Set gates", "First gate:")
-        last_gate = simpledialog.askinteger("Set gates", "Last gate:")
-        if first_gate is None or last_gate is None:
-            return
-        LEBL.SetGates(area, str(first_gate), str(last_gate), area.area)
-        self._set_console_text(f"Area {area.area} now has {len(area.Gates)} gates.")
 
     def load_airlines(self):
         if not self._need_structure():
@@ -1123,43 +1087,6 @@ class AirportInterface:
         self._set_console_text(f"Gate occupancy loaded: {len(gates)} gates")
         self._open_text_window("Gate occupancy", "Current gate status.", text)
 
-    def is_airline_in_terminal(self):
-        if not self._need_structure():
-            return
-        terminal_name = simpledialog.askstring("Check airline", "Terminal:")
-        airline = simpledialog.askstring("Check airline", "Airline code or name:")
-        if not terminal_name or not airline:
-            return
-        terminal = LEBL.FindTerminal(self.airport_structure, terminal_name)
-        found = terminal is not None and LEBL.IsAirlineInTerminal(terminal, airline)
-        self._set_console_text(f"{airline.strip().upper()} in {terminal_name.strip().upper()}: {found}")
-        messagebox.showinfo("Result", "Airline found." if found else "Airline not found.")
-
-    def search_terminal(self):
-        if not self._need_structure():
-            return
-        airline = simpledialog.askstring("Search terminal", "Airline code or name:")
-        if not airline:
-            return
-        terminals = LEBL.SearchTerminal(self.airport_structure, airline)
-        names = ", ".join(terminal.t_name for terminal in terminals) or "No terminal found"
-        self._set_console_text(f"{airline.strip().upper()}: {names}")
-        messagebox.showinfo("Search terminal", names)
-
-    def assign_gate(self):
-        if not self._need_structure():
-            return
-        flight = simpledialog.askstring("Assign gate", "Aircraft ID:")
-        airline = simpledialog.askstring("Assign gate", "Airline code:")
-        origin = simpledialog.askstring("Assign gate", "Origin airport:")
-        if not flight or not airline or not origin:
-            return
-        result = LEBL.AssignGate(self.airport_structure, flight, airline, origin)
-        if result is None:
-            messagebox.showerror("No gate", "No terminal or free gate found.")
-            return
-        terminal, _area, gate = result
-        self._set_console_text(f"{gate.craftID} assigned to {gate.name} in {terminal.t_name}.")
 
     def load_project_files(self):
         try:
