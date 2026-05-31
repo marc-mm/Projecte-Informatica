@@ -2,11 +2,14 @@ import tkinter as tk
 from collections import Counter
 from pathlib import Path
 from tkinter import filedialog, messagebox, simpledialog
+import random
+import string
 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from PIL import Image, ImageTk
 
+# Asumimos que estos módulos existen en tu entorno de trabajo
 import Arrivals
 import airport
 import LEBL
@@ -64,6 +67,168 @@ class AirportInterface:
             "Use the airport and arrival tiles to load files, inspect data and open plots."
         )
 
+    def switch_view(self, view_frame):
+        for view in (self.view_home, self.view_airport, self.view_arrival):
+            view.grid_remove()
+        view_frame.grid(row=0, column=0, sticky="nsew")
+        self.root.after(50, self._update_scroll_region)
+
+    def generate_boarding_pass(self):
+        """
+        Abre un formulario modal para pedir todos los datos a la vez.
+        Si se dejan campos en blanco, se generan datos automáticos aleatorios.
+        """
+        form_win = tk.Toplevel(self.root)
+        form_win.title("Dades del Passatger")
+        form_win.geometry("420x320")
+        form_win.configure(bg=self.colors["surface"])
+        form_win.transient(self.root)
+        form_win.grab_set()
+
+        tk.Label(form_win, text="Dades del Boarding Pass", font=("Trebuchet MS", 14, "bold"),
+                 bg=self.colors["surface"], fg=self.colors["text"]).pack(pady=(20, 15))
+
+        frame = tk.Frame(form_win, bg=self.colors["surface"])
+        frame.pack(padx=20, fill="x")
+
+        def create_field(label_text, row):
+            tk.Label(frame, text=label_text, bg=self.colors["surface"], fg=self.colors["text"],
+                     font=("Trebuchet MS", 10, "bold")).grid(row=row, column=0, sticky="w", pady=8)
+            entry = tk.Entry(frame, width=20, font=("Trebuchet MS", 10), bg="#ffffff")
+            entry.grid(row=row, column=1, pady=8, padx=10)
+            return entry
+
+        # Campos opcionales (si están vacíos, serán aleatorios)
+        entry_name = create_field("Nom (en blanc = aleatori):", 0)
+        entry_dest = create_field("Destinació (ex: JFK):", 1)
+        entry_flight = create_field("Vol (ex: IB1234):", 2)
+        entry_seat = create_field("Seient (ex: 12A):", 3)
+
+        entry_name.focus()
+
+        def submit():
+            name = entry_name.get().strip() or random.choice(
+                ["JOHN DOE", "MARIA GARCIA", "ALEX SMITH", "LUCIA PEREZ", "JAMES BOND"])
+            destination = entry_dest.get().strip() or random.choice(["JFK", "LHR", "HND", "CDG", "DXB", "SYD"])
+            flight = entry_flight.get().strip() or f"{random.choice(string.ascii_uppercase)}{random.choice(string.ascii_uppercase)}{random.randint(100, 9999)}"
+            seat = entry_seat.get().strip() or f"{random.randint(1, 40)}{random.choice(['A', 'B', 'C', 'D', 'E', 'F'])}"
+
+            # Generamos el resto de datos chulos automáticamente
+            gate = f"{random.choice(['A', 'B', 'C', 'D'])}{random.randint(1, 25)}"
+            time = f"{random.randint(0, 23):02d}:{random.choice(['00', '15', '30', '45'])}"
+
+            form_win.destroy()
+            self._animate_boarding_pass(name, destination, flight, seat, gate, time)
+
+        tk.Button(
+            form_win, text="Generar Billete", command=submit,
+            bg=self.colors["gold_fill"], fg=self.colors["text"],
+            font=("Trebuchet MS", 11, "bold"), relief="groove", cursor="hand2", padx=15, pady=5
+        ).pack(pady=20)
+
+    def _animate_boarding_pass(self, name, destination, flight, seat, gate, time):
+        """
+        Dibuja el billete con diseño realista y lo anima simulando una caída/impresión.
+        """
+        bp_win = tk.Toplevel(self.root)
+        bp_win.title("El teu Boarding Pass")
+        bp_win.geometry("850x350")
+        bp_win.configure(bg="#1a252f")
+
+        canvas = tk.Canvas(bp_win, bg="#1a252f", highlightthickness=0)
+        canvas.pack(fill="both", expand=True)
+
+        y_off = -400
+
+        # Sombra
+        canvas.create_rectangle(55, 55 + y_off, 805, 255 + y_off, fill="#000000", outline="", stipple="gray50",
+                                tags="ticket")
+        # Base blanca
+        canvas.create_rectangle(50, 50 + y_off, 800, 250 + y_off, fill="#ffffff", outline="#bdc3c7", width=2,
+                                tags="ticket")
+        # Cabecera roja
+        canvas.create_rectangle(50, 50 + y_off, 800, 90 + y_off, fill="#e74c3c", outline="", tags="ticket")
+        canvas.create_text(70, 70 + y_off, anchor="w", text="✈ BOARDING PASS", fill="#ffffff",
+                           font=("Trebuchet MS", 16, "bold"), tags="ticket")
+        canvas.create_text(780, 70 + y_off, anchor="e", text="PRIORITY BOARDING", fill="#ffffff",
+                           font=("Trebuchet MS", 12, "bold"), tags="ticket")
+
+        # Línea de corte (Stub)
+        canvas.create_line(600, 50 + y_off, 600, 250 + y_off, fill="#bdc3c7", dash=(5, 5), width=2, tags="ticket")
+
+        # Información principal
+        canvas.create_text(70, 110 + y_off, anchor="w", text="PASSENGER NAME", fill="#7f8c8d",
+                           font=("Helvetica", 8, "bold"), tags="ticket")
+        canvas.create_text(70, 130 + y_off, anchor="w", text=name.upper(), fill="#2c3e50",
+                           font=("Helvetica", 16, "bold"), tags="ticket")
+
+        canvas.create_text(70, 170 + y_off, anchor="w", text="FLIGHT", fill="#7f8c8d", font=("Helvetica", 8, "bold"),
+                           tags="ticket")
+        canvas.create_text(70, 190 + y_off, anchor="w", text=flight.upper(), fill="#2c3e50",
+                           font=("Helvetica", 14, "bold"), tags="ticket")
+
+        canvas.create_text(180, 170 + y_off, anchor="w", text="GATE", fill="#7f8c8d", font=("Helvetica", 8, "bold"),
+                           tags="ticket")
+        canvas.create_text(180, 190 + y_off, anchor="w", text=gate, fill="#2c3e50", font=("Helvetica", 14, "bold"),
+                           tags="ticket")
+
+        canvas.create_text(270, 170 + y_off, anchor="w", text="BOARDING TIME", fill="#7f8c8d",
+                           font=("Helvetica", 8, "bold"), tags="ticket")
+        canvas.create_text(270, 190 + y_off, anchor="w", text=time, fill="#e74c3c", font=("Helvetica", 16, "bold"),
+                           tags="ticket")
+
+        canvas.create_text(400, 170 + y_off, anchor="w", text="SEAT", fill="#7f8c8d", font=("Helvetica", 8, "bold"),
+                           tags="ticket")
+        canvas.create_text(400, 190 + y_off, anchor="w", text=seat.upper(), fill="#2c3e50",
+                           font=("Helvetica", 20, "bold"), tags="ticket")
+
+        origin = self.home_airport_code if self.home_airport_code else "LEBL"
+        canvas.create_text(400, 125 + y_off, anchor="center", text=f"{origin} ⟶ {destination.upper()}", fill="#bdc3c7",
+                           font=("Helvetica", 22, "bold"), tags="ticket")
+
+        # Stub (parte derecha)
+        canvas.create_text(620, 110 + y_off, anchor="w", text="NAME", fill="#7f8c8d", font=("Helvetica", 7, "bold"),
+                           tags="ticket")
+        canvas.create_text(620, 125 + y_off, anchor="w", text=name.upper(), fill="#2c3e50",
+                           font=("Helvetica", 10, "bold"), tags="ticket")
+        canvas.create_text(620, 155 + y_off, anchor="w", text="FLIGHT", fill="#7f8c8d", font=("Helvetica", 7, "bold"),
+                           tags="ticket")
+        canvas.create_text(620, 170 + y_off, anchor="w", text=flight.upper(), fill="#2c3e50",
+                           font=("Helvetica", 10, "bold"), tags="ticket")
+        canvas.create_text(710, 155 + y_off, anchor="w", text="SEAT", fill="#7f8c8d", font=("Helvetica", 7, "bold"),
+                           tags="ticket")
+        canvas.create_text(710, 170 + y_off, anchor="w", text=seat.upper(), fill="#2c3e50",
+                           font=("Helvetica", 10, "bold"), tags="ticket")
+
+        # Código de barras falso
+        for i in range(48):
+            x = 70 + (i * 10) + random.randint(-2, 2)
+            w = random.randint(1, 4)
+            canvas.create_rectangle(x, 215 + y_off, x + w, 240 + y_off, fill="#2c3e50", outline="", tags="ticket")
+
+        for i in range(16):
+            x = 620 + (i * 10) + random.randint(-2, 2)
+            w = random.randint(1, 4)
+            canvas.create_rectangle(x, 200 + y_off, x + w, 230 + y_off, fill="#2c3e50", outline="", tags="ticket")
+
+        def drop_animation(current_y_offset):
+            if current_y_offset < 0:
+                distance = abs(current_y_offset)
+                step = max(2, int(distance * 0.15))
+
+                canvas.move("ticket", 0, step)
+                new_offset = current_y_offset + step
+
+                if new_offset > 0:
+                    canvas.move("ticket", 0, -new_offset)
+                    new_offset = 0
+
+                bp_win.after(16, lambda: drop_animation(new_offset))
+            else:
+                self.write_console(f"🎟️ Boarding pass generat per a {name.upper()} (Vol: {flight.upper()}).")
+
+        drop_animation(-400)
+
     def _build_interface(self):
         viewport = tk.Frame(self.root, bg=self.colors["background"])
         viewport.grid(row=0, column=0, sticky="nsew")
@@ -108,287 +273,194 @@ class AirportInterface:
         status_frame.columnconfigure(2, weight=1)
 
         self._create_status_card(
-            status_frame,
-            0,
-            "Airport dataset",
-            self.airports_status,
-            self.colors["airport_fill"],
+            status_frame, 0, "Airport dataset", self.airports_status, self.colors["airport_fill"]
         )
         self._create_status_card(
-            status_frame,
-            1,
-            "Arrival dataset",
-            self.arrivals_status,
-            self.colors["arrival_fill"],
+            status_frame, 1, "Arrival dataset", self.arrivals_status, self.colors["arrival_fill"]
         )
         self._create_status_card(
-            status_frame,
-            2,
-            "Session",
-            self.console_status,
-            self.colors["gold_fill"],
+            status_frame, 2, "Session", self.console_status, self.colors["gold_fill"]
         )
 
-        airport_panel = self._create_section_panel(
-            main,
-            row=2,
-            column=0,
-            title="Airport tools",
-            subtitle="Load, edit and visualize airport information without touching the data module.",
+        # ---- INICIO DEL ÁREA DINÁMICA DE VISTAS ----
+        self.dynamic_area = tk.Frame(main, bg=self.colors["background"])
+        self.dynamic_area.grid(row=2, column=0, columnspan=2, sticky="nsew", pady=(0, 18))
+        self.dynamic_area.columnconfigure(0, weight=1)
+        self.dynamic_area.rowconfigure(0, weight=1)
+
+        self.view_home = tk.Frame(self.dynamic_area, bg=self.colors["background"])
+        self.view_home.columnconfigure(0, weight=1)
+        self.view_home.columnconfigure(1, weight=1)
+        self.view_home.rowconfigure(0, weight=1)
+        self.view_home.rowconfigure(1, weight=1)  # Damos peso a la nueva fila
+
+        self.view_airport = tk.Frame(self.dynamic_area, bg=self.colors["background"])
+        self.view_arrival = tk.Frame(self.dynamic_area, bg=self.colors["background"])
+
+        for view in (self.view_home, self.view_airport, self.view_arrival):
+            view.grid(row=0, column=0, sticky="nsew")
+
+        # --- 1. VISTA PRINCIPAL (HOME) ---
+        airport_home_panel = self._create_section_panel(
+            self.view_home, row=0, column=0, title="Airport tools",
+            subtitle="Load, edit and visualize airport information."
         )
-        arrival_panel = self._create_section_panel(
-            main,
-            row=2,
-            column=1,
-            title="Arrival tools",
-            subtitle="Inspect incoming flights with quick filters and visual summaries.",
+        arrival_home_panel = self._create_section_panel(
+            self.view_home, row=0, column=1, title="Arrival tools",
+            subtitle="Inspect incoming flights, gates and terminal structures."
+        )
+        # Panel del pasajero ocupando 2 columnas (ancho completo)
+        passenger_home_panel = self._create_section_panel(
+            self.view_home, row=1, column=0, columnspan=2, title="Passenger tools",
+            subtitle="Generate boarding passes and passenger utilities."
         )
 
+        home_air_tiles = tk.Frame(airport_home_panel, bg=self.colors["surface"])
+        home_air_tiles.pack(fill="both", expand=True)
+        home_air_tiles.columnconfigure(0, weight=1)
+        self._create_tile(
+            home_air_tiles, 0, 0, "Open Airport Tools", "Access all airport management features.",
+            lambda: self.switch_view(self.view_airport),
+            self.colors["airport_fill"], self.colors["airport_outline"], self.colors["airport_hover"]
+        )
+
+        home_arr_tiles = tk.Frame(arrival_home_panel, bg=self.colors["surface"])
+        home_arr_tiles.pack(fill="both", expand=True)
+        home_arr_tiles.columnconfigure(0, weight=1)
+        self._create_tile(
+            home_arr_tiles, 0, 0, "Open Arrival Tools", "Access all flight arrival features.",
+            lambda: self.switch_view(self.view_arrival),
+            self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"]
+        )
+
+        # Botón para el Boarding Pass dentro de su panel
+        home_pass_tiles = tk.Frame(passenger_home_panel, bg=self.colors["surface"])
+        home_pass_tiles.pack(fill="both", expand=True)
+        home_pass_tiles.columnconfigure(0, weight=1)
+        self._create_tile(
+            home_pass_tiles, 0, 0, "Generate Boarding Pass", "Create a passenger boarding pass ticket.",
+            self.generate_boarding_pass,
+            self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"]
+        )
+
+        # --- 2. VISTA D'AIRPORT TOOLS ---
+        airport_header = tk.Frame(self.view_airport, bg=self.colors["background"])
+        airport_header.pack(fill="x", pady=(0, 10))
+        tk.Button(
+            airport_header, text="← Back to Menu", command=lambda: self.switch_view(self.view_home),
+            bg=self.colors["surface"], fg=self.colors["text"], font=("Trebuchet MS", 11, "bold"),
+            relief="groove", cursor="hand2", padx=10, pady=5
+        ).pack(side="left")
+        tk.Label(
+            airport_header, text="Airport Tools", font=("Trebuchet MS", 16, "bold"),
+            bg=self.colors["background"], fg=self.colors["text"]
+        ).pack(side="left", padx=15)
+
+        airport_panel = tk.Frame(
+            self.view_airport, bg=self.colors["surface"], highlightbackground=self.colors["border"],
+            highlightthickness=1, bd=0, padx=18, pady=18
+        )
+        airport_panel.pack(fill="both", expand=True)
         airport_tiles = tk.Frame(airport_panel, bg=self.colors["surface"])
         airport_tiles.pack(fill="both", expand=True)
-        airport_tiles.columnconfigure(0, weight=1)
-        airport_tiles.columnconfigure(1, weight=1)
 
+        for c in range(3):
+            airport_tiles.columnconfigure(c, weight=1)
+
+        self._create_tile(airport_tiles, 0, 0, "Load airports", "Import airport coordinates from a text file.",
+                          self.load_airports, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(airport_tiles, 0, 1, "Show airports", "Open the loaded airport list in a separate window.",
+                          self.show_airports, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(airport_tiles, 0, 2, "Set Schengen", "Compute the Schengen flag for every loaded airport.",
+                          self.set_schengen, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+
+        self._create_tile(airport_tiles, 1, 0, "Add airport", "Insert a new airport by code and coordinates.",
+                          self.add_airport, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 1, 1, "Delete airport",
+                          "Remove an airport by ICAO code from the current list.", self.delete_airport,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 1, 2, "Save Schengen", "Export only the Schengen airports to a text file.",
+                          self.save_schengen, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
+
+        self._create_tile(airport_tiles, 2, 0, "Plot Schengen split",
+                          "Open a bar chart with Schengen and non-Schengen counts.", self.plot_airports,
+                          self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
+        self._create_tile(airport_tiles, 2, 1, "Show map",
+                          "Open Google Earth with airports and an optional arrival route.", self.show_map,
+                          self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
+
+        # --- 3. VISTA D'ARRIVAL TOOLS ---
+        arrival_header = tk.Frame(self.view_arrival, bg=self.colors["background"])
+        arrival_header.pack(fill="x", pady=(0, 10))
+        tk.Button(
+            arrival_header, text="← Back to Menu", command=lambda: self.switch_view(self.view_home),
+            bg=self.colors["surface"], fg=self.colors["text"], font=("Trebuchet MS", 11, "bold"),
+            relief="groove", cursor="hand2", padx=10, pady=5
+        ).pack(side="left")
+        tk.Label(
+            arrival_header, text="Arrival Tools", font=("Trebuchet MS", 16, "bold"),
+            bg=self.colors["background"], fg=self.colors["text"]
+        ).pack(side="left", padx=15)
+
+        arrival_panel = tk.Frame(
+            self.view_arrival, bg=self.colors["surface"], highlightbackground=self.colors["border"],
+            highlightthickness=1, bd=0, padx=18, pady=18
+        )
+        arrival_panel.pack(fill="both", expand=True)
         arrival_tiles = tk.Frame(arrival_panel, bg=self.colors["surface"])
         arrival_tiles.pack(fill="both", expand=True)
-        arrival_tiles.columnconfigure(0, weight=1)
-        arrival_tiles.columnconfigure(1, weight=1)
 
-        self._create_tile(
-            airport_tiles,
-            0,
-            0,
-            "Load airports",
-            "Import airport coordinates from a text file.",
-            self.load_airports,
-            self.colors["airport_fill"],
-            self.colors["airport_outline"],
-            self.colors["airport_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            0,
-            1,
-            "Show airports",
-            "Open the loaded airport list in a separate window.",
-            self.show_airports,
-            self.colors["airport_fill"],
-            self.colors["airport_outline"],
-            self.colors["airport_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            1,
-            0,
-            "Set Schengen",
-            "Compute the Schengen flag for every loaded airport.",
-            self.set_schengen,
-            self.colors["airport_fill"],
-            self.colors["airport_outline"],
-            self.colors["airport_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            1,
-            1,
-            "Add airport",
-            "Insert a new airport by code and coordinates.",
-            self.add_airport,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            2,
-            0,
-            "Delete airport",
-            "Remove an airport by ICAO code from the current list.",
-            self.delete_airport,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            2,
-            1,
-            "Save Schengen",
-            "Export only the Schengen airports to a text file.",
-            self.save_schengen,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            3,
-            0,
-            "Plot Schengen split",
-            "Open a bar chart with Schengen and non-Schengen counts.",
-            self.plot_airports,
-            self.colors["arrival_fill"],
-            self.colors["arrival_outline"],
-            self.colors["arrival_hover"],
-        )
-        self._create_tile(
-            airport_tiles,
-            3,
-            1,
-            "Show map",
-            "Open Google Earth with airports and an optional arrival route.",
-            self.show_map,
-            self.colors["arrival_fill"],
-            self.colors["arrival_outline"],
-            self.colors["arrival_hover"],
-        )
+        for c in range(3):
+            arrival_tiles.columnconfigure(c, weight=1)
 
-        self._create_tile(
-            arrival_tiles,
-            0,
-            0,
-            "Load arrivals",
-            "Import arrival flights from a text file such as Arrivals.txt.",
-            self.load_arrivals,
-            self.colors["arrival_fill"],
-            self.colors["arrival_outline"],
-            self.colors["arrival_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            0,
-            1,
-            "Show arrivals",
-            "Open the arrival list in a separate window.",
-            self.show_arrivals,
-            self.colors["arrival_fill"],
-            self.colors["arrival_outline"],
-            self.colors["arrival_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            1,
-            0,
-            "Plot by company",
-            "Bar chart of arrivals grouped by airline company.",
-            self.plot_arrivals_by_company,
-            self.colors["airport_fill"],
-            self.colors["airport_outline"],
-            self.colors["airport_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            1,
-            1,
-            "Plot by origin",
-            "Horizontal ranking of the busiest origin airports.",
-            self.plot_arrivals_by_origin,
-            self.colors["airport_fill"],
-            self.colors["airport_outline"],
-            self.colors["airport_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            2,
-            0,
-            "Hourly flow",
-            "Line chart of expected arrivals by landing hour.",
-            self.plot_arrivals_by_hour,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            3,
-            0,
-            "Set Gate",
-            "Create gates in a boarding area.",
-            self.set_gates,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            3,
-            1,
-            "Load Airlines",
-            "Load terminal airline list.",
-            self.load_airlines,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
+        self._create_tile(arrival_tiles, 0, 0, "Load arrivals",
+                          "Import arrival flights from a text file such as Arrivals.txt.", self.load_arrivals,
+                          self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
+        self._create_tile(arrival_tiles, 0, 1, "Show arrivals", "Open the arrival list in a separate window.",
+                          self.show_arrivals, self.colors["arrival_fill"], self.colors["arrival_outline"],
+                          self.colors["arrival_hover"])
+        self._create_tile(arrival_tiles, 0, 2, "Load bundled files", "Quick load Airports, Arrivals and Terminals.",
+                          self.load_project_files, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
 
-        self._create_tile(
-            arrival_tiles,
-            4,
-            0,
-            "Load Airport Structure",
-            "Load terminals and gate areas.",
-            self.load_airport_structure,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            4,
-            1,
-            "Gate Occupancy",
-            "Show gate usage.",
-            self.show_gate_occupancy,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            5,
-            0,
-            "Is Airline In Terminal",
-            "Check one terminal.",
-            self.is_airline_in_terminal,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
+        self._create_tile(arrival_tiles, 1, 0, "Plot by company", "Bar chart of arrivals grouped by airline company.",
+                          self.plot_arrivals_by_company, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(arrival_tiles, 1, 1, "Plot by origin", "Horizontal ranking of the busiest origin airports.",
+                          self.plot_arrivals_by_origin, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(arrival_tiles, 1, 2, "Hourly flow", "Line chart of expected arrivals by landing hour.",
+                          self.plot_arrivals_by_hour, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
 
-        self._create_tile(
-            arrival_tiles,
-            5,
-            1,
-            "Search Terminal",
-            "Find terminal by airline.",
-            self.search_terminal,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            6,
-            0,
-            "Assign Gate",
-            "Assign first free gate.",
-            self.assign_gate,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
-        self._create_tile(
-            arrival_tiles,
-            2,
-            1,
-            "Load bundled files",
-            "Quick load Airports.txt and Arrivals.txt from this project folder.",
-            self.load_project_files,
-            self.colors["gold_fill"],
-            self.colors["gold_outline"],
-            self.colors["gold_hover"],
-        )
+        self._create_tile(arrival_tiles, 2, 0, "Load Airport Structure", "Load terminals and gate areas.",
+                          self.load_airport_structure, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
+        self._create_tile(arrival_tiles, 2, 1, "Set Gate", "Create gates in a boarding area.", self.set_gates,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(arrival_tiles, 2, 2, "Load Airlines", "Load terminal airline list.", self.load_airlines,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
 
+        self._create_tile(arrival_tiles, 3, 0, "Gate Occupancy", "Show gate usage.", self.show_gate_occupancy,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(arrival_tiles, 3, 1, "Is Airline In Terminal", "Check one terminal.",
+                          self.is_airline_in_terminal, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
+        self._create_tile(arrival_tiles, 3, 2, "Search Terminal", "Find terminal by airline.", self.search_terminal,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+
+        self._create_tile(arrival_tiles, 4, 0, "Assign Gate", "Assign first free gate.", self.assign_gate,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+
+        self.switch_view(self.view_home)
+        # ---- FIN DEL ÁREA DINÁMICA ----
+
+        # ---- PANEL DE LA CONSOLA ----
         console_panel = tk.Frame(
             main,
             bg=self.colors["surface"],
@@ -605,7 +677,7 @@ class AirportInterface:
             justify="left",
         ).pack(anchor="w", pady=(6, 0))
 
-    def _create_section_panel(self, parent, row, column, title, subtitle):
+    def _create_section_panel(self, parent, row, column, title, subtitle, columnspan=1):
         panel = tk.Frame(
             parent,
             bg=self.colors["surface"],
@@ -615,7 +687,7 @@ class AirportInterface:
             padx=18,
             pady=18,
         )
-        panel.grid(row=row, column=column, sticky="nsew", padx=6, pady=(0, 18))
+        panel.grid(row=row, column=column, columnspan=columnspan, sticky="nsew", padx=6, pady=(0, 18))
         panel.columnconfigure(0, weight=1)
 
         tk.Label(
@@ -659,7 +731,8 @@ class AirportInterface:
             tile.configure(bg=self.colors["surface"])
             self._draw_tile(tile, title, subtitle, fill, outline)
 
-        for sequence in ("<Button-1>", "<Return>", "<space>"):
+        # Usamos <ButtonRelease-1> para evitar rebotes al cerrar ventanas modales
+        for sequence in ("<ButtonRelease-1>", "<Return>", "<space>"):
             tile.bind(sequence, lambda _event: command())
 
         tile.bind("<Enter>", handle_enter)
@@ -710,16 +783,16 @@ class AirportInterface:
         )
 
     def _draw_rounded_rectangle(
-        self,
-        canvas,
-        x1,
-        y1,
-        x2,
-        y2,
-        radius,
-        fill,
-        outline,
-        border_width=1,
+            self,
+            canvas,
+            x1,
+            y1,
+            x2,
+            y2,
+            radius,
+            fill,
+            outline,
+            border_width=1,
     ):
         points = [
             x1 + radius,
@@ -1397,6 +1470,7 @@ class AirportInterface:
         except Exception as exc:
             plt.show = original_show
             messagebox.showerror("Plot error", f"Could not generate the hourly chart.\nDetails: {exc}")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
