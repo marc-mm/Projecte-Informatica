@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b158f20-0d53-4cce-9272-d7d97d35bf4b" name="Changes" comment="Versió safe">
-      <change beforePath="$PROJECT_DIR$/.idea/Projecte-Informatica.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projecte-Informatica.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3b158f20-0d53-4cce-9272-d7d97d35bf4b" name="Changes" comment="VERSIO 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface.py" afterDir="false" />
     </list>
@@ -183,23 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779183037602</updated>
     </task>
-    <task id="LOCAL-00010" summary="Versió safe">
+    <task id="LOCAL-00010" summary="VERSIO 3">
       <option name="closed" value="true" />
-      <created>1780246585241</created>
+      <created>1780247436422</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1780246585241</updated>
+      <updated>1780247436423</updated>
     </task>
-    <task id="LOCAL-00011" summary="Versió safe">
-      <option name="closed" value="true" />
-      <created>1780246592902</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1780246592902</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,8 +211,8 @@
     <MESSAGE value="LEBL2" />
     <MESSAGE value="LEBL3" />
     <MESSAGE value="LEBL4" />
-    <MESSAGE value="Versió safe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Versió safe" />
+    <MESSAGE value="VERSIO 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="VERSIO 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
