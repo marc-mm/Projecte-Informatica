@@ -24,9 +24,9 @@ def LoadArrivals(filename):
                 parts = line.split()
                 if len(parts) >= 4:
                     # Validació bàsica de l'hora (format HH:MM)
-                    hora = parts[3]
+                    hora = parts[2]
                     if ":" in hora and len(hora) == 5:
-                        a = Aircraft(parts[0], parts[1], parts[2], hora)
+                        a = Aircraft(parts[0], parts[3], parts[1], parts[2])
                         # Assignem si és Schengen usant la funció de airport.py
                         a.schengen = airport.IsSchengenAirport(a.origin)
                         arrivals.append(a)

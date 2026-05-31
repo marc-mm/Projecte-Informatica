@@ -1,4 +1,4 @@
-
+import Arrivals
 
 class BarcelonaAP:
     def __init__(self):
@@ -81,5 +81,45 @@ def GateOccupancy (bcn):
                 Gates.append(k.__dict__)
     return Gates
 
+def IsAirlineInTerminal (terminal, name):
 
-print(GateOccupancy(LoadAirportStructure("Terminals.txt").terminals))
+    for i in terminal.air_code:
+        if name in i:
+            return True
+
+def SearchTerminal (bcn, name):
+    for i in bcn:
+        return i.name if IsAirlineInTerminal(i, name) else None
+
+def AssignGate (bcn,aircraft):
+
+    i = 0
+    while i < len(bcn):
+
+        if IsAirlineInTerminal(bcn[i],aircraft.airline):
+            j = 0
+            while j < len(bcn[i].BA):
+
+                if aircraft.schengen == bcn[i].BA[j].Schengen:
+                    k = 0
+                    while k < len(bcn[i].BA[j].Gates):
+                        if bcn[i].BA[j].Gates[k].occupied == False:
+                            bcn[i].BA[j].Gates[k].occupied = True
+                            bcn[i].BA[j].Gates[k].craftID = aircraft.id
+                            return
+
+
+                        k += 1
+                j += 1
+        i += 1
+
+
+
+arrivals = Arrivals.LoadArrivals("Arrivals.txt")
+
+bcn = LoadAirportStructure("Terminals.txt").terminals
+AssignGate(bcn,arrivals[0])
+print(GateOccupancy(bcn))
+
+
+
