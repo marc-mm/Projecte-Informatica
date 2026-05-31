@@ -1020,7 +1020,7 @@ class AirportInterface:
         ]
         for arrival in self.arrival_list:
             lines.append(
-                f"{arrival.flight_id:<12}{arrival.company:<14}{arrival.origin_airport:<12}{arrival.expected_time:<8}"
+                f"{arrival.id:<12}{arrival.airline:<14}{arrival.origin:<12}{arrival.arrival_time:<8}"
             )
         return "\n".join(lines)
 
@@ -1428,7 +1428,7 @@ class AirportInterface:
         try:
             from matplotlib.figure import Figure
 
-            origin_counter = Counter(arrival.origin_airport for arrival in self.arrival_list)
+            origin_counter = Counter(arrival.origin for arrival in self.arrival_list)
             labels, values = zip(*origin_counter.most_common(10))
 
             fig = Figure(figsize=(10, 6))
