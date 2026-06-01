@@ -5,3 +5,4 @@ Integrants del grup:
 - Félix Nicolás Díaz
 
 Vídeo V2: https://youtu.be/Zkv-7yocTgY
+Vídeo V3: https://youtu.be/EIP2XSEXWV8
