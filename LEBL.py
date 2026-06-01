@@ -143,9 +143,7 @@ AssignGate(bcn,arrivals[0])  # Assignem porta al primer avió com a prova
 print(GateOccupancy(bcn))  # Mostrem l'estat de totes les portes
 
 
-# =====================================================================
-# VERSIÓ 4 — Sortides, alliberament i assignació dinàmica de portes
-# =====================================================================
+# VERSIÓ 4
 
 def _terminals(bcn):
     """Accepta un BarcelonaAP o directament la llista de terminals (com fa
@@ -291,39 +289,6 @@ def PlotDayOccupancy(bcn, aircrafts):
     plt.legend()
     plt.show()
 
-
-# --- SECCIÓ DE TEST VERSIÓ 4 ---
-if __name__ == "__main__":
-    estructura = LoadAirportStructure("Terminals.txt")
-
-    arribades = Arrivals.LoadArrivals("Arrivals.txt")
-    sortides = Arrivals.LoadDepartures("Departures.txt")
-    moviments = Arrivals.MergeMovements(arribades, sortides)
-    nocturns = Arrivals.NightAircraft(moviments)
-    print(f"Moviments: {len(moviments)} | Nocturns: {len(nocturns)}")
-
-    # AssignNightGates (i el seu codi d'error amb llista buida)
-    print("AssignNightGates([]) ->", AssignNightGates(estructura, []))
-    AssignNightGates(estructura, nocturns)
-    ocupades = [g for g in GateOccupancy(estructura.terminals) if g['occupied']]
-    print(f"Portes ocupades després dels nocturns: {len(ocupades)}")
-
-    # AssignGatesAtTime per a una franja concreta
-    nf = AssignGatesAtTime(estructura, moviments, "08:00")
-    print(f"Avions no assignats a la franja 08:00: {nf}")
-    print("AssignGatesAtTime([]) ->", AssignGatesAtTime(estructura, [], "08:00"))
-
-    # FreeGate (cas correcte i codi d'error)
-    if ocupades:
-        cid = ocupades[0]['craftID']
-        print(f"FreeGate({cid}) ->", FreeGate(estructura, cid))
-    print("FreeGate(inexistent) ->", FreeGate(estructura, "XXXXX"))
-
-    # PlotDayOccupancy: reconstruïm l'estructura per començar net
-    estructura2 = LoadAirportStructure("Terminals.txt")
-    AssignNightGates(estructura2, nocturns)
-    print("PlotDayOccupancy([]) ->", PlotDayOccupancy(estructura2, []))
-    PlotDayOccupancy(estructura2, moviments)
 
 
 
