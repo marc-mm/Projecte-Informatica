@@ -1374,12 +1374,12 @@ class AirportInterface:
             route_note = "Airport map opened."
             # Si hi ha arribades, oferim dibuixar una ruta concreta
             if self.arrival_list and messagebox.askyesno("Arrival route", "Draw one loaded arrival route?"):
-                flight_id = simpledialog.askstring("Arrival route", "Arrival flight ID:")
+                id_flight = simpledialog.askstring("Arrival route", "Arrival flight ID:")
                 # Busquem el vol amb aquest identificador (o None si no es troba)
                 selected = next(
-                    (item for item in self.arrival_list if item.flight_id.upper() == flight_id.strip().upper()),
+                    (item for item in self.arrival_list if item.id.upper() == id_flight.strip().upper()),
                     None,
-                ) if flight_id else None
+                ) if id_flight else None
                 if selected is None:
                     messagebox.showwarning("Arrival not found", "The map will open without a route.")
                     airport.MapAirports(self.airport_list, str(filename))
@@ -1387,7 +1387,16 @@ class AirportInterface:
                     filename = self.base_dir / "flights_map.kml"
                     airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
                     Arrivals.MapFlights([selected], airports_for_map, str(filename))
-                    route_note = f"Route highlighted: {selected.flight_id}"
+                    route_note = f"Route highlighted: {selected.id}"
+            elif self.arrival_list and messagebox.askyesno(
+                "All routes",
+                "Highlight ALL arrival routes?\n(Schengen origins are drawn in a different colour)",
+            ):
+                # Dibuixem totes les trajectories de cop, amb color segons Schengen
+                filename = self.base_dir / "flights_map.kml"
+                airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
+                Arrivals.MapFlights(self.arrival_list, airports_for_map, str(filename))
+                route_note = f"All routes highlighted: {len(self.arrival_list)} flights"
             else:
                 airport.MapAirports(self.airport_list, str(filename))  # Només els aeroports
 

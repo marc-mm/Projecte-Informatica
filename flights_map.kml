@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
+<Style id="schengen">
+  <LineStyle><color>ff00ff00</color><width>3</width></LineStyle>
+</Style>
+<Style id="noschengen">
+  <LineStyle><color>ff0000ff</color><width>3</width></LineStyle>
+</Style>
 <Placemark>
   <name>ECMKV (LYBE -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>20.306944444444444,44.81944444444445,0 2.083,41.297,0</coordinates>
@@ -10,6 +17,7 @@
 </Placemark>
 <Placemark>
   <name>ECJGM (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
@@ -17,6 +25,7 @@
 </Placemark>
 <Placemark>
   <name>ECLOB (LMML -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>14.477500000000001,35.8575,0 2.083,41.297,0</coordinates>
@@ -24,6 +33,7 @@
 </Placemark>
 <Placemark>
   <name>ECLVC (LGTS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>22.97083333333333,40.51972222222222,0 2.083,41.297,0</coordinates>
@@ -31,6 +41,7 @@
 </Placemark>
 <Placemark>
   <name>DALEC (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -38,6 +49,7 @@
 </Placemark>
 <Placemark>
   <name>N327UP (EDDK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>7.142777777777778,50.865833333333335,0 2.083,41.297,0</coordinates>
@@ -45,6 +57,7 @@
 </Placemark>
 <Placemark>
   <name>ECMKN (LGSR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>25.479166666666664,36.399166666666666,0 2.083,41.297,0</coordinates>
@@ -52,6 +65,7 @@
 </Placemark>
 <Placemark>
   <name>DALEN (EDDP -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.236388888888888,51.42388888888889,0 2.083,41.297,0</coordinates>
@@ -59,34 +73,95 @@
 </Placemark>
 <Placemark>
   <name>ECMKT (LGAV -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.944444444444446,37.93666666666666,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>N920FD (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OEIBZ (EBLG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>5.442777777777778,50.63638888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDPG (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLTG (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>N761AJ (KJFK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-73.77833333333334,40.640277777777776,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIFJP (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECKRH (LROP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>26.084999999999997,44.571111111111115,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLVV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLYB (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLXV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>PHXRD (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -94,6 +169,7 @@
 </Placemark>
 <Placemark>
   <name>ECMAI (BIKF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-22.605555555555558,63.985,0 2.083,41.297,0</coordinates>
@@ -101,13 +177,39 @@
 </Placemark>
 <Placemark>
   <name>GRAJG (EBOS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>2.8622222222222224,51.19888888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZWE (LIMC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.723055555555556,45.63,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIFOG (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>DAIQE (EDDS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.221944444444444,48.69,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OOJEM (EBAW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.460277777777778,51.18944444444444,0 2.083,41.297,0</coordinates>
@@ -115,6 +217,7 @@
 </Placemark>
 <Placemark>
   <name>ECLZZ (URKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>39.169999999999995,45.03472222222222,0 2.083,41.297,0</coordinates>
@@ -122,13 +225,39 @@
 </Placemark>
 <Placemark>
   <name>HALXH (LHBP -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>19.261944444444445,47.43944444444444,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZAT (LFLL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>5.0811111111111105,45.72555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMBS (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJYX (LECO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.377222222222223,43.301944444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAEBP (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
@@ -136,6 +265,7 @@
 </Placemark>
 <Placemark>
   <name>OOSSW (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -143,6 +273,7 @@
 </Placemark>
 <Placemark>
   <name>VQBTN (UUEE -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.41305555555555,55.972500000000004,0 2.083,41.297,0</coordinates>
@@ -150,6 +281,7 @@
 </Placemark>
 <Placemark>
   <name>OHLZD (EFHK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>24.96333333333333,60.31722222222223,0 2.083,41.297,0</coordinates>
@@ -157,6 +289,7 @@
 </Placemark>
 <Placemark>
   <name>DABZA (EDDL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>6.7572222222222225,51.280833333333334,0 2.083,41.297,0</coordinates>
@@ -164,20 +297,55 @@
 </Placemark>
 <Placemark>
   <name>N823NW (KATL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-84.43333333333334,33.63333333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMAH (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIENM (EDDB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.500555555555556,52.36222222222222,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBT (LEAS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-6.034722222222222,43.56361111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJQZ (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBIOK (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMEA (ULLI -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>30.2625,59.80027777777777,0 2.083,41.297,0</coordinates>
@@ -185,20 +353,39 @@
 </Placemark>
 <Placemark>
   <name>ECLZN (LGMK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>25.34722222222222,37.43722222222222,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMLM (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAGWT (EDDV -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.68361111111111,52.46027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJQQ (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>PHHSK (EHEH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>5.374444444444444,51.45,0 2.083,41.297,0</coordinates>
@@ -206,6 +393,7 @@
 </Placemark>
 <Placemark>
   <name>ECMGE (UUDD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.906388888888884,55.40861111111111,0 2.083,41.297,0</coordinates>
@@ -213,6 +401,7 @@
 </Placemark>
 <Placemark>
   <name>DAIPZ (EDDL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>6.7572222222222225,51.280833333333334,0 2.083,41.297,0</coordinates>
@@ -220,6 +409,7 @@
 </Placemark>
 <Placemark>
   <name>GEUUC (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -227,13 +417,31 @@
 </Placemark>
 <Placemark>
   <name>ECMEQ (OLBA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>35.49,33.81916666666667,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIEKL (LPPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.678055555555554,41.23555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLUL (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OELBR (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
@@ -241,34 +449,87 @@
 </Placemark>
 <Placemark>
   <name>N76054 (KEWR -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-74.16833333333334,40.696666666666665,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIFIY (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMFM (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>9VSWD (SBGR -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-46.47,-23.433333333333334,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>FGTAZ (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OYKBP (EKCH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.65611111111111,55.61805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMHA (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAGWI (EDDK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>7.142777777777778,50.865833333333335,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLLJ (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMKV (LESO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-1.7905555555555555,43.35638888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAIDL (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -276,6 +537,7 @@
 </Placemark>
 <Placemark>
   <name>ECJTR (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -283,6 +545,7 @@
 </Placemark>
 <Placemark>
   <name>EIFRF (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
@@ -290,6 +553,7 @@
 </Placemark>
 <Placemark>
   <name>GZBAI (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -297,6 +561,7 @@
 </Placemark>
 <Placemark>
   <name>TCJNZ (LTBA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>28.81416666666667,40.976111111111116,0 2.083,41.297,0</coordinates>
@@ -304,6 +569,7 @@
 </Placemark>
 <Placemark>
   <name>GEZDU (EDDB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.500555555555556,52.36222222222222,0 2.083,41.297,0</coordinates>
@@ -311,6 +577,7 @@
 </Placemark>
 <Placemark>
   <name>B5913 (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
@@ -318,6 +585,7 @@
 </Placemark>
 <Placemark>
   <name>OELED (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
@@ -325,34 +593,103 @@
 </Placemark>
 <Placemark>
   <name>GZBAH (EGBB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.7480555555555557,52.45388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMHS (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLML (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDAM (LIME -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.700277777777776,45.66888888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZTG (EGGD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.7191666666666667,51.382777777777775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>CSTTO (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>GEZUM (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDEJ (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMLE (LFRS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-1.607777777777778,47.15694444444444,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CGHLQ (CYUL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-73.74138888888889,45.46805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLZF (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>CSDXZ (LFST -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.634444444444444,48.54194444444444,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZPC (EGGP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.8497222222222223,53.33361111111111,0 2.083,41.297,0</coordinates>
@@ -360,6 +697,7 @@
 </Placemark>
 <Placemark>
   <name>PHBXF (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -367,13 +705,23 @@
 </Placemark>
 <Placemark>
   <name>EIEBK (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLVC (LEGR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.777222222222222,37.18861111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDPM (EGPH -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-3.3725,55.95,0 2.083,41.297,0</coordinates>
@@ -381,27 +729,63 @@
 </Placemark>
 <Placemark>
   <name>ECMBK (UWKD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>49.280277777777776,55.606944444444444,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLUN (DAAG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>3.2144444444444447,36.693888888888885,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZBD (EGAA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.215833333333333,54.6575,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLRY (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIEFW (LEST -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.415277777777778,42.896388888888886,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDHP (EGBB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.7480555555555557,52.45388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLOB (LFMN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.215,43.665277777777774,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDWK (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -409,13 +793,23 @@
 </Placemark>
 <Placemark>
   <name>YRBGI (LROP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>26.084999999999997,44.571111111111115,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIENO (LFOB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.112777777777778,49.45444444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>YRBAP (LROP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>26.084999999999997,44.571111111111115,0 2.083,41.297,0</coordinates>
@@ -423,6 +817,7 @@
 </Placemark>
 <Placemark>
   <name>ECLUT (LLBG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>34.885555555555555,32.00944444444445,0 2.083,41.297,0</coordinates>
@@ -430,6 +825,7 @@
 </Placemark>
 <Placemark>
   <name>GEUUO (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -437,6 +833,7 @@
 </Placemark>
 <Placemark>
   <name>N790AN (KMIA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-80.28333333333333,25.8,0 2.083,41.297,0</coordinates>
@@ -444,6 +841,7 @@
 </Placemark>
 <Placemark>
   <name>GEZWN (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -451,6 +849,7 @@
 </Placemark>
 <Placemark>
   <name>SXDGQ (LGAV -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.944444444444446,37.93666666666666,0 2.083,41.297,0</coordinates>
@@ -458,6 +857,7 @@
 </Placemark>
 <Placemark>
   <name>ECMMU (GCLP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-15.386666666666667,27.931944444444447,0 2.083,41.297,0</coordinates>
@@ -465,13 +865,39 @@
 </Placemark>
 <Placemark>
   <name>LNRNO (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECHUH (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>IBIXR (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECKMI (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GOZBE (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
@@ -479,13 +905,23 @@
 </Placemark>
 <Placemark>
   <name>SPLND (EPWA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>20.96722222222222,52.16583333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDAE (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>N290AY (KPHL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-75.245,39.87,0 2.083,41.297,0</coordinates>
@@ -493,20 +929,47 @@
 </Placemark>
 <Placemark>
   <name>VQBHK (UUEE -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.41305555555555,55.972500000000004,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECKLT (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMMH (GCXO -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-16.341666666666665,28.482777777777777,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMHB (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLXV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>VPBWG (ULLI -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>30.2625,59.80027777777777,0 2.083,41.297,0</coordinates>
@@ -514,6 +977,7 @@
 </Placemark>
 <Placemark>
   <name>ECMBY (LDZA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.06888888888889,45.74305555555556,0 2.083,41.297,0</coordinates>
@@ -521,6 +985,7 @@
 </Placemark>
 <Placemark>
   <name>DAIDF (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
@@ -528,27 +993,63 @@
 </Placemark>
 <Placemark>
   <name>EIDCJ (EGSS -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>0.23500000000000001,51.885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMKN (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJTQ (LEVX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.627500000000001,42.22916666666667,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>LNNGP (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMIQ (LIRQ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>11.202777777777778,43.808611111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZBI (EGGW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.3683333333333333,51.874722222222225,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMGZ (LIPZ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.351944444444444,45.50527777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLQM (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -556,13 +1057,23 @@
 </Placemark>
 <Placemark>
   <name>GCELG (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZTA (LFSB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.529166666666667,47.59,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAISG (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -570,6 +1081,7 @@
 </Placemark>
 <Placemark>
   <name>N900JG (LLBG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>34.885555555555555,32.00944444444445,0 2.083,41.297,0</coordinates>
@@ -577,13 +1089,31 @@
 </Placemark>
 <Placemark>
   <name>LNDYW (EKCH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.65611111111111,55.61805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZAT (LFBD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.7152777777777777,44.828611111111115,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDHX (LIPE -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>11.296944444444444,44.530833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CFIYE (CYYZ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-79.63055555555555,43.67722222222222,0 2.083,41.297,0</coordinates>
@@ -591,20 +1121,47 @@
 </Placemark>
 <Placemark>
   <name>ECMJC (LDSP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.298055555555557,43.538888888888884,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECKRH (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBJYI (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLQK (LLBG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>34.885555555555555,32.00944444444445,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBE (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CNRGG (GMMN -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-7.581666666666666,33.36416666666667,0 2.083,41.297,0</coordinates>
@@ -612,20 +1169,39 @@
 </Placemark>
 <Placemark>
   <name>ECMJR (EGGW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.3683333333333333,51.874722222222225,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>TSIMV (DTTA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>10.226944444444445,36.85111111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLQL (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>FF333 (LFCK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.2905555555555552,43.555,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GGDFK (EGNM -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.6608333333333332,53.86611111111111,0 2.083,41.297,0</coordinates>
@@ -633,13 +1209,23 @@
 </Placemark>
 <Placemark>
   <name>ECLRG (EDDP -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.236388888888888,51.42388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBT (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>N803NW (KJFK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-73.77833333333334,40.640277777777776,0 2.083,41.297,0</coordinates>
@@ -647,6 +1233,7 @@
 </Placemark>
 <Placemark>
   <name>GEUYC (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -654,6 +1241,7 @@
 </Placemark>
 <Placemark>
   <name>N283AY (KCLT -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-80.95,35.21666666666667,0 2.083,41.297,0</coordinates>
@@ -661,6 +1249,7 @@
 </Placemark>
 <Placemark>
   <name>ECMGF (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -668,27 +1257,71 @@
 </Placemark>
 <Placemark>
   <name>ECMLD (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIIMU (LIML -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.278333333333334,45.44944444444444,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHUI (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLRN (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZWZ (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>CSTTV (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>PHBXP (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJGM (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CFDAT (CYUL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-73.74138888888889,45.46805555555556,0 2.083,41.297,0</coordinates>
@@ -696,13 +1329,31 @@
 </Placemark>
 <Placemark>
   <name>EIDHG (EDDH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.988333333333333,53.63027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIFJP (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHQI (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CGTSW (CYYZ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-79.63055555555555,43.67722222222222,0 2.083,41.297,0</coordinates>
@@ -710,6 +1361,7 @@
 </Placemark>
 <Placemark>
   <name>ECLZO (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -717,13 +1369,23 @@
 </Placemark>
 <Placemark>
   <name>N76062 (KIAD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-77.45666666666666,38.94499999999999,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>FA123 (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>URPSS (UKBB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>30.893333333333334,50.344722222222224,0 2.083,41.297,0</coordinates>
@@ -731,6 +1393,7 @@
 </Placemark>
 <Placemark>
   <name>4XELD (LLBG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>34.885555555555555,32.00944444444445,0 2.083,41.297,0</coordinates>
@@ -738,6 +1401,7 @@
 </Placemark>
 <Placemark>
   <name>EIEBA (EGNX -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.3277777777777777,52.83111111111111,0 2.083,41.297,0</coordinates>
@@ -745,6 +1409,7 @@
 </Placemark>
 <Placemark>
   <name>ECLZE (LFQQ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>3.0869444444444447,50.56333333333333,0 2.083,41.297,0</coordinates>
@@ -752,6 +1417,7 @@
 </Placemark>
 <Placemark>
   <name>DAISW (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -759,6 +1425,7 @@
 </Placemark>
 <Placemark>
   <name>PHXRX (EHEH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>5.374444444444444,51.45,0 2.083,41.297,0</coordinates>
@@ -766,6 +1433,7 @@
 </Placemark>
 <Placemark>
   <name>TCJVM (LTFJ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>29.309166666666666,40.89833333333333,0 2.083,41.297,0</coordinates>
@@ -773,6 +1441,7 @@
 </Placemark>
 <Placemark>
   <name>ECLVP (LKPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>14.26,50.100833333333334,0 2.083,41.297,0</coordinates>
@@ -780,6 +1449,7 @@
 </Placemark>
 <Placemark>
   <name>URPSO (UKBB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>30.893333333333334,50.344722222222224,0 2.083,41.297,0</coordinates>
@@ -787,13 +1457,31 @@
 </Placemark>
 <Placemark>
   <name>ECLRM (EGBB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.7480555555555557,52.45388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLML (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMEQ (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>A7AEC (OTHH -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>51.608333333333334,25.274444444444445,0 2.083,41.297,0</coordinates>
@@ -801,6 +1489,7 @@
 </Placemark>
 <Placemark>
   <name>LNDYB (ESGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.29111111111111,57.66,0 2.083,41.297,0</coordinates>
@@ -808,6 +1497,7 @@
 </Placemark>
 <Placemark>
   <name>A6EOP (OMDB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>55.36,25.249166666666667,0 2.083,41.297,0</coordinates>
@@ -815,6 +1505,7 @@
 </Placemark>
 <Placemark>
   <name>DAKNQ (EDDT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.287777777777778,52.55972222222222,0 2.083,41.297,0</coordinates>
@@ -822,20 +1513,39 @@
 </Placemark>
 <Placemark>
   <name>DAGWE (EDDH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.988333333333333,53.63027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>DCARO (LEVC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.4816666666666667,39.489444444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OKNEN (LKPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>14.26,50.100833333333334,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>LXLQB (ELLX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.204444444444444,49.623333333333335,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIENL (GMMX -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-8.040833333333333,31.608611111111113,0 2.083,41.297,0</coordinates>
@@ -843,13 +1553,39 @@
 </Placemark>
 <Placemark>
   <name>TCJHZ (LTBA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>28.81416666666667,40.976111111111116,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIFRH (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>GEZUM (LFMN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.215,43.665277777777774,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>CSTTK (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDHT (EYVI -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>25.28777777777778,54.636944444444445,0 2.083,41.297,0</coordinates>
@@ -857,20 +1593,63 @@
 </Placemark>
 <Placemark>
   <name>TCCPG (LTFJ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>29.309166666666666,40.89833333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLZF (LEAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.37,36.84388888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECIXD (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMHA (LIMC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.723055555555556,45.63,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>SUGCE (HECA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>31.413888888888888,30.11138888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>SXABE (LFRN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-1.7322222222222223,48.07194444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBIOM (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEUUY (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -878,6 +1657,7 @@
 </Placemark>
 <Placemark>
   <name>ECMEA (GMFF -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-4.977777777777778,33.92722222222222,0 2.083,41.297,0</coordinates>
@@ -885,6 +1665,7 @@
 </Placemark>
 <Placemark>
   <name>ECLTG (ETNL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.278333333333334,53.91916666666666,0 2.083,41.297,0</coordinates>
@@ -892,6 +1673,7 @@
 </Placemark>
 <Placemark>
   <name>DAIRA (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
@@ -899,13 +1681,23 @@
 </Placemark>
 <Placemark>
   <name>ECJYX (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLUN (LIMF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.649444444444444,45.2025,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZPL (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -913,6 +1705,7 @@
 </Placemark>
 <Placemark>
   <name>EIFJN (EDDB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.500555555555556,52.36222222222222,0 2.083,41.297,0</coordinates>
@@ -920,13 +1713,39 @@
 </Placemark>
 <Placemark>
   <name>PHXRD (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLXV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLOB (LEMG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.4991666666666665,36.675,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMGE (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OOSSW (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -934,6 +1753,7 @@
 </Placemark>
 <Placemark>
   <name>GEUYB (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -941,6 +1761,7 @@
 </Placemark>
 <Placemark>
   <name>DAISE (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -948,6 +1769,7 @@
 </Placemark>
 <Placemark>
   <name>N969AV (SKBO -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-74.15,4.7,0 2.083,41.297,0</coordinates>
@@ -955,27 +1777,111 @@
 </Placemark>
 <Placemark>
   <name>A6AIN (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIFIY (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHUH (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECHOB (LYTV -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>18.723333333333333,42.40472222222222,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDAE (LIMF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.649444444444444,45.2025,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLRY (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIENO (LEMG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.4991666666666665,36.675,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDWK (LIPH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.197777777777778,45.65083333333333,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJTR (LFSB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.529166666666667,47.59,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMGF (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIFJL (ENBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>5.218055555555556,60.29361111111111,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLST (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EK111 (LSZG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.416388888888889,47.18138888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMGY (EPWA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>20.96722222222222,52.16583333333333,0 2.083,41.297,0</coordinates>
@@ -983,6 +1889,7 @@
 </Placemark>
 <Placemark>
   <name>EIDAM (EGSS -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>0.23500000000000001,51.885,0 2.083,41.297,0</coordinates>
@@ -990,6 +1897,7 @@
 </Placemark>
 <Placemark>
   <name>EIFJM (ESSA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>17.91861111111111,59.651944444444446,0 2.083,41.297,0</coordinates>
@@ -997,20 +1905,47 @@
 </Placemark>
 <Placemark>
   <name>DAISR (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>CSTTN (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDCJ (LIME -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.700277777777776,45.66888888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OYRUP (GCXO -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-16.341666666666665,28.482777777777777,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECIVJ (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIEFW (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -1018,6 +1953,7 @@
 </Placemark>
 <Placemark>
   <name>LVCSX (SAEZ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-58.53583333333333,-34.82222222222222,0 2.083,41.297,0</coordinates>
@@ -1025,13 +1961,31 @@
 </Placemark>
 <Placemark>
   <name>PHBXG (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>LYVEO (LEST -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.415277777777778,42.896388888888886,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMJZ (LEBZ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-6.8213888888888885,38.89138888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>VQBBG (UUEE -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.41305555555555,55.972500000000004,0 2.083,41.297,0</coordinates>
@@ -1039,20 +1993,95 @@
 </Placemark>
 <Placemark>
   <name>PTMSV (SBGR -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-46.47,-23.433333333333334,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>HBJYL (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJPF (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIFJP (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBJXE (LFSB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.529166666666667,47.59,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CNNMH (GMMN -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-7.581666666666666,33.36416666666667,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLML (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJNI (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMKV (ELLX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.204444444444444,49.623333333333335,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJGM (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMBK (LEJR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-6.06,36.74472222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIFJK (EFHK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>24.96333333333333,60.31722222222223,0 2.083,41.297,0</coordinates>
@@ -1060,6 +2089,7 @@
 </Placemark>
 <Placemark>
   <name>ECMBF (EDDN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.078055555555554,49.49861111111111,0 2.083,41.297,0</coordinates>
@@ -1067,13 +2097,23 @@
 </Placemark>
 <Placemark>
   <name>ECMLE (EHEH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>5.374444444444444,51.45,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMHB (EDDS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.221944444444444,48.69,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>TCJIP (LTBA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>28.81416666666667,40.976111111111116,0 2.083,41.297,0</coordinates>
@@ -1081,6 +2121,7 @@
 </Placemark>
 <Placemark>
   <name>TCDCF (LTFJ -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>29.309166666666666,40.89833333333333,0 2.083,41.297,0</coordinates>
@@ -1088,20 +2129,39 @@
 </Placemark>
 <Placemark>
   <name>ECLZN (EGNT -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.6897222222222223,55.03805555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>IBIXS (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>VPBAS (UUDD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.906388888888884,55.40861111111111,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBS (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECJFF (GCFV -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-13.863888888888889,28.452777777777776,0 2.083,41.297,0</coordinates>
@@ -1109,27 +2169,79 @@
 </Placemark>
 <Placemark>
   <name>LNRRG (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJTQ (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLQK (LEGR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.777222222222222,37.18861111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMKX (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLVO (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>N483CM (LDDU -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>18.26833333333333,42.561388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>FHEPB (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMBY (EGGP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.8497222222222223,53.33361111111111,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMKM (LEAL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.5580555555555556,38.282222222222224,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DIERF (EDDN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.078055555555554,49.49861111111111,0 2.083,41.297,0</coordinates>
@@ -1137,20 +2249,55 @@
 </Placemark>
 <Placemark>
   <name>DAIRD (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJFN (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBIOH (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECKCU (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDHT (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLZF (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GTTOE (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -1158,6 +2305,7 @@
 </Placemark>
 <Placemark>
   <name>ECLAA (EDDH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.988333333333333,53.63027777777778,0 2.083,41.297,0</coordinates>
@@ -1165,6 +2313,7 @@
 </Placemark>
 <Placemark>
   <name>EIEPG (EGGP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.8497222222222223,53.33361111111111,0 2.083,41.297,0</coordinates>
@@ -1172,13 +2321,31 @@
 </Placemark>
 <Placemark>
   <name>ECMKN (EDDV -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.68361111111111,52.46027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECHHA (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLXV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CNRGG (GMMN -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-7.581666666666666,33.36416666666667,0 2.083,41.297,0</coordinates>
@@ -1186,27 +2353,63 @@
 </Placemark>
 <Placemark>
   <name>DAIDQ (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZWZ (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMGZ (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>SXABE (LFBD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.7152777777777777,44.828611111111115,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMEQ (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
   <name>GEZTA (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLZE (LIPZ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.351944444444444,45.50527777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLRN (LICJ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.099444444444446,38.18194444444444,0 2.083,41.297,0</coordinates>
@@ -1214,6 +2417,7 @@
 </Placemark>
 <Placemark>
   <name>ECHQI (LIBD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.765,41.13805555555555,0 2.083,41.297,0</coordinates>
@@ -1221,34 +2425,103 @@
 </Placemark>
 <Placemark>
   <name>ECHQJ (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMAI (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMLD (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>FGUGO (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMJR (LIRN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>14.290833333333333,40.88444444444444,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLUN (LFML -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>5.215,43.43666666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECKRN (GMMX -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-8.040833333333333,31.608611111111113,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDHG (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>GEZUM (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLVP (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECIXD (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLZZ (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>PHBXE (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -1256,13 +2529,63 @@
 </Placemark>
 <Placemark>
   <name>ECLRM (EGFF -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-3.3433333333333333,51.39666666666667,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMGY (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJYX (LEXJ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.82,43.426944444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIFIY (LEVD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.851944444444444,41.70611111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>DAICG (EDDS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.221944444444444,48.69,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>CSTPA (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDWK (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GOZBW (EGNM -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.6608333333333332,53.86611111111111,0 2.083,41.297,0</coordinates>
@@ -1270,6 +2593,7 @@
 </Placemark>
 <Placemark>
   <name>ECMMH (GCXO -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-16.341666666666665,28.482777777777777,0 2.083,41.297,0</coordinates>
@@ -1277,6 +2601,7 @@
 </Placemark>
 <Placemark>
   <name>EIDHX (EGSS -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>0.23500000000000001,51.885,0 2.083,41.297,0</coordinates>
@@ -1284,6 +2609,7 @@
 </Placemark>
 <Placemark>
   <name>EIDHO (ESKN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.90361111111111,58.78861111111111,0 2.083,41.297,0</coordinates>
@@ -1291,6 +2617,7 @@
 </Placemark>
 <Placemark>
   <name>ECMHS (GCRR -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-13.605277777777777,28.945555555555554,0 2.083,41.297,0</coordinates>
@@ -1298,6 +2625,7 @@
 </Placemark>
 <Placemark>
   <name>DAISL (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
@@ -1305,6 +2633,7 @@
 </Placemark>
 <Placemark>
   <name>HALPX (LRCL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.692222222222224,46.78916666666667,0 2.083,41.297,0</coordinates>
@@ -1312,13 +2641,23 @@
 </Placemark>
 <Placemark>
   <name>HALWY (EVRA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.97111111111111,56.92361111111111,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJFT (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>LNDYP (ESSA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>17.91861111111111,59.651944444444446,0 2.083,41.297,0</coordinates>
@@ -1326,6 +2665,7 @@
 </Placemark>
 <Placemark>
   <name>DABZA (EDDL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>6.7572222222222225,51.280833333333334,0 2.083,41.297,0</coordinates>
@@ -1333,6 +2673,7 @@
 </Placemark>
 <Placemark>
   <name>GEZIM (EDDB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.500555555555556,52.36222222222222,0 2.083,41.297,0</coordinates>
@@ -1340,6 +2681,7 @@
 </Placemark>
 <Placemark>
   <name>ECLQM (EDDT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.287777777777778,52.55972222222222,0 2.083,41.297,0</coordinates>
@@ -1347,6 +2689,7 @@
 </Placemark>
 <Placemark>
   <name>DAIQK (EDDK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>7.142777777777778,50.865833333333335,0 2.083,41.297,0</coordinates>
@@ -1354,6 +2697,7 @@
 </Placemark>
 <Placemark>
   <name>ECLRG (EGNM -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.6608333333333332,53.86611111111111,0 2.083,41.297,0</coordinates>
@@ -1361,13 +2705,23 @@
 </Placemark>
 <Placemark>
   <name>ECMFB (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMLM (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DASXJ (EDDL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>6.7572222222222225,51.280833333333334,0 2.083,41.297,0</coordinates>
@@ -1375,6 +2729,7 @@
 </Placemark>
 <Placemark>
   <name>ECMMU (GCLP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-15.386666666666667,27.931944444444447,0 2.083,41.297,0</coordinates>
@@ -1382,34 +2737,127 @@
 </Placemark>
 <Placemark>
   <name>ECLUT (GCXO -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-16.341666666666665,28.482777777777777,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>HBIOM (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMEA (LIMC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.723055555555556,45.63,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>FGRXE (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEUUT (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLQN (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>LYVEV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJTR (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>9HVMK (LIPZ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.351944444444444,45.50527777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMKV (LESO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-1.7905555555555555,43.35638888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>CGDEJ (EHRD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.437222222222222,51.956944444444446,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECHUH (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLLM (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>OEIEW (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLLJ (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIEFN (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
@@ -1417,20 +2865,55 @@
 </Placemark>
 <Placemark>
   <name>GEZEG (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDCM (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>A7ACD (OTHH -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>51.608333333333334,25.274444444444445,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>7TVJM (DAAG -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>3.2144444444444447,36.693888888888885,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDAE (LEVX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.627500000000001,42.22916666666667,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBJYK (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>HALYG (EPKT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>19.08,50.47416666666667,0 2.083,41.297,0</coordinates>
@@ -1438,6 +2921,7 @@
 </Placemark>
 <Placemark>
   <name>GEZBU (EGMC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>0.6933333333333334,51.57027777777778,0 2.083,41.297,0</coordinates>
@@ -1445,6 +2929,7 @@
 </Placemark>
 <Placemark>
   <name>OHLZB (EFHK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>24.96333333333333,60.31722222222223,0 2.083,41.297,0</coordinates>
@@ -1452,13 +2937,31 @@
 </Placemark>
 <Placemark>
   <name>GEUYC (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>HBJYE (LFSB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.529166666666667,47.59,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMBK (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>A6EEH (OMDB -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>55.36,25.249166666666667,0 2.083,41.297,0</coordinates>
@@ -1466,6 +2969,7 @@
 </Placemark>
 <Placemark>
   <name>OELEF (LOWW -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>16.56972222222222,48.11027777777778,0 2.083,41.297,0</coordinates>
@@ -1473,20 +2977,39 @@
 </Placemark>
 <Placemark>
   <name>OOSSK (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLML (LFLL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>5.0811111111111105,45.72555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIEFI (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>HBIJQ (LSGG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>6.109444444444444,46.23833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZFY (EGNT -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-1.6897222222222223,55.03805555555555,0 2.083,41.297,0</coordinates>
@@ -1494,20 +3017,55 @@
 </Placemark>
 <Placemark>
   <name>CSTRN (ESSA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>17.91861111111111,59.651944444444446,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDHB (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>FGZHY (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDHH (GCRR -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-13.605277777777777,28.945555555555554,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJBX (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLVS (LEMG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.4991666666666665,36.675,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>HALYL (LWSK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>21.62138888888889,41.961666666666666,0 2.083,41.297,0</coordinates>
@@ -1515,20 +3073,47 @@
 </Placemark>
 <Placemark>
   <name>EIDWA (EGPK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-4.594444444444444,55.50944444444445,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJPK (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLST (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLOB (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJTQ (LEVD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.851944444444444,41.70611111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZFG (EGGP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.8497222222222223,53.33361111111111,0 2.083,41.297,0</coordinates>
@@ -1536,13 +3121,31 @@
 </Placemark>
 <Placemark>
   <name>EIDLH (GCLP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-15.386666666666667,27.931944444444447,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECJGM (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>CSTTN (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>HALYO (LBSF -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.40833333333333,42.69499999999999,0 2.083,41.297,0</coordinates>
@@ -1550,6 +3153,7 @@
 </Placemark>
 <Placemark>
   <name>ECLZO (EKCH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.65611111111111,55.61805555555556,0 2.083,41.297,0</coordinates>
@@ -1557,6 +3161,7 @@
 </Placemark>
 <Placemark>
   <name>N900AL (HTDA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>39.20333333333333,-6.875555555555556,0 2.083,41.297,0</coordinates>
@@ -1564,13 +3169,23 @@
 </Placemark>
 <Placemark>
   <name>DAIRB (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>GEZIZ (LIMC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.723055555555556,45.63,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMKT (EFHK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>24.96333333333333,60.31722222222223,0 2.083,41.297,0</coordinates>
@@ -1578,13 +3193,47 @@
 </Placemark>
 <Placemark>
   <name>EIFIN (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMJZ (LELN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.6561111111111115,42.58861111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMBT (LEAS -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-6.034722222222222,43.56361111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECKHN (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIENG (LIPE -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>11.296944444444444,44.530833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GDBCI (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -1592,6 +3241,7 @@
 </Placemark>
 <Placemark>
   <name>EIFHS (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
@@ -1599,20 +3249,95 @@
 </Placemark>
 <Placemark>
   <name>GEZIK (EGGD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.7191666666666667,51.382777777777775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBS (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIENL (LEJR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-6.06,36.74472222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLXV (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLGV (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>LYVEO (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>N327UP (LEVC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.4816666666666667,39.489444444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDLC (LPPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.678055555555554,41.23555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>TFBRO (BIKF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-22.605555555555558,63.985,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIDPG (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJFN (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLQL (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
@@ -1620,34 +3345,127 @@
 </Placemark>
 <Placemark>
   <name>EIDEE (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLVA (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMGF (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>CNNMH (GMTT -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.921111111111111,35.73166666666667,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMKM (LPPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.678055555555554,41.23555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLUN (LEBB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-2.9105555555555553,43.301111111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ERAXP (LUKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>28.930833333333336,46.92777777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMLE (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIFJL (EKBI -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>9.151666666666667,55.74027777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECKMI (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>GEZUM (LFLL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>5.0811111111111105,45.72555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>HBION (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLZF (LEAL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.5580555555555556,38.282222222222224,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>TCICT (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLAA (LEST -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.415277777777778,42.896388888888886,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIFJK (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
@@ -1655,6 +3473,7 @@
 </Placemark>
 <Placemark>
   <name>YRBGA (LROP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>26.084999999999997,44.571111111111115,0 2.083,41.297,0</coordinates>
@@ -1662,27 +3481,55 @@
 </Placemark>
 <Placemark>
   <name>TCJRF (LTBA -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>28.81416666666667,40.976111111111116,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>DCALL (LIEE -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.056111111111111,39.24722222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECLRY (EDDM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.786111111111111,48.35388888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECKCU (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDAM (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMIR (LIRQ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>11.202777777777778,43.808611111111105,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>PHBXK (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -1690,6 +3537,7 @@
 </Placemark>
 <Placemark>
   <name>EIENO (LHBP -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>19.261944444444445,47.43944444444444,0 2.083,41.297,0</coordinates>
@@ -1697,41 +3545,119 @@
 </Placemark>
 <Placemark>
   <name>GEUUG (EGLL -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.4613888888888889,51.4775,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECHHA (LSZH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.548055555555555,47.45805555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMHB (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMFL (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLVP (LEMD -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.560833333333333,40.47222222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLUT (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECJFF (LDDU -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>18.26833333333333,42.561388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLZE (LEMG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-4.4991666666666665,36.675,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>FGKXR (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLRG (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>DAISG (EDDF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>8.570555555555556,50.03333333333333,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIEIB (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIFJN (ENGM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>11.08388888888889,60.20277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>EIEPG (LFOB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.112777777777778,49.45444444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMKX (EDDL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>6.7572222222222225,51.280833333333334,0 2.083,41.297,0</coordinates>
@@ -1739,6 +3665,7 @@
 </Placemark>
 <Placemark>
   <name>VPBZA (UUEE -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.41305555555555,55.972500000000004,0 2.083,41.297,0</coordinates>
@@ -1746,6 +3673,7 @@
 </Placemark>
 <Placemark>
   <name>EIFJM (EKCH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>12.65611111111111,55.61805555555556,0 2.083,41.297,0</coordinates>
@@ -1753,6 +3681,7 @@
 </Placemark>
 <Placemark>
   <name>ECLZN (LKPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>14.26,50.100833333333334,0 2.083,41.297,0</coordinates>
@@ -1760,41 +3689,215 @@
 </Placemark>
 <Placemark>
   <name>ECLQK (EIDW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-6.27,53.421388888888885,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLZS (LIEO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.517777777777779,40.89861111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHTD (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLML (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMGE (EGGW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.3683333333333333,51.874722222222225,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMGY (LEGR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-3.777222222222222,37.18861111111111,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDHX (LIME -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.700277777777776,45.66888888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLRM (LIPE -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>11.296944444444444,44.530833333333334,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHFK (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDAE (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>CSTTS (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIFIY (LIPH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.197777777777778,45.65083333333333,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDCJ (EDDB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>13.500555555555556,52.36222222222222,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECLVO (LECO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.377222222222223,43.301944444444445,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLVB (LPPT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-9.134166666666665,38.774166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>SXABE (EBBR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.484444444444445,50.90138888888889,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMEQ (LFPO -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.3794444444444447,48.723333333333336,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>EIDWK (LIRF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.238888888888889,41.80027777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMJR (LIMC -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>8.723055555555556,45.63,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMFK (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECMLM (LEVX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.627500000000001,42.22916666666667,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>VPBRI (UUDD -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>37.906388888888884,55.40861111111111,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMEA (LEZL -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-5.898888888888888,37.418055555555554,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJTR (LEPA -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.738888888888889,39.55166666666666,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>GEZTA (LFPG -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>2.5477777777777777,49.00972222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLSA (LPPR -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-8.678055555555554,41.23555555555556,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMGZ (EHAM -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>4.764166666666667,52.308055555555555,0 2.083,41.297,0</coordinates>
@@ -1802,13 +3905,31 @@
 </Placemark>
 <Placemark>
   <name>SXDVV (LGAV -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>23.944444444444446,37.93666666666666,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMKV (LIRP -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>10.395555555555555,43.68277777777777,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECJYX (LIPX -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>10.887777777777778,45.396388888888886,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>EIDHT (EGSS -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>0.23500000000000001,51.885,0 2.083,41.297,0</coordinates>
@@ -1816,6 +3937,7 @@
 </Placemark>
 <Placemark>
   <name>OYRUP (GCLP -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-15.386666666666667,27.931944444444447,0 2.083,41.297,0</coordinates>
@@ -1823,13 +3945,23 @@
 </Placemark>
 <Placemark>
   <name>GEZWZ (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>LYVEV (LIPZ -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>12.351944444444444,45.50527777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>YLPSH (BIKF -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-22.605555555555558,63.985,0 2.083,41.297,0</coordinates>
@@ -1837,6 +3969,7 @@
 </Placemark>
 <Placemark>
   <name>EIDHG (EDDK -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>7.142777777777778,50.865833333333335,0 2.083,41.297,0</coordinates>
@@ -1844,23 +3977,74 @@
 </Placemark>
 <Placemark>
   <name>ECLZZ (EGKK -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.19027777777777777,51.14805555555556,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECMBK (LIEE -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>9.056111111111111,39.24722222222222,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>GEZDJ (EGGW -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-0.3683333333333333,51.874722222222225,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 <Placemark>
+  <name>ECKHN (LEMH -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>4.2186111111111115,39.862500000000004,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLZO (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHQI (LFMN -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>7.215,43.665277777777774,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
   <name>ECMLD (EGCC -> LEBL)</name>
+  <styleUrl>#noschengen</styleUrl>
   <LineString>
       <tessellate>1</tessellate>
     <coordinates>-2.275,53.35388888888889,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECLTG (LFBT -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>-0.002777777777777778,43.18555555555555,0 2.083,41.297,0</coordinates>
+  </LineString>
+</Placemark>
+<Placemark>
+  <name>ECHQJ (LEIB -> LEBL)</name>
+  <styleUrl>#schengen</styleUrl>
+  <LineString>
+      <tessellate>1</tessellate>
+    <coordinates>1.3730555555555557,38.87277777777778,0 2.083,41.297,0</coordinates>
   </LineString>
 </Placemark>
 </Document>

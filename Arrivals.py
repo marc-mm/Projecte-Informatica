@@ -1,3 +1,4 @@
+import os  # Per obrir el fitxer KML generat amb l'aplicació per defecte (Google Earth)
 import math  # Funcions matemàtiques (radians, sin, cos...) per la distància
 import matplotlib.pyplot as plt  # Per dibuixar gràfics de barres
 import airport  # Importem el fitxer de la Versió 1 per usar IsSchengenAirport i les coordenades
@@ -86,31 +87,51 @@ def PlotAirlines(aircrafts):
     plt.show()
 
 
-def MapFlights(aircrafts, airport_list):
-    """Genera un KML amb les trajectòries des de l'origen fins a Barcelona (LEBL)."""
+def MapFlights(aircrafts, airport_list, filename="flights_map.kml"):
+    """Shows in Google Earth the trajectories of all flights in the list, from
+    origin airport to LEBL. Show in different colors the trajectories with origin
+    in a Schengen country. Remember that Annex A explains how to draw lines in
+    Google Earth.
+    """
     # Coordenades de Barcelona (LEBL) aproximades o buscades
     lebl_lat, lebl_lon = 41.297, 2.083
 
-    filename = "flights_map.kml"
     with open(filename, 'w') as f:
         # Capçalera del document KML
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
         f.write('<Document>\n')
 
+        # Definim dos estils de línia. El color KML va en ordre aabbggrr
+        # (alfa, blau, verd, vermell).
+        # Verd = origen en un país Schengen; Vermell = origen fora de Schengen.
+        f.write('<Style id="schengen">\n')
+        f.write('  <LineStyle><color>ff00ff00</color><width>3</width></LineStyle>\n')
+        f.write('</Style>\n')
+        f.write('<Style id="noschengen">\n')
+        f.write('  <LineStyle><color>ff0000ff</color><width>3</width></LineStyle>\n')
+        f.write('</Style>\n')
+
         for a in aircrafts:
             # Busquem les coordenades de l'aeroport d'origen a la llista de la Versió 1
             origin_coords = None
             for apt in airport_list:
-                if apt.code == a.origin_airport:  # Coincidència de codi ICAO
+                if apt.code == a.origin:  # Coincidència de codi ICAO
                     origin_coords = (apt.latitude, apt.longitude)
                     break
 
             # Només dibuixem la línia si hem trobat les coordenades d'origen
             if origin_coords:
+                # Triem el color de la línia segons si l'origen és Schengen o no
+                if airport.IsSchengenAirport(a.origin):
+                    style = "schengen"
+                else:
+                    style = "noschengen"
+
                 # Cada vol és una línia (LineString) de l'origen fins a LEBL
                 f.write('<Placemark>\n')
-                f.write(f'  <name>{a.flight_id} ({a.origin_airport} -> LEBL)</name>\n')
+                f.write(f'  <name>{a.id} ({a.origin} -> LEBL)</name>\n')
+                f.write(f'  <styleUrl>#{style}</styleUrl>\n')
                 f.write('  <LineString>\n')
                 f.write('      <tessellate>1</tessellate>\n')  # La línia segueix el terreny
                 # Coordenades en ordre lon,lat,alt: punt d'origen i punt de LEBL
@@ -120,7 +141,8 @@ def MapFlights(aircrafts, airport_list):
 
         f.write('</Document>\n')
         f.write('</kml>\n')
-    print("Mapa KML generat: flights_map.kml")
+    print(f"Mapa KML generat: {filename}")
+    os.startfile(filename)  # Obre el fitxer amb Google Earth (o l'app per defecte)
 
 
 
