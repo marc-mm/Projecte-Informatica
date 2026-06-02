@@ -32,31 +32,46 @@ def LoadAirports (filename):
     # Llegeix un fitxer d'aeroports i retorna una llista d'objectes Airport.
     # Les coordenades venen en format graus/minuts/segons enganxats (DDMMSS)
     # amb un prefix de hemisferi (N/S per latitud, E/W per longitud).
+    # Retorna -1 si el fitxer no es pot obrir.
     airports = []
-    file = open(filename, 'r')
-    lines = file.readlines()
-    file.close()
+    # ERROR 1: el fitxer no existeix o no es pot llegir
+    try:
+        file = open(filename, 'r')
+        lines = file.readlines()
+        file.close()
+    except Exception as e:
+        print(f"Error llegint aeroports: {e}")
+        return -1
+    # ERROR 2: el fitxer es buit o nomes conte la linia de capçalera
+    if len(lines) <= 1:
+        print("Error: el fitxer d'aeroports es buit o no conte dades.")
+        return airports
+    skipped = 0  # Comptador de linies amb format incorrecte
     i = 1 # Saltem la línia 0 (l'encapçalament)
     while i < len(lines):
         w = lines[i].split(" ")  # Separem la línia en camps
-        code = w[0]  # Primer camp: codi ICAO
-        # --- Conversió de la latitud (DMS -> graus decimals) ---
-        latitude = 0
-        latitude = float(w[1][1:3])  # Graus (posicions 1-2, la 0 és N/S)
-        latitude += float(w[1][3:5])/60  # Minuts -> graus
-        latitude += float(w[1][5:7])/3600  # Segons -> graus
-        if w[1][0] == "S":  # Hemisferi sud -> latitud negativa
-            latitude = -latitude
-        # --- Conversió de la longitud (DMS -> graus decimals) ---
-        longitude = 0
-        longitude = float(w[2][1:4])  # Graus (la longitud en té 3 dígits)
-        longitude += float(w[2][4:6])/60  # Minuts -> graus
-        longitude += float(w[2][6:8])/3600  # Segons -> graus
-        if w[2][0] == "W":  # Oest -> longitud negativa
-            longitude = -longitude
-        airport = Airport(code, latitude, longitude)
-        airports.append(airport)
+        # ERROR 3: linia mal formada (falten camps o coordenades no numeriques)
+        try:
+            code = w[0]  # Primer camp: codi ICAO
+            # --- Conversió de la latitud (DMS -> graus decimals) ---
+            latitude = float(w[1][1:3])  # Graus (posicions 1-2, la 0 és N/S)
+            latitude += float(w[1][3:5])/60  # Minuts -> graus
+            latitude += float(w[1][5:7])/3600  # Segons -> graus
+            if w[1][0] == "S":  # Hemisferi sud -> latitud negativa
+                latitude = -latitude
+            # --- Conversió de la longitud (DMS -> graus decimals) ---
+            longitude = float(w[2][1:4])  # Graus (la longitud en té 3 dígits)
+            longitude += float(w[2][4:6])/60  # Minuts -> graus
+            longitude += float(w[2][6:8])/3600  # Segons -> graus
+            if w[2][0] == "W":  # Oest -> longitud negativa
+                longitude = -longitude
+            airport = Airport(code, latitude, longitude)
+            airports.append(airport)
+        except Exception:
+            skipped += 1  # Aquesta linia no te el format esperat: la saltem
         i = i + 1
+    if skipped > 0:
+        print(f"Avis: {skipped} linies d'aeroports amb format incorrecte s'han ignorat.")
     return airports
 
 def SaveSchengenAirports(filename, airports):

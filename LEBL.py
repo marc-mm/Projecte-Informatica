@@ -47,8 +47,17 @@ def SetGates(area, init_gate, end_gate, prefix):
 
 def LoadAirlines(terminal, t_name):
     # Carrega les aerolínies del terminal des del fitxer "{t_name}_Airlines.txt".
-    file = open(f"{t_name}_Airlines.txt","r")
+    # Retorna -1 si el fitxer no es pot obrir.
+    # ERROR 1: el fitxer d'aerolinies del terminal no existeix o no es pot llegir
+    try:
+        file = open(f"{t_name}_Airlines.txt","r")
+    except Exception as e:
+        print(f"Error llegint les aerolinies del terminal {t_name}: {e}")
+        return -1
     readline = file.readline()
+    # ERROR 2: el fitxer existeix pero esta buit (cap aerolinia)
+    if readline == "":
+        print(f"Avis: el fitxer d'aerolinies del terminal {t_name} es buit.")
     while readline != "":  # Llegim fins al final del fitxer
         terminal.air_code.append(readline)
         readline = file.readline().strip("\n")
@@ -58,27 +67,47 @@ def LoadAirlines(terminal, t_name):
 def LoadAirportStructure (filename):
     # Llegeix el fitxer de terminals i construeix tota l'estructura de
     # l'aeroport (BarcelonaAP -> terminals -> àrees -> portes).
-    file = open(filename,"r")
-    lines = file.readlines()
-    file.close()
+    # Retorna -1 si el fitxer no es pot obrir o si esta buit.
+    # ERROR 1: el fitxer no existeix o no es pot llegir
+    try:
+        file = open(filename,"r")
+        lines = file.readlines()
+        file.close()
+    except Exception as e:
+        print(f"Error llegint l'estructura de l'aeroport: {e}")
+        return -1
+    # ERROR 2: el fitxer es buit o nomes conte la linia de capçalera
+    if len(lines) <= 1:
+        print("Error: el fitxer de terminals es buit o no conte dades.")
+        return -1
     terminals = []
+    skipped = 0  # Comptador de linies amb format incorrecte
     i = 1  # Saltem la línia 0 (capçalera amb el nom de l'aeroport)
     while i < len(lines):
         linia = lines[i].split(" ")
         linia = [x for x in linia if x]  # Eliminem els camps buits (espais dobles)
-        if linia[0] == "Terminal":
-            # Nova línia de terminal -> creem un Terminal
-            terminals.append(Terminal())
-            terminals[-1].t_name = linia[1]
-        if linia[0] == "Area":
-            # Nova àrea dins de l'últim terminal creat
-            terminals[-1].BA.append(Boarding_Area())
-            terminals[-1].BA[-1].area = linia[1]
-            # Creem les portes amb el rang indicat (camps 4 i 6 de la línia)
-            SetGates(terminals[-1].BA[-1], linia[4], linia[6], linia[1])
-            if linia[2] == "Schengen":
-                terminals[-1].BA[-1].Schengen = True
+        if len(linia) == 0:
+            i += 1
+            continue  # Linia en blanc: la saltem sense comptar-la com a error
+        # ERROR 3: linia mal formada (falten camps de terminal o d'area)
+        try:
+            if linia[0] == "Terminal":
+                # Nova línia de terminal -> creem un Terminal
+                terminals.append(Terminal())
+                terminals[-1].t_name = linia[1]
+            if linia[0] == "Area":
+                # Nova àrea dins de l'últim terminal creat
+                terminals[-1].BA.append(Boarding_Area())
+                terminals[-1].BA[-1].area = linia[1]
+                # Creem les portes amb el rang indicat (camps 4 i 6 de la línia)
+                SetGates(terminals[-1].BA[-1], linia[4], linia[6], linia[1])
+                if linia[2] == "Schengen":
+                    terminals[-1].BA[-1].Schengen = True
+        except Exception:
+            skipped += 1  # Aquesta linia no te el format esperat: la saltem
         i += 1
+    if skipped > 0:
+        print(f"Avis: {skipped} linies de l'estructura amb format incorrecte s'han ignorat.")
     AirportStructure = BarcelonaAP()
     linia_0 = lines[0].split(" ")  # Primera línia (info de l'aeroport)
     for i in terminals:

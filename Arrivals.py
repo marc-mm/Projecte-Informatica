@@ -21,25 +21,37 @@ class Aircraft:
 
 
 def LoadArrivals(filename):
-    """Llegeix el fitxer arrivals.txt i retorna una llista d'objectes Aircraft."""
+    """Llegeix el fitxer arrivals.txt i retorna una llista d'objectes Aircraft.
+    Retorna -1 si el fitxer no es pot obrir."""
     # Format del fitxer: AIRCRAFT ORIGIN ARRIVAL AIRLINE
     arrivals = []
+    # ERROR 1: el fitxer no existeix o no es pot llegir
     try:
         with open(filename, 'r') as file:
             lines = file.readlines()
-            for line in lines[1:]:  # Saltem l'encapçalament
-                parts = line.split()  # Separem la línia per espais
-                if len(parts) >= 4:
-                    # Validació bàsica de l'hora (format HH:MM, 5 caràcters)
-                    hora = parts[2]
-                    if ":" in hora and len(hora) == 5:
-                        # id=parts[0], airline=parts[3], origin=parts[1], hora=parts[2]
-                        a = Aircraft(parts[0], parts[3], parts[1], parts[2])
-                        # Assignem si és Schengen usant la funció de airport.py
-                        a.schengen = airport.IsSchengenAirport(a.origin)
-                        arrivals.append(a)
     except Exception as e:
         print(f"Error llegint arribades: {e}")  # Si el fitxer no existeix, etc.
+        return -1
+    # ERROR 2: el fitxer es buit o nomes conte la linia de capçalera
+    if len(lines) <= 1:
+        print("Error: el fitxer d'arribades es buit o no conte dades.")
+        return arrivals
+    skipped = 0  # Comptador de linies amb format incorrecte
+    for line in lines[1:]:  # Saltem l'encapçalament
+        parts = line.split()  # Separem la línia per espais
+        if len(parts) == 0:
+            continue  # Linia en blanc: la saltem sense comptar-la com a error
+        # ERROR 3: linia mal formada (falten camps o hora en format incorrecte)
+        if len(parts) >= 4 and ":" in parts[2] and len(parts[2]) == 5:
+            # id=parts[0], airline=parts[3], origin=parts[1], hora=parts[2]
+            a = Aircraft(parts[0], parts[3], parts[1], parts[2])
+            # Assignem si és Schengen usant la funció de airport.py
+            a.schengen = airport.IsSchengenAirport(a.origin)
+            arrivals.append(a)
+        else:
+            skipped += 1  # Linia que no segueix el format esperat
+    if skipped > 0:
+        print(f"Avis: {skipped} linies d'arribades amb format incorrecte s'han ignorat.")
     return arrivals
 
 
@@ -112,32 +124,53 @@ def MapFlights(aircrafts, airport_list, filename="flights_map.kml"):
         f.write('  <LineStyle><color>ff0000ff</color><width>3</width></LineStyle>\n')
         f.write('</Style>\n')
 
-        for a in aircrafts:
-            # Busquem les coordenades de l'aeroport d'origen a la llista de la Versió 1
-            origin_coords = None
+        # Funció auxiliar: busca les coordenades d'un aeroport pel seu codi ICAO
+        def find_coords(code):
             for apt in airport_list:
-                if apt.code == a.origin:  # Coincidència de codi ICAO
-                    origin_coords = (apt.latitude, apt.longitude)
-                    break
+                if apt.code == code:  # Coincidència de codi ICAO
+                    return (apt.latitude, apt.longitude)
+            return None
 
-            # Només dibuixem la línia si hem trobat les coordenades d'origen
-            if origin_coords:
-                # Triem el color de la línia segons si l'origen és Schengen o no
-                if airport.IsSchengenAirport(a.origin):
-                    style = "schengen"
-                else:
-                    style = "noschengen"
+        for a in aircrafts:
+            # --- Tram d'ARRIBADA: de l'aeroport d'origen fins a LEBL ---
+            if a.origin != "":
+                origin_coords = find_coords(a.origin)
+                # Només dibuixem la línia si hem trobat les coordenades d'origen
+                if origin_coords:
+                    # Triem el color segons si l'origen és Schengen o no
+                    if airport.IsSchengenAirport(a.origin):
+                        style = "schengen"
+                    else:
+                        style = "noschengen"
+                    f.write('<Placemark>\n')
+                    f.write(f'  <name>{a.id} ({a.origin} -> LEBL)</name>\n')
+                    f.write(f'  <styleUrl>#{style}</styleUrl>\n')
+                    f.write('  <LineString>\n')
+                    f.write('      <tessellate>1</tessellate>\n')  # La línia segueix el terreny
+                    # Coordenades en ordre lon,lat,alt: origen i LEBL
+                    f.write(f'    <coordinates>{origin_coords[1]},{origin_coords[0]},0 {lebl_lon},{lebl_lat},0</coordinates>\n')
+                    f.write('  </LineString>\n')
+                    f.write('</Placemark>\n')
 
-                # Cada vol és una línia (LineString) de l'origen fins a LEBL
-                f.write('<Placemark>\n')
-                f.write(f'  <name>{a.id} ({a.origin} -> LEBL)</name>\n')
-                f.write(f'  <styleUrl>#{style}</styleUrl>\n')
-                f.write('  <LineString>\n')
-                f.write('      <tessellate>1</tessellate>\n')  # La línia segueix el terreny
-                # Coordenades en ordre lon,lat,alt: punt d'origen i punt de LEBL
-                f.write(f'    <coordinates>{origin_coords[1]},{origin_coords[0]},0 {lebl_lon},{lebl_lat},0</coordinates>\n')
-                f.write('  </LineString>\n')
-                f.write('</Placemark>\n')
+            # --- Tram de SORTIDA: de LEBL fins a l'aeroport de destinació ---
+            if a.destination != "":
+                dest_coords = find_coords(a.destination)
+                # Només dibuixem la línia si hem trobat les coordenades de destinació
+                if dest_coords:
+                    # Triem el color segons si la destinació és Schengen o no
+                    if airport.IsSchengenAirport(a.destination):
+                        style = "schengen"
+                    else:
+                        style = "noschengen"
+                    f.write('<Placemark>\n')
+                    f.write(f'  <name>{a.id} (LEBL -> {a.destination})</name>\n')
+                    f.write(f'  <styleUrl>#{style}</styleUrl>\n')
+                    f.write('  <LineString>\n')
+                    f.write('      <tessellate>1</tessellate>\n')  # La línia segueix el terreny
+                    # Coordenades en ordre lon,lat,alt: LEBL i destinació
+                    f.write(f'    <coordinates>{lebl_lon},{lebl_lat},0 {dest_coords[1]},{dest_coords[0]},0</coordinates>\n')
+                    f.write('  </LineString>\n')
+                    f.write('</Placemark>\n')
 
         f.write('</Document>\n')
         f.write('</kml>\n')
@@ -172,18 +205,27 @@ def LoadDepartures(filename):
             lines = file.readlines()
     except Exception as e:
         print(f"Error llegint sortides: {e}")
-        return -1  # codi d'error: el fitxer no existeix
+        return -1  # ERROR 1: el fitxer no existeix o no es pot llegir
+    # ERROR 2: el fitxer es buit o nomes conte la linia de capçalera
+    if len(lines) <= 1:
+        print("Error: el fitxer de sortides es buit o no conte dades.")
+        return departures
+    skipped = 0  # Comptador de linies amb format incorrecte
     for line in lines[1:]:  # Saltem l'encapçalament
         parts = line.split()
-        if len(parts) >= 4:
-            # Validació bàsica de l'hora
-            hora = parts[2]
-            if ":" in hora and _time_to_minutes(hora) >= 0:
-                # Només omplim les dades de sortida (origen/arribada buits)
-                a = Aircraft(parts[0], parts[3], "", "", parts[1], hora)
-                # Schengen segons la destinació de la sortida
-                a.schengen = airport.IsSchengenAirport(a.destination)
-                departures.append(a)
+        if len(parts) == 0:
+            continue  # Linia en blanc: la saltem sense comptar-la com a error
+        # ERROR 3: linia mal formada (falten camps o hora en format incorrecte)
+        if len(parts) >= 4 and ":" in parts[2] and _time_to_minutes(parts[2]) >= 0:
+            # Només omplim les dades de sortida (origen/arribada buits)
+            a = Aircraft(parts[0], parts[3], "", "", parts[1], parts[2])
+            # Schengen segons la destinació de la sortida
+            a.schengen = airport.IsSchengenAirport(a.destination)
+            departures.append(a)
+        else:
+            skipped += 1  # Linia que no segueix el format esperat
+    if skipped > 0:
+        print(f"Avis: {skipped} linies de sortides amb format incorrecte s'han ignorat.")
     return departures
 
 

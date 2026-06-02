@@ -314,7 +314,8 @@ class AirportInterface:
         self.view_home.columnconfigure(0, weight=1)
         self.view_home.columnconfigure(1, weight=1)
         self.view_home.rowconfigure(0, weight=1)
-        self.view_home.rowconfigure(1, weight=1)  # Donem pes a la nova fila
+        self.view_home.rowconfigure(1, weight=1)  # Donem pes a la fila del passatger
+        self.view_home.rowconfigure(2, weight=1)  # Donem pes a la fila de File tools
 
         self.view_airport = tk.Frame(self.dynamic_area, bg=self.colors["background"])
         self.view_arrival = tk.Frame(self.dynamic_area, bg=self.colors["background"])
@@ -328,7 +329,7 @@ class AirportInterface:
             subtitle="Load, edit and visualize airport information."
         )
         arrival_home_panel = self._create_section_panel(
-            self.view_home, row=0, column=1, title="Arrival tools",
+            self.view_home, row=0, column=1, title="Flight tools",
             subtitle="Inspect incoming flights, gates and terminal structures."
         )
         # Panell del passatger ocupant 2 columnes (amplada completa)
@@ -350,7 +351,7 @@ class AirportInterface:
         home_arr_tiles.pack(fill="both", expand=True)
         home_arr_tiles.columnconfigure(0, weight=1)
         self._create_tile(
-            home_arr_tiles, 0, 0, "Open Arrival Tools", "Access all flight arrival features.",
+            home_arr_tiles, 0, 0, "Open Flight Tools", "Access all flight arrival features.",
             lambda: self.switch_view(self.view_arrival),
             self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"]
         )
@@ -362,6 +363,22 @@ class AirportInterface:
         self._create_tile(
             home_pass_tiles, 0, 0, "Generate Boarding Pass", "Create a passenger boarding pass ticket.",
             self.generate_boarding_pass,
+            self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"]
+        )
+
+        # Panell de fitxers ocupant 2 columnes (mateixa amplada que Passenger tools)
+        file_home_panel = self._create_section_panel(
+            self.view_home, row=2, column=0, columnspan=2, title="File tools",
+            subtitle="Load the project data files in one click."
+        )
+        # Botó de càrrega ràpida dins del seu panell (just a sota del títol)
+        home_file_tiles = tk.Frame(file_home_panel, bg=self.colors["surface"])
+        home_file_tiles.pack(fill="both", expand=True)
+        home_file_tiles.columnconfigure(0, weight=1)
+        self._create_tile(
+            home_file_tiles, 0, 0, "Load bundled files",
+            "Quick load Airports, Arrivals, Departures and Terminals.",
+            self.load_project_files,
             self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"]
         )
 
@@ -416,6 +433,25 @@ class AirportInterface:
                           "Open Google Earth with airports and an optional arrival route.", self.show_map,
                           self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
 
+        # ---- Botons moguts des de Flight tools cap a Airport tools ----
+        self._create_tile(airport_tiles, 2, 2, "Load Airport Structure", "Load terminals and gate areas.",
+                          self.load_airport_structure, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 3, 0, "Gate Occupancy", "Show gate usage.", self.show_gate_occupancy,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 3, 1, "Assign day gates",
+                          "Simulate gate assignment for every one-hour period of the day.", self.assign_day_gates,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 3, 2, "Day occupancy plot",
+                          "Gates per terminal per hour + unassigned aircraft per hour.", self.plot_day_occupancy,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 4, 0, "Occupancy by hour",
+                          "Inspect gate occupancy at a chosen hour period.", self.show_occupancy_by_hour,
+                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
+        self._create_tile(airport_tiles, 4, 1, "Interactive day timeline",
+                          "Animated hour-by-hour gate occupancy timeline (extra feature).", self.open_day_timeline,
+                          self.colors["airport_fill"], self.colors["airport_outline"], self.colors["airport_hover"])
+
         # --- 3. VISTA D'ARRIVAL TOOLS ---
         arrival_header = tk.Frame(self.view_arrival, bg=self.colors["background"])
         arrival_header.pack(fill="x", pady=(0, 10))
@@ -425,7 +461,7 @@ class AirportInterface:
             relief="groove", cursor="hand2", padx=10, pady=5
         ).pack(side="left")
         tk.Label(
-            arrival_header, text="Arrival Tools", font=("Trebuchet MS", 16, "bold"),
+            arrival_header, text="Flight Tools", font=("Trebuchet MS", 16, "bold"),
             bg=self.colors["background"], fg=self.colors["text"]
         ).pack(side="left", padx=15)
 
@@ -446,55 +482,29 @@ class AirportInterface:
         self._create_tile(arrival_tiles, 0, 1, "Show arrivals", "Open the arrival list in a separate window.",
                           self.show_arrivals, self.colors["arrival_fill"], self.colors["arrival_outline"],
                           self.colors["arrival_hover"])
-        self._create_tile(arrival_tiles, 0, 2, "Load bundled files", "Quick load Airports, Arrivals and Terminals.",
-                          self.load_project_files, self.colors["gold_fill"], self.colors["gold_outline"],
-                          self.colors["gold_hover"])
-
-        self._create_tile(arrival_tiles, 1, 0, "Plot by company", "Bar chart of arrivals grouped by airline company.",
-                          self.plot_arrivals_by_company, self.colors["airport_fill"], self.colors["airport_outline"],
-                          self.colors["airport_hover"])
-        self._create_tile(arrival_tiles, 1, 1, "Plot by origin", "Horizontal ranking of the busiest origin airports.",
-                          self.plot_arrivals_by_origin, self.colors["airport_fill"], self.colors["airport_outline"],
-                          self.colors["airport_hover"])
-        self._create_tile(arrival_tiles, 1, 2, "Hourly flow", "Line chart of expected arrivals by landing hour.",
-                          self.plot_arrivals_by_hour, self.colors["gold_fill"], self.colors["gold_outline"],
-                          self.colors["gold_hover"])
-
-        self._create_tile(arrival_tiles, 2, 0, "Load Airport Structure", "Load terminals and gate areas.",
-                          self.load_airport_structure, self.colors["gold_fill"], self.colors["gold_outline"],
-                          self.colors["gold_hover"])
-
-        self._create_tile(arrival_tiles, 2, 2, "Load Airlines", "Load terminal airline list.", self.load_airlines,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
-
-        self._create_tile(arrival_tiles, 2, 1, "Gate Occupancy", "Show gate usage.", self.show_gate_occupancy,
+        self._create_tile(arrival_tiles, 0, 2, "Load Airlines", "Load terminal airline list.", self.load_airlines,
                           self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
 
         # ---- VERSIÓ 4: SORTIDES I ASSIGNACIÓ DINÀMICA DE PORTES ----
-        self._create_tile(arrival_tiles, 3, 0, "Load departures",
+        self._create_tile(arrival_tiles, 1, 0, "Load departures",
                           "Import a departures file (id, destination, time, airline).", self.load_departures,
                           self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
-        self._create_tile(arrival_tiles, 3, 1, "Merge movements",
+        self._create_tile(arrival_tiles, 1, 1, "Merge movements",
                           "Merge arrivals and departures into the full daily movements.", self.merge_movements,
                           self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
-        self._create_tile(arrival_tiles, 3, 2, "Night aircraft",
+        self._create_tile(arrival_tiles, 1, 2, "Night aircraft",
                           "List aircraft that only depart (no arrival).", self.show_night_aircraft,
                           self.colors["arrival_fill"], self.colors["arrival_outline"], self.colors["arrival_hover"])
 
-        self._create_tile(arrival_tiles, 4, 0, "Assign day gates",
-                          "Simulate gate assignment for every one-hour period of the day.", self.assign_day_gates,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
-        self._create_tile(arrival_tiles, 4, 1, "Day occupancy plot",
-                          "Gates per terminal per hour + unassigned aircraft per hour.", self.plot_day_occupancy,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
-        self._create_tile(arrival_tiles, 4, 2, "Occupancy by hour",
-                          "Inspect gate occupancy at a chosen hour period.", self.show_occupancy_by_hour,
-                          self.colors["gold_fill"], self.colors["gold_outline"], self.colors["gold_hover"])
-
-        self._create_tile(arrival_tiles, 5, 0, "Interactive day timeline",
-                          "Animated hour-by-hour gate occupancy timeline (extra feature).", self.open_day_timeline,
-                          self.colors["airport_fill"], self.colors["airport_outline"], self.colors["airport_hover"])
-
+        self._create_tile(arrival_tiles, 2, 0, "Plot by company", "Bar chart of arrivals grouped by airline company.",
+                          self.plot_arrivals_by_company, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(arrival_tiles, 2, 1, "Plot by origin", "Horizontal ranking of the busiest origin airports.",
+                          self.plot_arrivals_by_origin, self.colors["airport_fill"], self.colors["airport_outline"],
+                          self.colors["airport_hover"])
+        self._create_tile(arrival_tiles, 2, 2, "Hourly flow", "Line chart of expected arrivals by landing hour.",
+                          self.plot_arrivals_by_hour, self.colors["gold_fill"], self.colors["gold_outline"],
+                          self.colors["gold_hover"])
 
         self.switch_view(self.view_home)
         # ---- FI DE L'ÀREA DINÀMICA ----
@@ -1067,8 +1077,11 @@ class AirportInterface:
             bundled_airports_path = self.base_dir / "Airports.txt"
             if bundled_airports_path.exists():
                 try:
-                    for item in airport.LoadAirports(str(bundled_airports_path)):
-                        lookup.setdefault(item.code.upper(), item)  # No pisa els ja existents
+                    bundled = airport.LoadAirports(str(bundled_airports_path))
+                    # Només iterem si el lector ha retornat una llista (no -1)
+                    if bundled != -1:
+                        for item in bundled:
+                            lookup.setdefault(item.code.upper(), item)  # No pisa els ja existents
                 except Exception:
                     pass
         return lookup
@@ -1100,7 +1113,11 @@ class AirportInterface:
 
     def _load_structure_from(self, path):
         # Carrega l'estructura de portes des del fitxer indicat i la desa.
-        self.airport_structure = LEBL.LoadAirportStructure(str(path))
+        structure = LEBL.LoadAirportStructure(str(path))
+        # Si el lector retorna -1, el fitxer no s'ha pogut llegir o es buit
+        if structure == -1:
+            raise ValueError("The terminal structure file is missing, empty or invalid.")
+        self.airport_structure = structure
         return self.airport_structure
 
     def _need_structure(self):
@@ -1181,16 +1198,24 @@ class AirportInterface:
 
 
     def load_project_files(self):
-        # Càrrega ràpida dels tres fitxers del projecte (aeroports, arribades, terminals).
+        # Càrrega ràpida dels fitxers del projecte (aeroports, arribades, sortides, terminals).
         try:
             airports_path = self.base_dir / "Airports.txt"
             arrivals_path = self.base_dir / "Arrivals.txt"
+            departures_path = self.base_dir / "Departures.txt"
             terminals_path = self.base_dir / "Terminals.txt"
 
             if airports_path.exists():
-                self.airport_list = airport.LoadAirports(str(airports_path))
+                loaded_airports = airport.LoadAirports(str(airports_path))
+                # Si el lector retorna -1 (fitxer il·legible), deixem la llista buida
+                self.airport_list = loaded_airports if loaded_airports != -1 else []
             if arrivals_path.exists():
-                self.arrival_list = Arrivals.LoadArrivals(str(arrivals_path))
+                loaded_arrivals = Arrivals.LoadArrivals(str(arrivals_path))
+                self.arrival_list = loaded_arrivals if loaded_arrivals != -1 else []
+            if departures_path.exists():
+                loaded_departures = Arrivals.LoadDepartures(str(departures_path))
+                self.departure_list = loaded_departures if loaded_departures != -1 else []
+                self.merged_list = []  # Si carreguem sortides noves, cal tornar a fusionar
             if terminals_path.exists():
                 self._load_structure_from(terminals_path)
 
@@ -1200,6 +1225,7 @@ class AirportInterface:
                 "Bundled files loaded from the project folder.\n"
                 f"Airports: {len(self.airport_list)}\n"
                 f"Arrivals: {len(self.arrival_list)}\n"
+                f"Departures: {len(self.departure_list)}\n"
                 f"Terminals: {len(self.airport_structure.terminals) if self.airport_structure else 0}"
             )
         except Exception as exc:
@@ -1216,7 +1242,20 @@ class AirportInterface:
             if not filepath:
                 return
 
-            self.airport_list = airport.LoadAirports(filepath)
+            result = airport.LoadAirports(filepath)
+            # ERROR: el fitxer no s'ha pogut obrir/llegir
+            if result == -1:
+                messagebox.showerror("Load error", "The airports file could not be opened or read.")
+                return
+            # ERROR: el fitxer s'ha llegit pero no tenia cap aeroport valid
+            if not result:
+                messagebox.showwarning(
+                    "Empty data",
+                    "No valid airports were found.\nCheck the file format: CODE DMS-LATITUDE DMS-LONGITUDE",
+                )
+                return
+
+            self.airport_list = result
             self._update_status_labels()
             self.console_status.set("Airport dataset loaded successfully.")
             self._set_console_text(f"Successfully loaded {len(self.airport_list)} airports from:\n{filepath}")
@@ -1275,6 +1314,14 @@ class AirportInterface:
 
         longitude = simpledialog.askfloat("Longitude", "Enter longitude in decimal degrees:")
         if longitude is None:
+            return
+
+        # ERROR: coordenades fora del rang valid (lat -90..90, lon -180..180)
+        if latitude < -90 or latitude > 90 or longitude < -180 or longitude > 180:
+            messagebox.showerror(
+                "Invalid coordinates",
+                "Latitude must be between -90 and 90 and longitude between -180 and 180.",
+            )
             return
 
         normalized_code = code.strip().upper()
@@ -1388,15 +1435,34 @@ class AirportInterface:
                     airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
                     Arrivals.MapFlights([selected], airports_for_map, str(filename))
                     route_note = f"Route highlighted: {selected.id}"
-            elif self.arrival_list and messagebox.askyesno(
+            elif (self.arrival_list or self.departure_list) and messagebox.askyesno(
                 "All routes",
-                "Highlight ALL arrival routes?\n(Schengen origins are drawn in a different colour)",
+                "Highlight ALL arrival + departure routes?\n(Schengen origins/destinations in a different colour)",
             ):
-                # Dibuixem totes les trajectories de cop, amb color segons Schengen
+                # Dibuixem totes les trajectories (arribades i sortides) de cop
                 filename = self.base_dir / "flights_map.kml"
                 airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
-                Arrivals.MapFlights(self.arrival_list, airports_for_map, str(filename))
-                route_note = f"All routes highlighted: {len(self.arrival_list)} flights"
+                all_flights = self.arrival_list + self.departure_list
+                Arrivals.MapFlights(all_flights, airports_for_map, str(filename))
+                route_note = (
+                    f"All routes highlighted: {len(self.arrival_list)} arrivals "
+                    f"+ {len(self.departure_list)} departures"
+                )
+            elif (self.arrival_list or self.departure_list) and messagebox.askyesno(
+                "Long-distance flights",
+                "Plot only long-distance flights?\n(Haversine distance greater than 2000 km)",
+            ):
+                # Filtrem nomes els vols amb distancia (origen/desti a LEBL) > 2000 km
+                filename = self.base_dir / "flights_map.kml"
+                airports_for_map = list(self._airport_lookup(include_project_airports=True).values())
+                long_flights = self._long_distance_flights(airports_for_map)
+                if not long_flights:
+                    messagebox.showinfo("No long-distance flights", "No flights over 2000 km were found.")
+                    airport.MapAirports(self.airport_list, str(filename))
+                    route_note = "No long-distance flights found."
+                else:
+                    Arrivals.MapFlights(long_flights, airports_for_map, str(filename))
+                    route_note = f"Long-distance flights (> 2000 km): {len(long_flights)}"
             else:
                 airport.MapAirports(self.airport_list, str(filename))  # Només els aeroports
 
@@ -1410,6 +1476,30 @@ class AirportInterface:
         except Exception as exc:
             messagebox.showerror("Map error", f"Could not generate the KML map.\nDetails: {exc}")
 
+    def _long_distance_flights(self, airports):
+        # Retorna els vols amb distancia (origen->LEBL o LEBL->desti) > 2000 km.
+        # Diccionari codi ICAO -> (latitud, longitud) per buscar coordenades rapid
+        coords = {}
+        for apt in airports:
+            coords[apt.code] = (apt.latitude, apt.longitude)
+        # Coordenades de Barcelona (LEBL)
+        lebl_lat, lebl_lon = 41.297, 2.083
+        result = []
+        # Mirem totes les arribades i sortides carregades
+        for a in self.arrival_list + self.departure_list:
+            # Per a una arribada: distancia de l'origen fins a LEBL
+            if a.origin != "" and a.origin in coords:
+                olat, olon = coords[a.origin]
+                if Arrivals.Haversine(olat, olon, lebl_lat, lebl_lon) > 2000:
+                    result.append(a)
+                    continue
+            # Per a una sortida: distancia de LEBL fins a la destinacio
+            if a.destination != "" and a.destination in coords:
+                dlat, dlon = coords[a.destination]
+                if Arrivals.Haversine(lebl_lat, lebl_lon, dlat, dlon) > 2000:
+                    result.append(a)
+        return result
+
     def load_arrivals(self):
         # Demana un fitxer d'arribades i el carrega a la llista de treball.
         try:
@@ -1421,7 +1511,20 @@ class AirportInterface:
             if not filepath:
                 return
 
-            self.arrival_list = Arrivals.LoadArrivals(filepath)
+            result = Arrivals.LoadArrivals(filepath)
+            # ERROR: el fitxer no s'ha pogut obrir/llegir
+            if result == -1:
+                messagebox.showerror("Load error", "The arrivals file could not be opened or read.")
+                return
+            # ERROR: el fitxer s'ha llegit pero no tenia cap arribada valida
+            if not result:
+                messagebox.showwarning(
+                    "Empty data",
+                    "No valid arrivals were found.\nCheck the file format: AIRCRAFT ORIGIN ARRIVAL AIRLINE",
+                )
+                return
+
+            self.arrival_list = result
             self._update_status_labels()
             self.console_status.set("Arrival dataset loaded successfully.")
             self._set_console_text(f"Successfully loaded {len(self.arrival_list)} arrivals from:\n{filepath}")
@@ -1559,7 +1662,11 @@ class AirportInterface:
         source = self.base_dir / "Terminals.txt"
         if self.airport_structure is not None and Path(self.airport_structure.name).exists():
             source = Path(self.airport_structure.name)
-        return LEBL.LoadAirportStructure(str(source))
+        structure = LEBL.LoadAirportStructure(str(source))
+        # Si el fitxer no s'ha pogut llegir o es buit, avisem amb un error clar
+        if structure == -1:
+            raise ValueError(f"The terminal structure file could not be read: {source}")
+        return structure
 
     def load_departures(self):
         try:
@@ -1572,8 +1679,16 @@ class AirportInterface:
                 return
 
             result = Arrivals.LoadDepartures(filepath)
+            # ERROR: el fitxer no s'ha pogut obrir/llegir
             if result == -1:
                 messagebox.showerror("Load error", "The departures file could not be opened.")
+                return
+            # ERROR: el fitxer s'ha llegit pero no tenia cap sortida valida
+            if not result:
+                messagebox.showwarning(
+                    "Empty data",
+                    "No valid departures were found.\nCheck the file format: AIRCRAFT DESTINATION DEPARTURE AIRLINE",
+                )
                 return
 
             self.departure_list = result
@@ -1624,7 +1739,7 @@ class AirportInterface:
         lines = [f"{'ID':<10}{'DEST':<8}{'DEPART':<9}{'AIRLINE'}", "-" * 36]
         for a in night:
             lines.append(f"{a.id:<10}{a.destination:<8}{a.departure_time:<9}{a.airline}")
-        self._set_console_text(f"Night aircraft (departure only): {len(night)}")
+        sel(f"Night aircraft (departure only): {len(night)}")
         self._open_text_window("Night aircraft", "Aircraft that only depart from the airport.", "\n".join(lines))
 
     def _simulate_day(self, structure, movements):
